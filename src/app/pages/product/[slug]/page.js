@@ -6,7 +6,7 @@ import Image from "next/image";
 import arrow from "../../../../../public/assets/farrow.svg";
 import eye from "../../../../../public/assets/eye.svg";
 import Nav from "../../../components/Navbar"
-import pic1 from "../../../../../public/assets/picturecommerce1.svg"
+import pic1 from "../../../../../public/assets/Picturecommerce1.svg"
 import { CartProvider, useCart } from "react-use-cart";
 
 async function fetchData(slug) {

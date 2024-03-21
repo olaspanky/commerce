@@ -4,7 +4,7 @@ import arrow from "../../../public/assets/farrow.svg";
 import eye from "../../../public/assets/eye.svg";
 import Link from "next/link";
 import progress1 from "../../../public/assets/progress.svg";
-import pic1 from "../../../public/assets/picturecommerce1.svg";
+import pic1 from "../../../public/assets/Picturecommerce1.svg";
 import bin from "../../../public/assets/trashbin.svg";
 
 const alldata = [

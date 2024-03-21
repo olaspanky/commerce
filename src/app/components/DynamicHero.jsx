@@ -3,8 +3,8 @@ import Image from 'next/image';
 import arrow from "../../../public/assets/farrow.svg"
 import eye from "../../../public/assets/eye.svg"
 import Link from 'next/link';
-import pic12 from "../../../public/assets/picturecommerce12.svg"
-import pic1 from "../../../public/assets/picturecommerce1.svg"
+import pic12 from "../../../public/assets/Picturecommerce12.svg"
+import pic1 from "../../../public/assets/Picturecommerce1.svg"
 import { client } from '../lib/sanity';
 
 async function getData() {

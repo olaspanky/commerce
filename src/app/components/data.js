@@ -1,15 +1,15 @@
-import pic1 from "../../../public/assets/picturecommerce1.svg";
-import pic2 from "../../../public/assets/picturecommerce2.svg";
-import pic3 from "../../../public/assets/picturecommerce3.svg";
-import pic4 from "../../../public/assets/picturecommerce4.svg";
-import pic5 from "../../../public/assets/picturecommerce5.svg";
-import pic6 from "../../../public/assets/picturecommerce6.svg";
-import pic7 from "../../../public/assets/picturecommerce7.svg";
-import pic8 from "../../../public/assets/picturecommerce8.svg";
-import pic9 from "../../../public/assets/picturecommerce9.svg";
-import picx from "../../../public/assets/picturecommercex.svg";
-import pic11 from "../../../public/assets/picturecommerce11.svg";
-import pic12 from "../../../public/assets/picturecommerce12.svg";
+import pic1 from "../../../public/assets/Picturecommerce1.svg";
+import pic2 from "../../../public/assets/Picturecommerce2.svg";
+import pic3 from "../../../public/assets/Picturecommerce3.svg";
+import pic4 from "../../../public/assets/Picturecommerce4.svg";
+import pic5 from "../../../public/assets/Picturecommerce5.svg";
+import pic6 from "../../../public/assets/Picturecommerce6.svg";
+import pic7 from "../../../public/assets/Picturecommerce7.svg";
+import pic8 from "../../../public/assets/Picturecommerce8.svg";
+import pic9 from "../../../public/assets/Picturecommerce9.svg";
+import picx from "../../../public/assets/Picturecommercex.svg";
+import pic11 from "../../../public/assets/Picturecommerce11.svg";
+import pic12 from "../../../public/assets/Picturecommerce12.svg";
 
 const alldata = [
   {
