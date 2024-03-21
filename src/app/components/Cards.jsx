@@ -3,7 +3,6 @@ import Image from 'next/image';
 import arrow from "../../../public/assets/farrow.svg"
 import eye from "../../../public/assets/eye.svg"
 import Link from 'next/link';
-import pic1 from "../../../public/assets/picturecommerce1.svg";
 
 
 const BoxGrid = ({ data }) => {
