@@ -38,7 +38,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                 <div className="mb-4 flex flex-col w-500">
 
-                    <label htmlFor="form-name">Name </label>
+                    <label htmlFor="form-name">Name please </label>
                     <input id="form-name" autoComplete="name" maxLength={50} size="lg" name="name" className="text-black"/>
 
                     <label htmlFor="form-email"> Email:</label>
