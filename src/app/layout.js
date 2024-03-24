@@ -5,6 +5,8 @@ import { createTheme, MantineProvider } from "@mantine/core";
 import '@mantine/carousel/styles.css';
 import { Poppins } from "next/font/google";
 import CartProviders from "./components/provider";
+import { ChakraProvider } from '@chakra-ui/react'
+
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,12 +25,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={poppins.className}>
         <MantineProvider>
+          <ChakraProvider>
           <CartProviders>
+          
             
             {children}
 
             
           </CartProviders>
+          </ChakraProvider>
           </MantineProvider>
       </body>
     </html>

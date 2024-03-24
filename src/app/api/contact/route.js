@@ -23,9 +23,11 @@ export async function POST(request) {
         host: "smtp.elasticemail.com",
         port: 2525,
         tls: {
-            ciphers: "SSLv3",
-            rejectUnauthorized: false,
+            rejectUnauthorized: true,
+            minVersion: "TLSv1.2"
         },
+
+        
 
         auth: {
 
@@ -38,7 +40,7 @@ export async function POST(request) {
 
         const mail = await transporter.sendMail({
             from: username,
-            to: myEmail,
+            to: email,
             replyTo: email,
             subject: `Website activity from ${email}`,
             html: `

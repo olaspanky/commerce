@@ -8,6 +8,7 @@ import eye from "../../../../../public/assets/eye.svg";
 import Nav from "../../../components/Navbar"
 import pic1 from "../../../../../public/assets/Picturecommerce1.svg"
 import { CartProvider, useCart } from "react-use-cart";
+import Head from "next/head";
 
 async function fetchData(slug) {
   const query = `*[_type == "product" && slug.current == "${slug}"][0]{
@@ -74,6 +75,10 @@ export default function productPage({ params }) {
  
   return (
     <div>
+      <Head>
+      <script id='pixel-script-poptin' src='https://cdn.popt.in/pixel.js?id=b6981d0c90768' async='true'></script> 
+      </Head>
+
         <Nav/>
       <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 px-10 h-[70vh]">
         <div className='col-span-3 lg:px-10 2xl:px-20'>

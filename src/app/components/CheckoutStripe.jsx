@@ -1,30 +1,211 @@
-import { CardElement, useElements, useStripe, CardCvcElement } from "@stripe/react-stripe-js";
+// import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+// import axios from "axios";
+// import React, { useState } from "react";
+// import { useCart } from "react-use-cart";
+
+// export default function PaymentForm() {
+//   const { items, cartTotal, emptyCart } = useCart();
+//   const [isProcessing, setIsProcessing] = useState(false);
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     message: `Here is your pdf ${items.pdfurl} `,
+//   });
+//   const stripe = useStripe();
+//   const elements = useElements();
+
+//   const handleFormChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   async function handleSubmit(event) {
+
+//     event.preventDefault();
+//     const formData = new FormData(event.target)
+//     try {
+
+//         const response = await fetch('/api/contact', {
+//             method: 'post',
+//             body: formData,
+//         });
+
+//         if (!response.ok) {
+//             console.log("falling over")
+//             throw new Error(`response status: ${response.status}`);
+//         }
+//         const responseData = await response.json();
+//         console.log(responseData['message'])
+
+//         alert('Message successfully sent');
+//     } catch (err) {
+//         console.error(err);
+//         alert("Error, please try resubmitting the form");
+//     }
+// };
+
+//   const onSubmit = async (e) => {
+//     e.preventDefault();
+//     const cardElement = elements.getElement("card");
+
+//     if (!stripe || !cardElement || isProcessing) return;
+
+//     setIsProcessing(true);
+
+//     try {
+//       const { data } = await axios.post("/api/stripe", {
+//         data: { amount: cartTotal },
+//       });
+//       const clientSecret = data;
+
+//       const result = await stripe.confirmCardPayment(clientSecret, {
+//         payment_method: { card: cardElement },
+//       });
+
+//       if (result.error) {
+//         console.log(result.error.message);
+//       } else {
+//         console.log("Payment successful");
+//         let message = `Payment Complete! Reference`;
+//         alert(message);
+//         handleSubmit(e);
+//         emptyCart();
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     } finally {
+//       setIsProcessing(false);
+//     }
+//   };
+
+//   const cardElementOptions = {
+//     style: {
+//       base: {
+//         fontSize: "14px",
+//         color: "black",
+//         "::placeholder": {
+//           color: "black",
+//         },
+//         padding: "10px 15px",
+//         border: "2px solid black",
+//         borderRadius: "5px",
+//         display: "flex",
+//         flexDirection: "column",
+//         gap: "10px",
+//       },
+//       invalid: {
+//         color: "#9e2146",
+//       },
+//     },
+//   };
+
+//   return (
+//     <form onSubmit={onSubmit} className="flex flex-col gap-5">
+//       <div className="mb-4 flex flex-col w-500">
+
+// <label htmlFor="form-name">Name </label>
+// <input id="form-name" autoComplete="name" maxLength={50} size="lg" name="name" className="text-black"/>
+
+// <label htmlFor="form-email"> Email:</label>
+// <input id="form-email" required autoComplete="email" maxLength={80} name="email" type="email" className="text-black"/>
+
+// <label htmlFor="form-message"> Message: </label>
+// <textarea  id="form-message" required name="message" rows={5} className="text-black" />
+
+// </div>
+// <button className=" rounded bg-sky-400" type="submit">Send</button>
+//       <div className="form-group">
+//         <label htmlFor="card-element">Credit or debit card</label>
+//         <CardElement
+//           id="card-element"
+//           options={{ style: { base: { fontSize: "14px", color: "black" } } }}
+//         />
+//       </div>
+//       <button type="submit" className="w-full rounded-md text-center p-2 bg-blue-700 text-white">
+//         Pay and Submit
+//       </button>
+//     </form>
+//   );
+// }
+
+
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useState } from "react";
 import { useCart } from "react-use-cart";
-import { useRouter } from 'next/navigation';
-
+import { useRouter } from "next/navigation";
 
 export default function PaymentForm() {
-  const { items, isEmpty, totalUniqueItems, totalItems, cartTotal, updateItemQuantity, removeItem, emptyCart } = useCart();
+  const router= useRouter()
+  const { items, cartTotal, emptyCart } = useCart();
+  console.log("items are", items)
+  console.log("items name", items[0]?.details)
   const [isProcessing, setIsProcessing] = useState(false);
-  const downloadPdf = () => {
-    // Construct the URL for the PDF file on localhost
-    const pdfUrl = `http://localhost:3000/healthReport.pdf`;
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: `Here are your PDFs: \n${items.map(item => item.pdfFileURL).join('\n')}`,
     
-    // Create an anchor element
-    const anchor = document.createElement("a");
-    anchor.href = pdfUrl; // Set the href to the PDF URL
-    anchor.download = "Health-Report.pdf"; // Specify the file name for download
-    anchor.click(); // Simulate a click event to trigger the download
-  };
-
+  });
   const stripe = useStripe();
   const elements = useElements();
 
+  const handleFormChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // async function handleSubmit(event) {
+  //   event.preventDefault();
+    // const formData = new FormData(event.target);
+  //   formData.append("pdfFile", localhost:3000/public/healthReport.pdf);
+  //   try {
+  //     const response = await fetch("/api/contact", {
+  //       method: "post",
+  //       body: formData,
+  //     });
+
+  //     if (!response.ok) {
+  //       console.log("falling over");
+  //       throw new Error(`response status: ${response.status}`);
+  //     }
+  //     const responseData = await response.json();
+  //     console.log(responseData["message"]);
+
+  //     alert("Message successfully sent");
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Error, please try resubmitting the form");
+  //   }
+  // }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+  
+    const formData = new FormData(event.target);
+  
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        console.log("falling over");
+        throw new Error(`response status: ${response.status}`);
+      }
+      const responseData = await response.json();
+      console.log(responseData["message"]);
+  
+      alert("Message successfully sent");
+    } catch (err) {
+      console.error(err);
+      alert("Error, please try resubmitting the form");
+    }
+  }
+  
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    const cardElement = elements?.getElement("card");
+    const cardElement = elements.getElement("card");
 
     if (!stripe || !cardElement || isProcessing) return;
 
@@ -43,13 +224,12 @@ export default function PaymentForm() {
       if (result.error) {
         console.log(result.error.message);
       } else {
-        // Payment successful
         console.log("Payment successful");
         let message = `Payment Complete! Reference`;
         alert(message);
-        // router.push("/pages/congrats")
-        downloadPdf(); // Call the function with parentheses to execute it
-        emptyCart()
+        handleSubmit(e);
+        emptyCart();
+        router.push('/pages/congrats')
       }
     } catch (error) {
       console.log(error);
@@ -57,8 +237,6 @@ export default function PaymentForm() {
       setIsProcessing(false);
     }
   };
-
-
 
   const cardElementOptions = {
     style: {
@@ -68,100 +246,69 @@ export default function PaymentForm() {
         "::placeholder": {
           color: "black",
         },
-        padding: "10px 15px", // Adjust card field padding
-        border: "2px solid black", // Add a border
-        borderRadius: "5px", // Round the corners
+        padding: "10px 15px",
+        border: "2px solid black",
+        borderRadius: "5px",
         display: "flex",
         flexDirection: "column",
-        gap: "10px"
+        gap: "10px",
       },
       invalid: {
         color: "#9e2146",
-      
-      
-      
-      
-      
       },
     },
   };
+
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-5">
-      <div class="form-group" className="flex flex-col gap-5">
-    <label for="card-element">Credit or debit card</label>
-    <div id="card-element" class="form-control" className="" >
-    <CardElement style={{
-            height: "150px", // Adjust height as needed
-            display: "flex",
-            flexFlow: "column wrap",
-          }} options={cardElementOptions} />
-    </div>
-  </div>
-      <button className="w-full rounded-md text-center p-2 bg-blue-700 text-white" type="submit" disabled={isProcessing}>Pay ${cartTotal}</button>
+    <form onSubmit={onSubmit} enctype="multipart/form-data" className="flex flex-col gap-5">
+      <div className="mb-4 flex flex-col w-500">
+        <label htmlFor="form-name">Name </label>
+        <input
+          id="form-name"
+          autoComplete="name"
+          maxLength={50}
+          size="lg"
+          name="name"
+          className="text-black border border-gray-200 p-2 rounded-md"
+        />
+
+        <label htmlFor="form-email"> Email:</label>
+        <input
+          id="form-email"
+          required
+          autoComplete="email"
+          maxLength={80}
+          name="email"
+          type="email"
+          className="text-black border border-gray-200 p-2 rounded-md"
+        />
+
+        <label htmlFor="form-message"> Message: </label>
+        <textarea
+          id="form-message"
+          required
+          name="message"
+          rows={5}
+          className="text-black border border-gray-200 p-2 rounded-md"
+          value={formData.message} // Add this line
+          onChange={handleFormChange} // Add this line
+        />
+      </div>
+   
+      <div className="form-group">
+        <label htmlFor="card-element">Credit or debit card</label>
+        <CardElement
+          id="card-element"
+          options={{ style: { base: { fontSize: "14px", color: "black" } } }}
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full rounded-md text-center p-2 bg-blue-700 text-white"
+      >
+        Pay ${cartTotal}
+      </button>
     </form>
   );
 }
 
-
-// import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-// import axios from "axios";
-// import React, { useState } from "react";
-// import { useCart } from "react-use-cart";
-// import { useRouter } from 'next/navigation';
-
-// export default function PaymentForm() {
-//   const { items, isEmpty, totalUniqueItems, totalItems, cartTotal, updateItemQuantity, removeItem, emptyCart } = useCart();
-//   const [isProcessing, setIsProcessing] = useState(false);
-//   const [email, setEmail] = useState("");
-
-//   // ... other functions
-
-//   const stripe = useStripe();
-//   const elements = useElements();
-
-//   const onSubmit = async (e) => {
-//     e.preventDefault();
-//     const paymentElement = elements?.getElement("payment");
-
-//     if (!stripe || !paymentElement || isProcessing) return;
-
-//     setIsProcessing(true);
-
-//     try {
-//       const { data } = await axios.post("/api/stripe", {
-//         data: { amount: 89, email }, // Include email in server-side request
-//       });
-//       const clientSecret = data;
-
-//       const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
-//         payment_method: paymentElement,
-//       });
-
-//       if (error) {
-//         console.log(error);
-//       } else {
-//         // Payment successful
-//         console.log("Payment successful");
-//         // ... success actions
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     } finally {
-//       setIsProcessing(false);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={onSubmit}>
-//       <input
-//         type="email"
-//         value={email}
-//         onChange={(e) => setEmail(e.target.value)}
-//         placeholder="Enter your email address"
-//         required
-//       />
-//       <CardElement  />
-//       <button type="submit" disabled={isProcessing}>Submit {cartTotal}</button>
-//     </form>
-//   );
-// }
