@@ -80,8 +80,8 @@ export default function productPage({ params }) {
       </Head>
 
         <Nav/>
-      <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 px-10 h-[70vh]">
-        <div className='col-span-3 lg:px-10 2xl:px-20'>
+      <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 px-10 h-[70vh]">
+        <div className='lg:col-span-3 lg:px-10 2xl:px-20'>
           <div className="w-full">
             <div className="flex rounded-md shadow-md flex-col gap-3 w-full">
               <div className="">
@@ -106,7 +106,7 @@ export default function productPage({ params }) {
           </div>
         </div>
 
-        <div className='col-span-6 flex flex-col gap-3'>
+        <div className='lg:col-span-6 flex flex-col gap-3'>
           <div className="lg:w-[55%]">
           <p className='text-2xl text-[#1567E0] font-bold'>Anti-infective Report Analysis 2023</p>
           <div className='flex justify-between text-xs w-full '>
@@ -164,9 +164,9 @@ export default function productPage({ params }) {
           </div>
         </div>
 
-        <div className='col-span-3 flex flex-col gap-5 items-center w-full mt-20'>
-          <button className='rounded-lg w-[60%] p-3 bg-[#1567E0] text-white ' onClick={handleAddToCart}>Add to cart</button>
-          <button className='rounded-lg w-[60%] p-3 bg-gray-200 '>Download Summary</button>
+        <div className='lg:col-span-3 flex flex-col gap-5 items-center w-full mt-20'>
+          <button className='rounded-lg w-full lg:w-[60%] p-3 bg-[#1567E0] text-white ' onClick={handleAddToCart}>Add to cart</button>
+          <button className='rounded-lg w-full lg:w-[60%] p-3 bg-gray-200 '>Download Summary</button>
         </div>
 
 

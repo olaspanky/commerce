@@ -19,7 +19,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'bgImage': "url('/commercehead.png')",
-        'footer': "url('/assets/footer.svg')",
+        'footer': "url('/assets/footerblur.svg')",
 
          },
       keyframes: {

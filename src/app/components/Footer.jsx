@@ -7,18 +7,30 @@ import Link from "next/link";
 
 const footer = () => {
   return (
-    <div className="bg-footer bg-[#1b1448] bg-cover mb-1 bg-no-repeat text-[#ABABAB] lg:px-7 px-1 py-8">
+    <div style={{ position: "relative" }}>
+
+<div style={{ position: "absolute", top: 0, left: 0, height: "100%" }}>
+        <video
+          src={require("../../../public/pbrvideo.mp4")}
+          autoPlay
+          muted
+          loop
+          className="w-[3000px] h-full"
+        />
+      </div>
+
+      <div className="bg-footer bg-cover mb-1 bg-no-repeat text-[white]] lg:px-7 px-1 py-8" style={{ position: "relative", zIndex: 1 }}>
       <div className="flex flex-col justify-between lg:mx-7 lg:flex-row grid-cols-1 place-content-center ">
         <div className="col-span-5 flex flex-col gap-5 m-1 ">
           <Image src={logo} />
-          <h1 className="lg:text-sm text-xs  my-5  ">
+          <h1 className="lg:text-sm text-xs  my-5 text-white ">
             Transforming healthcare through Real-world
             <br /> Data, Technology, and People
           </h1>
         </div>
         <div className=" flex flex-col lg:gap-20 gap-10 2xl:gap-36 lg:flex-row">
           <div className="col-span-2 flex flex-col gap-3 ">
-            <h1 className="text-xs my-5">Products</h1>
+            <h1 className="text-xs my-5 text-[#292D32]">Products</h1>
             <Link href="/pages/versus">
               <p className="text-xs font-bold text-white">Versus</p>
             </Link>
@@ -96,7 +108,7 @@ const footer = () => {
               <Image src={location} alt="" />
             </div>
             <div className="col-span-10 flex flex-col gap-2">
-              <h1 className="text-sm font-bold my-1">PBR International</h1>
+              <h1 className="text-sm font-bold my-1 text-white">PBR International</h1>
               <p className="text-xs">
                 Kemp House, 152-160 City Road,London EC1V 2NX,United Kingdom
               </p>
@@ -107,7 +119,7 @@ const footer = () => {
               <Image src={location} alt="" />
             </div>
             <div className="col-span-10 flex flex-col gap-2">
-              <h1 className="text-sm font-bold my-1">PBR Sub-Saharan Africa</h1>
+              <h1 className="text-sm font-bold my-1 text-white">PBR Sub-Saharan Africa</h1>
               <p className="text-xs">
                 Plot 9, Gbagada Industrial Scheme, Gbagada Expy, Araromi, Lagos
                 105102, Lagos
@@ -117,7 +129,7 @@ const footer = () => {
         </div>
 
         <div className="col-span-1 my-5">
-          <h1 className="text-xs lg:text-end">
+          <h1 className="text-xs lg:text-end text-white">
             Reach us at marketanalytics@pbrinsight.com <br /> or through our
             online contact form.
           </h1>
@@ -135,8 +147,17 @@ const footer = () => {
         <p>Privacy</p>
         <p>Terms</p>
       </div>
+
+
+      
+    </div>
     </div>
   );
 };
 
 export default footer;
+
+
+{/* <div>
+    <video src={require('../../../public/pbrvideo.mp4')} autoPlay muted loop className="w-[100vw] h-96" />
+  </div> */}

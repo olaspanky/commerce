@@ -15,7 +15,7 @@ const BoxGrid = () => {
   
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 px-10 2xl:px-36">
+    <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 p-2 lg:px-10 2xl:px-36">
       <div className="col-span-6 flex flex-col gap-5  ">
         <h1>Checkout</h1>
 
@@ -30,7 +30,7 @@ const BoxGrid = () => {
         </div>
       </div>
 
-      <div className="col-span-6  flex flex-col justify-between h-[60vh] 2xl:min-h-[80vh]  px-10 rounded-md ">
+      <div className="col-span-6  flex flex-col justify-between h-[60vh] 2xl:min-h-[80vh] p-2  lg:px-10 rounded-md ">
         <div>
           <h1 className="text-xl">Your Order</h1>
 

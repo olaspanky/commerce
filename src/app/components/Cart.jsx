@@ -24,7 +24,7 @@ const BoxGrid = () => {
 
   </div> 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-12 place-content-center gap-10 my-20 px-10">
+    <div className="flex flex-col lg:grid md:grid-cols-2 lg:grid-cols-12 place-content-center gap-10 my-20 px-10">
       <div className="col-span-9">
         <div className=" flex justify-between mx-5">
           <h1>Name</h1>
@@ -61,6 +61,7 @@ const BoxGrid = () => {
             <div className="w-4/10">
               <h1 className="text-xl text-[#1567E0] font-bold">{item.name}</h1>
             </div>
+            
             <div className="w-3/10 flex flex-row items-center justify-center gap-10">
               <h1 className="text-md">${item.price}</h1>
               <div onClick={() => removeItem(item._id)}>
