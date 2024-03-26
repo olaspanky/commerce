@@ -9,13 +9,59 @@ import PayStack from "./Paystack";
 import { useCart } from "react-use-cart";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import { useState, useEffect } from "react";
+
+
+const CustomAlert = ({ message, type }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  
+
+  useEffect(() => {
+    if (message) {
+      setIsVisible(true);
+      const timeoutId = setTimeout(() => {
+        setIsVisible(false);
+      }, 3000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [message]);
+
+  const alertClass =
+    type === "success" ? "text-primary text-xl" : "text-red-500";
+
+  return (
+    <div
+      className={`p-3   ${alertClass} ${
+        isVisible ? "slide-in border bg-white mt-5 " : "slide-out"
+      }`}
+    >
+      {message}
+    </div>
+  );
+};
 
 const BoxGrid = () => {
   const { items, isEmpty, totalUniqueItems, totalItems, cartTotal, updateItemQuantity, removeItem, emptyCart } = useCart();
   
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
+
+  const showAlert = (message, type) => {
+    setAlertMessage(message);
+    setAlertType(type);
+    setTimeout(() => {
+      setAlertMessage("");
+      setAlertType("");
+    }, 3000);
+  };
 
   return (
+    <div>
+                  <CustomAlert message={alertMessage} type={alertType} />
+
     <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 p-2 lg:px-10 2xl:px-36">
+
       <div className="col-span-6 flex flex-col gap-5  ">
         <h1>Checkout</h1>
 
@@ -105,6 +151,7 @@ const BoxGrid = () => {
 
        
       </div>
+    </div>
     </div>
   );
 };

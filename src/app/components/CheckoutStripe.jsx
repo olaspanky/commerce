@@ -6,38 +6,13 @@ import React, { useState, useEffect } from "react";
 import { useCart } from "react-use-cart";
 import { useRouter } from "next/navigation";
 
-const CustomAlert = ({ message, type }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  
 
-  useEffect(() => {
-    if (message) {
-      setIsVisible(true);
-      const timeoutId = setTimeout(() => {
-        setIsVisible(false);
-      }, 3000);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [message]);
-
-  const alertClass =
-    type === "success" ? "text-primary text-xl" : "text-red-500";
-
-  return (
-    <div
-      className={`p-3   ${alertClass} ${
-        isVisible ? "slide-in border bg-white mt-5 " : "slide-out"
-      }`}
-    >
-      {message}
-    </div>
-  );
-};
 
 export default function PaymentForm() {
   const router= useRouter()
   const { items, cartTotal, emptyCart } = useCart();
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // Step 1: State variable for success modal
+
   console.log("items are", items)
   console.log("items name", items[0]?.details)
   const [isProcessing, setIsProcessing] = useState(false);
@@ -115,15 +90,18 @@ export default function PaymentForm() {
 
       if (result.error) {
         console.log(result.error.message);
-      } else {
+      }else {
         console.log("Payment successful");
         let message = `Payment Complete! Reference`;
         showAlert("Payment Confirmed");
         alert(message);
         handleSubmit(e);
         emptyCart();
-        router.push('/pages/congrats')
-      }
+        setShowSuccessModal(true); // Step 3: Show success modal on payment success
+        setTimeout(() => {
+          setShowSuccessModal(false); // Step 4: Close success modal after a few seconds
+          router.push('/pages/congrats'); // Step 5: Update routing logic
+        }, 3000); }
     } catch (error) {
       console.log(error);
     } finally {
@@ -153,8 +131,8 @@ export default function PaymentForm() {
   };
 
   return (
+    <>
     <form onSubmit={onSubmit} enctype="multipart/form-data" className="flex flex-col gap-5">
-            <CustomAlert message={alertMessage} type={alertType} />
 
       <div className="mb-4 flex flex-col w-500">
         <label htmlFor="form-name">Name </label>
@@ -191,11 +169,26 @@ export default function PaymentForm() {
       </div>
    
       <div className="form-group">
-        <label htmlFor="card-element">Credit or debit card</label>
+        <div className="my-9" htmlFor="card-element">Credit or debit card</div>
+       
         <CardElement
-          id="card-element"
-          options={{ style: { base: { fontSize: "14px", color: "black" } } }}
-        />
+                  id="card-element"
+
+        options={{
+          style: {
+            base: {
+              fontSize: "16px",
+              color: "#424770",
+              "::placeholder": {
+                color: "#aab7c4",
+              },
+            },
+            invalid: {
+              color: "#9e2146",
+            },
+          },
+        }}
+      />
       </div>
       <button
         type="submit"
@@ -204,6 +197,16 @@ export default function PaymentForm() {
         Pay ${cartTotal}
       </button>
     </form>
+
+    {/* Success Modal */}
+    {showSuccessModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 shadow-lg">
+            <h2 className="text-2xl font-bold mb-4">Payment Successful!</h2>
+            <p>Your payment was successfully processed.</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
-
