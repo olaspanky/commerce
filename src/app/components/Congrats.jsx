@@ -25,8 +25,7 @@ const BoxGrid = () => {
           </div>
 
 <h1>Congratulations</h1>
-<h1>Your order has been placed and will be delivered to you soon.</h1>
-<h1>Order ID: 123456789</h1>
+<h1>Please Check Your mail for your Purchase.</h1>
 <Link href="/">
 <button className="w-96 text-white rounded-md bg-[#1567E0] p-2">Order Details</button>
 </Link>

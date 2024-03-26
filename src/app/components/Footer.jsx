@@ -31,20 +31,20 @@ const footer = () => {
         <div className=" flex flex-col lg:gap-20 gap-10 2xl:gap-36 lg:flex-row">
           <div className="col-span-2 flex flex-col gap-3 ">
             <h1 className="text-xs my-5 text-[#292D32]">Products</h1>
-            <Link href="/pages/versus">
+            <Link href="https://pbr-site.vercel.app/pages/versus">
               <p className="text-xs font-bold text-white">Versus</p>
             </Link>
-            <Link href="/pages/sonus">
+            <Link href="https://pbr-site.vercel.app/pages/sonus">
               <p className="text-xs font-bold  text-white">SONUS </p>
             </Link>
-            <Link href="/pages/market_sizer">
+            <Link href="https://pbr-site.vercel.app/pages/market_sizer">
               <p className="text-xs font-bold  text-white">MARKETSIZER</p>
             </Link>
-            <Link href="/pages/invisio">
+            <Link href="https://pbr-site.vercel.app/pages/invisio">
               <p className="text-xs font-bold  text-white">INVISIO</p>
             </Link>
             <div className="flex flex-row gap-2 items-center">
-              <Link href="/pages/sonusApp">
+              <Link href="https://pbr-site.vercel.app/pages/sonusApp">
                 <p className="text-xs font-bold  text-white">SONUS APP</p>
               </Link>
               <button className="bg-white px-3 py-2 rounded-3xl text-xs text-black">
@@ -54,17 +54,17 @@ const footer = () => {
           </div>
           <div className="col-span-2 flex flex-col gap-5 ">
             <h1 className="text-xs my-5">Company</h1>
-            <Link href="/pages/company">
+            <Link href="https://pbr-site.vercel.app/pages/company">
               <p className="text-xs font-bold text-white">About us</p>
             </Link>
-            <Link href="/pages/career">
+            <Link href="https://pbr-site.vercel.app/pages/career">
               <p className="text-xs font-bold  text-white">Career</p>
             </Link>
-            <Link href="/pages/blog">
+            <Link href="https://pbr-site.vercel.app/pages/blog">
               <p className="text-xs font-bold  text-white">Blog</p>
             </Link>
             <div className="flex flex-row gap-2 items-center">
-              <Link href="/pages/invisio">
+              <Link href="https://pbr-site.vercel.app/pages/invisio">
                 <p className="text-xs font-bold  text-white">News</p>
               </Link>
               <button className="bg-white px-3 py-2 rounded-3xl text-xs text-black">
@@ -74,13 +74,13 @@ const footer = () => {
           </div>
           <div className="col-span-3 flex flex-col gap-5 ">
             <h1 className="text-xs my-5">Services</h1>
-            <Link href="/pages/consulting">
+            <Link href="https://pbr-site.vercel.app/pages/consulting">
               <p className="text-xs font-bold text-white">Consulting</p>
             </Link>
-            <Link href="/pages/whitepaper">
+            <Link href="https://pbr-site.vercel.app/pages/whitepaper">
               <p className="text-xs font-bold text-white">whitepaper</p>
             </Link>
-            <Link href="/pages/pharmacovigilance">
+            <Link href="https://pbr-site.vercel.app/pages/pharmacovigilance">
               <p className="text-xs font-bold  text-white">
                 Patient Management
               </p>
