@@ -23,11 +23,11 @@ const Hero = () => {
   </button>
 </div>
 
-<div className='grid lg:grid-cols-3 gap-2 text-white'>
+{/* <div className='grid lg:grid-cols-3 gap-2 text-white'>
     <h1 className='border p-1 border-white rounded-md text-center text-xs'>Pharma Intelligence Report </h1>
     <h1 className='border p-1 border-white rounded-md text-center text-xs'>FMCG - Consumer Intelligence Report  </h1>
     <h1 className='border p-1 border-white rounded-md text-center text-xs'>Diagnostics Intelligence Report  </h1>
-</div>
+</div> */}
 
             </div>
 
