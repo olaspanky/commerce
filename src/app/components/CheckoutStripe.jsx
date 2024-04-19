@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react";
 import { useCart } from "react-use-cart";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import suc from "../../../public/assets/Vectorsuc.svg"
+import Image from "next/image";
 
 
 
@@ -210,9 +212,12 @@ export default function PaymentForm() {
       {/* Message Modal */}
       {showMessageModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">Message Sent!</h2>
-            <p>Your PDFs have been sent to your email.</p>
+          <div className="bg-white w-[500px] rounded-lg p-8 shadow-lg">
+            <div className="w-full flex justify-center my-9">
+              <Image src={suc} alt=""/>
+            </div>
+            <h2 className="text-2xl font-bold mb-4 text-center">Thank you!</h2>
+            <p className="text-gray-300 font-extralight text-sm text-center">Your order has been confirmed & it is on the way. Check your email for the details</p>
             <div className="flex justify-center mt-4 space-x-4">
               <Link href="/">
               <button
@@ -224,7 +229,7 @@ export default function PaymentForm() {
               </Link>
               <button
                 onClick={() => setShowMessageModal(false)}
-                className="px-4 py-2 bg-white text-[#1567E0] border border-[#1567E0] rounded-md"
+                className="px-4 py-2 bg-white text-[#1567E0] border border-[#1567E0] rounded-full"
               >
                 Check Order status
               </button>
