@@ -5,13 +5,16 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useCart } from "react-use-cart";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 
 export default function PaymentForm() {
   const router= useRouter()
   const { items, cartTotal, emptyCart } = useCart();
-  const [showSuccessModal, setShowSuccessModal] = useState(false); // Step 1: State variable for success modal
+  // const [showSuccessModal, setShowSuccessModal] = useState(false); // Step 1: State variable for success modal
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showMessageModal, setShowMessageModal] = useState(false); 
 
   console.log("items are", items)
   console.log("items name", items[0]?.details)
@@ -92,16 +95,8 @@ export default function PaymentForm() {
         console.log(result.error.message);
       }else {
         console.log("Payment successful");
-        let message = `Payment Complete! Reference`;
-        showAlert("Payment Confirmed");
-        alert(message);
-        handleSubmit(e);
-        emptyCart();
-        setShowSuccessModal(true); // Step 3: Show success modal on payment success
-        setTimeout(() => {
-          setShowSuccessModal(false); // Step 4: Close success modal after a few seconds
-          router.push('/pages/congrats'); // Step 5: Update routing logic
-        }, 3000); }
+        setShowMessageModal(true); // Show message modal on message success 
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -134,15 +129,15 @@ export default function PaymentForm() {
     <>
     <form onSubmit={onSubmit} enctype="multipart/form-data" className="flex flex-col gap-5">
 
-      <div className="mb-4 flex flex-col w-500">
-        <label htmlFor="form-name">Name </label>
+      <div className="flex flex-col my-5">
+        <label htmlFor="form-name">Name On Card* </label>
         <input
           id="form-name"
           autoComplete="name"
           maxLength={50}
           size="lg"
           name="name"
-          className="text-black border border-gray-200 p-2 rounded-md"
+          className="text-black border border-gray-200 p-2 rounded-md my-2"
         />
 
         <label htmlFor="form-email"> Email:</label>
@@ -153,7 +148,7 @@ export default function PaymentForm() {
           maxLength={80}
           name="email"
           type="email"
-          className="text-black border border-gray-200 p-2 rounded-md"
+          className="text-black border border-gray-200 p-2 rounded-md my-2"
         />
 
         <label className="hidden" htmlFor="form-message"> Message: </label>
@@ -169,10 +164,11 @@ export default function PaymentForm() {
       </div>
    
       <div className="form-group">
-        <div className="my-9" htmlFor="card-element">Credit or debit card</div>
+        <div className="my-2" htmlFor="card-element">Credit or debit card</div>
        
         <CardElement
                   id="card-element"
+                  className="text-black border border-gray-200 p-2 rounded-md my-2"
 
         options={{
           style: {
@@ -182,6 +178,9 @@ export default function PaymentForm() {
               "::placeholder": {
                 color: "#aab7c4",
               },
+              padding: "10px 15px",
+              border: "2px solid black",
+              borderRadius: "5px",
             },
             invalid: {
               color: "#9e2146",
@@ -192,21 +191,48 @@ export default function PaymentForm() {
       </div>
       <button
         type="submit"
-        className="w-full rounded-md text-center p-2 bg-blue-700 text-white"
+        className="w-48 rounded-full text-center p-2 bg-blue-700 text-white"
       >
         Pay ${cartTotal}
       </button>
     </form>
 
-    {/* Success Modal */}
-    {showSuccessModal && (
+         {/* Success Modal */}
+         {/* {showSuccessModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 shadow-lg">
             <h2 className="text-2xl font-bold mb-4">Payment Successful!</h2>
             <p>Your payment was successfully processed.</p>
           </div>
         </div>
+      )} */}
+
+      {/* Message Modal */}
+      {showMessageModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 shadow-lg">
+            <h2 className="text-2xl font-bold mb-4">Message Sent!</h2>
+            <p>Your PDFs have been sent to your email.</p>
+            <div className="flex justify-center mt-4 space-x-4">
+              <Link href="/">
+              <button
+                onClick={() => setShowMessageModal(false)}
+                className="px-4 py-2 bg-[#1567E0] text-white rounded-full"
+              >
+                Go to Homepage
+              </button>
+              </Link>
+              <button
+                onClick={() => setShowMessageModal(false)}
+                className="px-4 py-2 bg-white text-[#1567E0] border border-[#1567E0] rounded-md"
+              >
+                Check Order status
+              </button>
+            </div>
+          </div>
+        </div>
       )}
+
     </>
   );
 }

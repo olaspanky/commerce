@@ -10,6 +10,7 @@ import pic1 from "../../../../../public/assets/Picturecommerce1.svg"
 import { CartProvider, useCart } from "react-use-cart";
 import Head from "next/head";
 
+
 async function fetchData(slug) {
   const query = `*[_type == "product" && slug.current == "${slug}"][0]{
     _id, image, location, price, name, details,sumary, objective,methodology,pdfFile,
@@ -24,6 +25,9 @@ export default function productPage({ params }) {
   const { addItem, inCart } = useCart();
   const [card, setCard] = useState(null);
   const [displayText, setDisplayText] = useState("Loading..."); // Default value
+  const [value, setValue] = useState(2);
+
+  
 
   useEffect(() => {
     async function getData() {
@@ -80,43 +84,81 @@ export default function productPage({ params }) {
       </Head>
 
         <Nav/>
-      <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 px-10 h-[70vh]">
-        <div className='lg:col-span-3 lg:px-10 2xl:px-20'>
+      <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 px-48">
+        <div className='lg:col-span-6 lg:px-10 2xl:px-20'>
           <div className="w-full">
             <div className="flex rounded-md shadow-md flex-col gap-3 w-full">
               <div className="">
               {card?.imageUrl && (
                     <Image alt="alt" src={card?.imageUrl} width={100} height={100} className="w-full" />
-                  )}                           </div>
-              <div className='px-5 text-xs'>
-                <p>{card?.location}</p>
-              </div>
-              <div className='flex justify-between px-5 text-xs text-[#1567E0] pb-5'>
-                <div className='flex gap-2'>
-                  <p className="">${card?.price}</p>
-                  <Image src={arrow} />
-                </div>
-                <div className='flex gap-2'>
-                  <p className="">{card?.view}</p>
-                  <Image src={eye} />
-                </div>
-              </div>
+                  )}                           
+                  </div>
             </div>
             <div></div>
           </div>
         </div>
 
         <div className='lg:col-span-6 flex flex-col gap-3'>
-          <div className="lg:w-[55%]">
-          <p className='text-2xl text-[#1567E0] font-bold'>Anti-infective Report Analysis 2023</p>
-          <div className='flex justify-between text-xs w-full '>
-            <p>Published: October 18, 2023</p>
-            <p>Report Code: PBR -LS1200</p>
+          <div className="flex flex-col gap-3">
+          <p className='text-2xl text-black w-96 font-bold'>The Anti-infectives Drugs
+Market in Nigeria</p>
+          <div className="flex my-9 items-center">
+            <p className="text-xl mr-5 ">${card?.price}</p>
+            {/* <Rating name="read-only" value={value} readOnly /> */}
+            <div class="flex items-center border-l-2 px-2">
+    <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+    </svg>
+    <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+    </svg>
+    <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+    </svg>
+    <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+    </svg>
+    <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+    </svg>
+</div>
+<div>
+<p className="text-xs ">(34 reviews)</p>
+
+</div>
+
           </div>
+
+          <div className="border border-gray-200 "></div>
+
+          <div className="flex flex-col my-9 gap-9">
+            <p className="text-sm ">
+            Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn. Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn. 
+            </p>
+            <div>
+              <ul className="flex flex-col gap-3">
+                <li>Lorem ipsum dolor sit amet, adipi scing elit</li>
+                <li>Lorem ipsum dolor sit amet, adipi scing elit</li>
+                <li>Lorem ipsum dolor sit amet, adipi scing elit</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className='lg:col-span-3 flex flex-col gap-5 items-center w-full mt-20'>
+            <div className="flex w-full gap-5">
+            <button className='rounded-full w-[30%] border border-[#1567E0]  p-3 bg-[white] text-[#1567E0] '>1</button>
+            <button className='rounded-full w-full  p-3 bg-[#1567E0] text-white ' onClick={handleAddToCart}>Add to cart</button>
+
+
+            </div>
+          <button className='rounded-full w-full border border-[#1567E0]  p-3 bg-[white] text-[#1567E0] '>Buy now</button>
+        </div>
+
+         
 
           </div>
           
-          <div className='w-full '>
+          {/* <div className='w-full '>
             <div className="flex justify-between w-full text-[#1567E0] font-bold">
               <div
                 className={`title ${activeTitle === 'Report Overview' ? 'active' : ''}`}
@@ -161,14 +203,10 @@ export default function productPage({ params }) {
                 margin-top: 20px;
               }
             `}</style>
-          </div>
+          </div> */}
         </div>
 
-        <div className='lg:col-span-3 flex flex-col gap-5 items-center w-full mt-20'>
-          <button className='rounded-lg w-full lg:w-[60%] p-3 bg-[#1567E0] text-white ' onClick={handleAddToCart}>Add to cart</button>
-          <button className='rounded-lg w-full lg:w-[60%] p-3 bg-gray-200 '>Download Summary</button>
-        </div>
-
+       
 
 
         {/* Modal */}
@@ -205,6 +243,54 @@ export default function productPage({ params }) {
           </div>
         )}
       </div>
+
+
+      <div className='w-full p-20 bg-[#F8F8F8] px-36 mt-9'>
+            <div className="flex justify-between w-full text-[#1567E0] font-bold">
+              <div
+                className={`title ${activeTitle === 'Report Overview' ? 'active' : ''}`}
+                onClick={() => handleTitleClick('Report Overview')}
+              >
+                Report Overview
+              </div>
+              <div
+                className={`title ${activeTitle === 'Report' ? 'active' : ''}`}
+                onClick={() => handleTitleClick('Report')}
+              >
+                Report
+              </div>
+              <div
+                className={`title ${activeTitle === 'Methodology' ? 'active' : ''}`}
+                onClick={() => handleTitleClick('Methodology')}
+              >
+                Methodology
+              </div>
+            </div>
+            <div className="content text-sm text-[#575757] ">
+            {card ? (
+        <p>{displayText}</p>
+      ) : (
+        <p>Loading...</p> // Or any loading indicator
+      )}            </div>
+            <style jsx>{`
+              .flex {
+                display: flex;
+              }
+
+              .title {
+                padding: 10px;
+                cursor: pointer;
+              }
+
+              .active {
+                border-bottom: 2px solid blue;
+              }
+
+              .content {
+                margin-top: 20px;
+              }
+            `}</style>
+          </div>
     </div>
   );
 }

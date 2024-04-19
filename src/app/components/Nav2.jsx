@@ -1,7 +1,7 @@
 // // import { useState } from "react";
 // // import Image from "next/image";
 // // import logo from "../../../public/assets/logo.svg";
- import cart from "../../../public/assets/cart.svg";
+import cart from "../../../public/assets/cart2.svg";
 // // import Link from "next/link";
 
 // // function Demo() {
@@ -223,30 +223,31 @@ import { usePathname } from "next/navigation";
 
 const menuItems = [
 
-  {
-    title: "Home",
-    route: "/"
-
-   
-  },
-  {
-    title: "Categories",
-    route: "/"
+    {
+      title: "Home",
+      route: "/"
   
-  },
-
-  {
-    title: "Blog",
-    route: "/",
-
-
-  },
-  {
-    title: "Contact Us",
-    route: "/",
-  },
-
-];
+     
+    },
+    {
+      title: "Categories",
+      route: ""
+    
+    },
+  
+    {
+      title: "Blog",
+      route: "",
+  
+  
+    },
+    {
+      title: "Contact Us",
+      route: "",
+    },
+  
+  ];
+  
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -260,7 +261,7 @@ export default function Header() {
   " hover:text-blue-500"
 
   return (
-    <div className="bg-white flex justify-between px-5 xl:px-20 2xl:px-36 gap-10 items-center ">
+    <div className="flex justify-between px-5 xl:px-20 2xl:px-36 gap-10 items-center ">
       <div className="lg:p-5 p-2 rounded-br-[25%] rounded-bl-[25%] bg-[#1567E0]">
      <Link href="/" >
         <Image src={Logo} className="w-5 lg:w-20" alt="logo" />
@@ -268,7 +269,7 @@ export default function Header() {
 
       </div>
       
-      <div className="hidden md:flex gap-8 items-center text-black">
+      <div className="hidden md:flex gap-8 items-center text-white">
         {menuItems.map((item) => {
           return item.hasOwnProperty("children") ? (
             <Dropdown item={item} />
@@ -279,7 +280,7 @@ export default function Header() {
           );
         })}
         <a href="/pages/cart" className="text-white">
-            <div className="flex gap-3 px-3 py-2 border rounded-lg border-[#1567E0] items-center justify-center">
+            <div className="flex gap-3 px-3 py-2 border rounded-lg border-white items-center justify-center">
               <div className="relative">
                 <Image src={cart} />
                 {totalItems > 0 && (
@@ -288,7 +289,7 @@ export default function Header() {
                   </div>
                 )}
               </div>
-              <p className="text-xs text-[#1567E0]">Cart</p>
+              <p className="text-xs text-[white]">Cart</p>
             </div>
           </a>
       </div>

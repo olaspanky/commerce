@@ -4,6 +4,7 @@ import alldata from "./data";
 import { client } from "../lib/sanity";
 import { useState, useEffect } from "react";
 import Confetti from './Confetti';
+import Carousel from "./Carousel"
 
 async function getData() {
   const query = `*[_type == 'product'] | order(_createdAt desc){
@@ -53,8 +54,7 @@ export default  function Hero() {
   console.log("Carddata is,:", cardData);
   return (
     <div className="flex flex-col justify-center items-center">
-       <h1 className="text-green-500">
-        </h1>
+      
       <h1 className="text-3xl my-5 font-bold ">
        
         Chart Your Course to Success -{" "}

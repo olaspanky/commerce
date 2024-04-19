@@ -26,7 +26,11 @@ const BoxGrid = ({ data }) => {
         <div
         key={box.id}
          
-        ><div className="w-full">
+        >
+                      <Link href={`/pages/product/${box.slug}`}>
+
+          
+          <div className="w-full">
           <div className="flex flexflex-col justify-between rounded-md shadow-md xl:h-[500px]  flex-col gap-3 w-full">
             <div className="">
             {box.imageUrl && (
@@ -39,13 +43,12 @@ const BoxGrid = ({ data }) => {
             <div className='px-5 text-xs'>
               <p>{box.location}</p>
             </div>
-            <div className='flex justify-between px-5 text-xs text-[#1567E0] pb-5'>
+            <div className='flex justify-between px-5 text-xs text-[black] pb-5'>
               <div className='flex gap-2'>
               <p className="">
               ${box.price}
             </p>
             <Link href={`/pages/product/${box.slug}`}>
-            <Image src={arrow}/>
             </Link>
               </div>
               <div className='flex gap-2'>
@@ -66,6 +69,7 @@ const BoxGrid = ({ data }) => {
            
           </div>
         </div>
+        </Link>
         </div>
       ))}
     </div>
