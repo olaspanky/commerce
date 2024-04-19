@@ -151,7 +151,12 @@ Market in Nigeria</p>
 
 
             </div>
-          <button className='rounded-full w-full border border-[#1567E0]  p-3 bg-[white] text-[#1567E0] '>Buy now</button>
+            <div className="w-full">
+            <a href="/pages/payment" className="text-black w-full">
+          <button className='rounded-full w-full border border-[#1567E0]  p-3 bg-[white] text-[#1567E0]  ' onClick={handleAddToCart}>Buy now</button>
+          </a>
+            </div>
+           
         </div>
 
          
