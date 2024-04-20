@@ -84,7 +84,7 @@ export default function productPage({ params }) {
       </Head>
 
         <Nav/>
-      <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 px-48">
+      <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 p-2 2xl:px-48">
         <div className='lg:col-span-6 lg:px-10 2xl:px-20'>
           <div className="w-full">
             <div className="flex rounded-md shadow-md flex-col gap-3 w-full">
@@ -250,7 +250,7 @@ Market in Nigeria</p>
       </div>
 
 
-      <div className='w-full p-20 bg-[#F8F8F8] px-36 mt-9'>
+      <div className='w-full lg:p-20 bg-[#F8F8F8] p-2 2xl:px-36 mt-9'>
             <div className="flex justify-between w-full text-[#1567E0] font-bold">
               <div
                 className={`title ${activeTitle === 'Report Overview' ? 'active' : ''}`}

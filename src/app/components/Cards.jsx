@@ -34,7 +34,7 @@ const BoxGrid = ({ data }) => {
           <div className="flex flexflex-col justify-between rounded-md shadow-md xl:h-[500px]  flex-col gap-3 w-full">
             <div className="">
             {box.imageUrl && (
-                    <Image alt="alt" src={box.imageUrl} width={100} height={100} className="w-full" />
+              <Image alt="alt" src={box.imageUrl} width={100} height={100} className="w-full" />
                   )}             
             </div>
 

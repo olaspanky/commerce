@@ -116,17 +116,17 @@ const Hero = () => {
         </div>
         <div className='   absolute  z-10 left-0 w-full h-auto flex flex-col '>
 
-        <div className=' p-12 lg:py-12 xl:px-20 xl:py-32 2xl:px-36 2xl:py-48 my-auto flex flex-col gap-1 xl-gap-7 2xl:gap-10 md:gap-5'>
+        <div className=' p-3 lg:py-12 xl:px-20 xl:py-32 2xl:px-36 2xl:py-48 my-auto flex flex-col gap-5 xl-gap-7 2xl:gap-10 md:gap-5'>
         <h1 className='text-md xl:text-2xl font-light font-work text-[#FFFFFF]'>Leverage the power of real world data when you subscribe to </h1>
           <h1 className='text-sm md:text-3xl  xl:text-5xl font-extrabold font-work text-[#FFFFFF]'>PBR MARKET INTELLIGENCE REPORT</h1>
-          <h1 className='text-xs lg:text-md xl:text-xl font-light font-work text-white'>The reports are focused on insights from patients, healthcare practitioners,<br/> healthcare ecosystems and channels within emerging markets</h1>
+          <h1 className='text-xs lg:text-md xl:text-xl font-light font-work text-white hidden lg:flex'>The reports are focused on insights from patients, healthcare practitioners,<br/> healthcare ecosystems and channels within emerging markets</h1>
           <div className="flex items-center gap-3">
-            <button className="ml-2 p-2 2xl:w-36 text-lg font-bold lg:w-[20%] bg-[#1567E0] text-[white] rounded-md hover:bg-blue-900 ">
+            <button className=" p-2 px-3 2xl:w-48 texy-sm lg:text-lg font-bold lg:w-[30%] bg-[#1567E0] text-[white] rounded-md hover:bg-blue-900 ">
               ORDER NOW
             </button>
           </div>
         </div>
-        <div className=" w-full bottom-0 "><Carousel/></div>
+        <div className="w-full bottom-0 lg:mt-2 2xl:mt-12 top-auto hidden lg:flex"><Carousel/></div>
 
 
 
