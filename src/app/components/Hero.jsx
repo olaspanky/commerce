@@ -60,13 +60,13 @@ export default  function Hero() {
         </div>
         <div className="flex md:hidden w-full py-2 top-auto h-full bg-black "><Carousel/></div>
       
-      <h1 className="text-3xl text-center my-5 font-bold ">
+      <h1 className="text-3xl text-center my-3 font-bold ">
        
         Chart Your Course to Success -{" "}
         <span className="text-[#1567E0]">Order Your Report Today</span>
       </h1>
 
-      <div className="mx-1 p-3 my-20 w-full  lg:px-36">
+      <div className="mx-1 p-3 my-5 w-full lg:px-10  2xl:px-20">
         <Card data={cardData} />
       </div>
      
