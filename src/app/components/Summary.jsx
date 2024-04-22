@@ -86,7 +86,7 @@ const BoxGrid = () => {
 
   return (
     <div ref={boxGridRef} className="flex flex-col lg:grid md:grid-cols-2 lg:grid-cols-12 place-content-center gap-10 m-2 p-3 lg:my-20 lg:px-10">
-      <div className="lg:px-5">
+      <div className="col-span-12 lg:px-5">
         <h1 className="my-3">Order Summary</h1>
         <div className="bg-[#1567E0] p-3 flex justify-between  text-white rounded-tr-lg rounded-tl-lg lg:px-9">
           <h1 className="">Product</h1>
@@ -97,8 +97,9 @@ const BoxGrid = () => {
         {items.map((item) => (
           <div className="border border-gray-200 rounded-bl-lg border-br-lg">
             <div key={item.id} className="flex justify-between items-center py-3 p-2 lg:px-10">
-              <div className="">
+              <div className="w-3/10">
                 <div className="flex rounded-md  items-center  gap-3 ">
+                  <div onClick={() => removeItem(item._id)}>x</div>
                   <div className="w-2 lg:w-20 shadow-md rounded-md">
                     {item.imageUrl && (
                       <Image alt="alt" src={item.imageUrl} width={20} height={20} className="w-full" />
@@ -118,8 +119,7 @@ const BoxGrid = () => {
             </div>
           </div>
         ))}
-
-<button onClick={() => handleDownload('image')} className="bg-blue-500 text-white p-2 rounded-md my-3 ">Download</button>
+              <button onClick={() => handleDownload('image')} className="my-3 bg-blue-500 text-white p-2 rounded-md">Download</button>
 
       </div>
 

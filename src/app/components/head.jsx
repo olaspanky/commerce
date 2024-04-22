@@ -116,7 +116,7 @@ const Hero = () => {
         </div>
         <div className='   absolute  z-10 left-0 w-full h-auto flex flex-col justify-between '>
 
-        <div className=' p-3 lg:py-12 xl:px-20 xl:py-32 2xl:px-36 2xl:py-48 my-auto flex flex-col gap-5 xl-gap-7 2xl:gap-10 md:gap-5'>
+        <div className=' p-3 lg:py-20 xl:px-20 xl:py-36 2xl:px-36 2xl:py-48 my-auto flex flex-col gap-5 xl-gap-7 2xl:gap-10 md:gap-5'>
         <h1 className='text-md xl:text-2xl font-light font-work text-[#FFFFFF]'>Leverage the power of real world data when you subscribe to </h1>
           <h1 className='text-sm md:text-3xl  xl:text-5xl font-extrabold font-work text-[#FFFFFF]'>PBR MARKET INTELLIGENCE REPORT</h1>
           <h1 className='text-xs lg:text-md xl:text-xl font-light font-work text-white hidden md:flex'>The reports are focused on insights from patients, healthcare practitioners,<br/> healthcare ecosystems and channels within emerging markets</h1>

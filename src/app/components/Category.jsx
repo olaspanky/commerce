@@ -16,9 +16,8 @@ const category = () => {
         </h1>
         <h1 className="text-[#666666] m-2 xl:mx-48 text-sm">
           Deep dive into emerging markets with our reports on markets, channels,
-          <br className="hidden lg:flex"/> Healthcare practioners, Health Care Ecosystem & Patients 
-          <br className="hidden lg:flex"/>
-          has context menu
+          <br className="hidden lg:flex"/> Healthcare practioners, Patients and Health Care Ecosystem
+
         </h1>
       </div>
 
@@ -42,7 +41,7 @@ const category = () => {
         </div>
         <div className="w-1/3 cursor-pointer transition-transform duration-300 transform hover:scale-105">
           {" "}
-          <Image alt="alt" src={cat1} className="w-full" />
+          <Image alt="alt" src={cat4} className="w-full" />
         </div>
       </div>
     </div>
