@@ -273,7 +273,7 @@ export default function Header() {
           return item.hasOwnProperty("children") ? (
             <Dropdown item={item} />
           ) : (
-            <Link className={`${item.route === path ? "text-gray-200 underline font-semibold pb-1" : ""}`} href={item?.route || ""}>
+            <Link className={`${item.route === path ? "text-[#FFFFFF] border-b-2 px-3 border-[#FFFFFF] font-semibold pb-1" : ""}`} href={item?.route || ""}>
               {item.title}
             </Link>
           );

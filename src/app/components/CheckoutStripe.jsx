@@ -235,15 +235,17 @@ export default function PaymentForm() {
                   Go to Homepage
                 </button>
               </Link>
+              <Link href="/pages/summary">
+
               <button
                 onClick={() => {
                   setShowMessageModal(false);
-                  emptyCart(); // Empty cart when the user clicks on "Go to Homepage"
                 }}
                 className="px-4 py-2 bg-white text-[#1567E0] border border-[#1567E0] rounded-full"
               >
                 Check Order status
               </button>
+              </Link>
             </div>
           </div>
         </div>

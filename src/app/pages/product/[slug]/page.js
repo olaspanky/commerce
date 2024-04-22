@@ -251,25 +251,20 @@ Market in Nigeria</p>
 
 
       <div className='w-full lg:p-20 bg-[#F8F8F8] p-2 2xl:px-36 mt-9'>
-            <div className="flex justify-between w-full text-[#1567E0] font-bold">
+            <div className="flex gap-5 w-full text-[#696969] font-light">
               <div
-                className={`title ${activeTitle === 'Report Overview' ? 'active' : ''}`}
+                className={`title ${activeTitle === 'Report Overview' ? 'active' : ''} border-r-2 border-[#696969]`}
                 onClick={() => handleTitleClick('Report Overview')}
               >
-                Report Overview
+Description
               </div>
               <div
                 className={`title ${activeTitle === 'Report' ? 'active' : ''}`}
                 onClick={() => handleTitleClick('Report')}
               >
-                Report
+                Reviews
               </div>
-              <div
-                className={`title ${activeTitle === 'Methodology' ? 'active' : ''}`}
-                onClick={() => handleTitleClick('Methodology')}
-              >
-                Methodology
-              </div>
+              
             </div>
             <div className="content text-sm text-[#575757] ">
             {card ? (
@@ -288,7 +283,8 @@ Market in Nigeria</p>
               }
 
               .active {
-                border-bottom: 2px solid blue;
+                color: #696969;
+                font-weight: bold;
               }
 
               .content {

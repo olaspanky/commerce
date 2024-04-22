@@ -54,11 +54,11 @@ export default  function Hero() {
   console.log("Carddata is,:", cardData);
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="flex lg:hidden bg-gray-100">
-      <h1 className='text-xs lg:text-md xl:text-xl font-light font-work text-black '>The reports are focused on insights from patients, healthcare practitioners,<br/> healthcare ecosystems and channels within emerging markets</h1>
+      <div className="flex md:hidden bg-gray-100">
+      <h1 className='text-xs lg:text-md xl:text-xl font-light font-work text-black p-2 '>The reports are focused on insights from patients, healthcare practitioners,<br className="hidden lg:flex"/> healthcare ecosystems and channels within emerging markets</h1>
          
         </div>
-        <div className="flex lg:hidden w-full py-2 top-auto h-full bg-black "><Carousel/></div>
+        <div className="flex md:hidden w-full py-2 top-auto h-full bg-black "><Carousel/></div>
       
       <h1 className="text-3xl text-center my-5 font-bold ">
        
@@ -66,7 +66,7 @@ export default  function Hero() {
         <span className="text-[#1567E0]">Order Your Report Today</span>
       </h1>
 
-      <div className="mx-1 p-3 my-20 w-full px-36">
+      <div className="mx-1 p-3 my-20 w-full  lg:px-36">
         <Card data={cardData} />
       </div>
      
