@@ -42,7 +42,7 @@ const BoxGrid = ({ data }) => {
               <div className='px-5 text-lg my-2 font-light text-[#404040] h-20 lg:h-20  2xl:h-12'>{box.name}</div>
 
             <div className='px-5 text-xs'>
-              <p>{box.location}</p>
+              {/* <p>{box.location}</p> */}
             </div>
             <div className='flex justify-between px-5 text-xs text-[black] pb-5'>
               <div className='flex gap-2'>
