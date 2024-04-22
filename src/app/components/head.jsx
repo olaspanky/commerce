@@ -108,13 +108,13 @@ const Hero = () => {
         </Fade>
       </div>
       
-      <div className=' bg-black bg-opacity-50  absolute top-0 z-10 left-0 w-full  h-full   '>
+      <div className=' bg-black bg-opacity-50  absolute top-0 z-10 left-0 w-full h-full   '>
         <div className='z-15'>
         <Navbar/>
 
 
         </div>
-        <div className='   absolute  z-10 left-0 w-full h-auto flex flex-col justify-between '>
+        <div className='   absolute  z-10 left-0 w-full h-auto top-auto bottom-0  flex flex-col justify-between '>
 
         <div className=' p-3 lg:py-20 xl:px-20 xl:py-36 2xl:px-36 2xl:py-48 my-auto flex flex-col gap-5 xl-gap-7 2xl:gap-10 md:gap-5'>
         <h1 className='text-md xl:text-2xl font-light font-work text-[#FFFFFF]'>Leverage the power of real world data when you subscribe to </h1>
@@ -126,7 +126,7 @@ const Hero = () => {
             </button>
           </div>
         </div>
-        <div className="w-full bottom-0 md:mt-32 lg:mt-2 2xl:mt-12 top-auto hidden md:flex"><Carousel/></div>
+        <div className="w-full top-auto hidden md:flex"><Carousel/></div>
 
 
 
