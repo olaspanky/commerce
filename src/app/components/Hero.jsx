@@ -60,7 +60,7 @@ export default  function Hero() {
         </div>
         <div className="flex md:hidden w-full py-2 top-auto h-full bg-black "><Carousel/></div>
       
-      <h1 className="text-3xl text-center my-3 font-bold ">
+      <h1 className="text-3xl text-center my-5 font-bold ">
        
         Chart Your Course to Success -{" "}
         <span className="text-[#1567E0]">Order Your Report Today</span>
