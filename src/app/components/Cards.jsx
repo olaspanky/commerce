@@ -39,7 +39,7 @@ const BoxGrid = ({ data }) => {
             </div>
 
             <div className=''>
-              <div className='px-5 text-lg my-2 font-light text-[#404040] h-20 lg:h-12  xl:h-20'>{box.name}</div>
+              <div className='px-5 text-lg my-2 font-light text-[#404040] h-20 lg:h-20  2xl:h-12'>{box.name}</div>
 
             <div className='px-5 text-xs'>
               <p>{box.location}</p>
