@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import cat1 from "../../../public/assets/cat11.png";
+import cat1 from "../../../public/assets/hcp.png";
 import cat2 from "../../../public/assets/cat2.png";
 import cat3 from "../../../public/assets/cat3.png";
-import cat4 from "../../../public/assets/cat4.png";
+import cat4 from "../../../public/assets/patient.png";
 import Link from 'next/link';
 
 
