@@ -13,6 +13,7 @@ export default function PaymentForm() {
   // const [showSuccessModal, setShowSuccessModal] = useState(false); // Step 1: State variable for success modal
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showMessageModal, setShowMessageModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   console.log("items are", items);
   console.log("items name", items[0]?.details);
@@ -64,7 +65,7 @@ export default function PaymentForm() {
       alert("Message successfully sent");
     } catch (err) {
       console.error(err);
-      showAlert("Error, please try resubmitting the form");
+      showAlert("Error, please try resubmitting the form", err);
 
       alert("Error, please try resubmitting the form");
     }
@@ -96,6 +97,8 @@ export default function PaymentForm() {
       }
     } catch (error) {
       console.log(error);
+      setShowErrorModal(true); // Show message modal on message success
+
     } finally {
       setIsProcessing(false);
     }
@@ -245,6 +248,34 @@ export default function PaymentForm() {
               >
                 Check Order status
               </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      {showErrorModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white w-[500px] rounded-lg p-8 shadow-lg">
+
+            <h2 className="text-2xl font-bold mb-4 text-center">Error!</h2>
+            <p className="text-gray-300 font-extralight text-sm text-center">
+Something went Wrong
+            </p>
+            <div className="flex justify-center mt-4 space-x-4">
+              <Link href="/">
+                <button
+                  onClick={() => {
+                    setShowMessageModal(false);
+                    emptyCart(); // Empty cart when the user clicks on "Go to Homepage"
+                  }}
+                  className="px-4 py-2 bg-[#1567E0] text-white rounded-full"
+                >
+                  Go to Homepage
+                </button>
+              </Link>
+              <Link href="/pages/summary">
+
+            
               </Link>
             </div>
           </div>
