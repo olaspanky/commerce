@@ -94,7 +94,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import bin from "../../../public/assets/trashbin.svg";
+import bin from "../../../public/assets/close.svg";
 import eye from "../../../public/assets/eye.svg";
 import { useCart } from "react-use-cart";
 import CheckoutButton from "../components/CheckoutStripe";
@@ -135,11 +135,11 @@ const BoxGrid = () => {
            
               <div className="flex rounded-md  items-center  gap-3 ">
               <div onClick={() => removeItem(item._id)}>
-x 
+<Image src={bin} alt="" />
              </div>
                 <div className="w-2 lg:w-20 shadow-md rounded-md">
                 {item.imageUrl && (
-                    <Image alt="alt" src={item.imageUrl} width={20} height={20} className="w-full" />
+                    <img alt="alt" src={item.imageUrl} width={20} height={20} className="w-full" />
                   )}            
                   
                   </div>
