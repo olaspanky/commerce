@@ -87,13 +87,13 @@ export default function productPage({ params }) {
       </Head>
 
         <Nav/>
-        <div className="flex gap-2 lg:gap-10 my-5 p-2 2xl:px-48">
+        <div className="flex gap-2 lg:gap-10 my-5 p-2 xl:px-20 2xl:px-36">
           <p className="text-sm ">Product Listing</p> 
           <Image src={arrow} alt=""/>
           <p className="text-sm font-bold">Product Page</p> 
 
         </div>
-      <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 p-2 2xl:px-48">
+      <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 p-2 xl:px-20 2xl:px-36">
        
         <div className='lg:col-span-6 lg:px-10 2xl:px-20'>
           <div className="w-full">
