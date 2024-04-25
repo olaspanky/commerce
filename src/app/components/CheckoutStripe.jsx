@@ -96,7 +96,7 @@ export default function PaymentForm() {
         setShowMessageModal(true); // Show message modal on message success
       }
     } catch (error) {
-      console.log(error);
+      console.log("payment error is", error);
       setShowErrorModal(true); // Show message modal on message success
 
     } finally {

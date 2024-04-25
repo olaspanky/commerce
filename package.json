@@ -54,6 +54,7 @@
     "react-social-icons": "^6.15.0",
     "react-use-cart": "^1.13.0",
     "sanity": "^3.34.0",
+    "sanity-image": "^0.1.7",
     "slick-carousel": "^1.8.1",
     "stripe": "^14.21.0",
     "stripe-cli": "^0.1.0",
@@ -61,6 +62,7 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "use-shopping-cart": "^3.2.0",
+    "uuid": "^9.0.1",
     "yup": "^1.4.0"
   },
   "devDependencies": {

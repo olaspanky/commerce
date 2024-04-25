@@ -67,6 +67,11 @@ export default {
           type: 'string'
       },
       {
+          name: "availability",
+          title: 'available',
+          type: 'string'
+      },
+      {
           name: 'pdfFile',
           title: 'PDF File',
           type: 'file', // Use 'file' type for PDF files

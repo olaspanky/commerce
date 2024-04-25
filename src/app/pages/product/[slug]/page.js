@@ -3,7 +3,7 @@ import React from "react";
 import { client } from "@/app/lib/sanity";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import arrow from "../../../../../public/assets/farrow.svg";
+import arrow from "../../../../../public/assets/vec.svg";
 import eye from "../../../../../public/assets/eye.svg";
 import Nav from "../../../components/Navbar"
 import pic1 from "../../../../../public/assets/Picturecommerce1.svg"
@@ -26,6 +26,9 @@ export default function productPage({ params }) {
   const [card, setCard] = useState(null);
   const [displayText, setDisplayText] = useState("Loading..."); // Default value
   const [value, setValue] = useState(2);
+
+  const objective = "The Nigerian anti-infectives market plays a pivotal role in addressing a wide spectrum of infections. Notably, in 2022, the anti-infectives segment made a substantial contribution, accounting for 25.90% of the total pharmaceutical market revenue, reaching an impressive $835 million. This market exhibited a robust growth pattern, primarily fueled by the profound impact of the COVID-19 pandemic. In 2022, it recorded significant expansion, with a notable increase in revenue amounting to +$237 million compared to the previous year. Projections indicate a continuous growth trend, with market revenue expected to reach $722 million by 2028(CAGR: 6.60%). However, it is essential to acknowledge that the anticipated decline in market revenue from 2022 to 2028 is primarily attributed to currency devaluation. As the local currency undergoes devaluation, it triggers a chain reaction of effects. This includes increased production costs for pharmaceutical companies, resulting in higher drug prices for consumers. Consequently, consumers' purchasing power may diminish, potentially posing challenges for local pharmaceutical enterprises as they compete on the global stage. These combined factors are expected to constrain the revenue growth within the anti-infectives market (CAGR: 6.60%).Major industry players, including GSK, Sanofi, Fidson Healthcare, Pfizer, Roche, and Taylek have made substantial contributions. GSK, driven by Augmentin and Ampiclox, accounted for 31.94% of the 2022 revenue."
+  const methodology = ""
 
   
 
@@ -84,13 +87,21 @@ export default function productPage({ params }) {
       </Head>
 
         <Nav/>
+        <div className="flex gap-2 lg:gap-10 my-5 p-2 2xl:px-48">
+          <p className="text-sm ">Product Listing</p> 
+          <Image src={arrow} alt=""/>
+          <p className="text-sm font-bold">Product Page</p> 
+
+        </div>
       <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 p-2 2xl:px-48">
+       
         <div className='lg:col-span-6 lg:px-10 2xl:px-20'>
           <div className="w-full">
             <div className="flex rounded-md shadow-md flex-col gap-3 w-full">
               <div className="">
               {card?.imageUrl && (
-                    <Image alt="alt" src={card?.imageUrl} width={100} height={100} className="w-full" />
+                    <img alt="alt" src={card?.imageUrl}  className="w-full h-full" />
+
                   )}                           
                   </div>
             </div>
@@ -99,10 +110,10 @@ export default function productPage({ params }) {
         </div>
 
         <div className='lg:col-span-6 flex flex-col gap-3'>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
           <p className='text-2xl text-black w-96 font-bold'>The Anti-infectives Drugs
 Market in Nigeria</p>
-          <div className="flex my-9 items-center">
+          <div className="flex my-2 items-center">
             <p className="text-xl mr-5 ">${card?.price}</p>
             {/* <Rating name="read-only" value={value} readOnly /> */}
             <div class="flex items-center border-l-2 px-2">
@@ -123,7 +134,7 @@ Market in Nigeria</p>
     </svg>
 </div>
 <div>
-<p className="text-xs ">(34 reviews)</p>
+<p className="text-xs ">(20 views)</p>
 
 </div>
 
@@ -131,20 +142,13 @@ Market in Nigeria</p>
 
           <div className="border border-gray-200 "></div>
 
-          <div className="flex flex-col my-9 gap-9">
-            <p className="text-sm ">
-            Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn. Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn. 
-            </p>
-            <div>
-              <ul className="flex flex-col gap-3">
-                <li>Lorem ipsum dolor sit amet, adipi scing elit</li>
-                <li>Lorem ipsum dolor sit amet, adipi scing elit</li>
-                <li>Lorem ipsum dolor sit amet, adipi scing elit</li>
-              </ul>
-            </div>
+          <div className="flex flex-col my-2 gap-9">
+            <p className="text-sm "> {objective}
+                        </p>
+        
           </div>
 
-          <div className='lg:col-span-3 flex flex-col gap-5 items-center w-full mt-20'>
+          <div className='lg:col-span-3 flex flex-col gap-5 items-center w-full mt-3'>
             <div className="flex w-full gap-5">
             <button className='rounded-full w-[30%] border border-[#1567E0]  p-3 bg-[white] text-[#1567E0] '>1</button>
             <button className='rounded-full w-full  p-3 bg-[#1567E0] text-white ' onClick={handleAddToCart}>Add to cart</button>

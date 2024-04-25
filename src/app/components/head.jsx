@@ -77,7 +77,7 @@ const slideImages = [
  
 ];
 
-const Hero = () => {
+const Hero = ({ scrollToHero }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
 
@@ -121,7 +121,9 @@ const Hero = () => {
           <h1 className='text-sm md:text-3xl  xl:text-5xl font-extrabold font-work text-[#FFFFFF]'>PBR MARKET INTELLIGENCE REPORT</h1>
           <h1 className='text-xs lg:text-md xl:text-xl font-light font-work text-white hidden md:flex'>The reports are focused on insights from patients, healthcare practitioners,<br/> healthcare ecosystems and channels within emerging markets</h1>
           <div className="flex items-center gap-3">
-            <button className=" p-2 px-3 2xl:w-48 texy-sm lg:text-lg font-bold lg:w-[30%] bg-[#1567E0] text-[white] rounded-md hover:bg-blue-900 ">
+            <button className=" p-2 px-3 2xl:w-48 texy-sm lg:text-lg font-bold lg:w-[15%] bg-[#1567E0] text-[white] rounded-md hover:bg-blue-900 "
+                      onClick={scrollToHero}  // Add onClick handler to scroll to Hero section
+                      >
               ORDER NOW
             </button>
           </div>
