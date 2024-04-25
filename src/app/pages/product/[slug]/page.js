@@ -9,17 +9,34 @@ import Nav from "../../../components/Navbar"
 import pic1 from "../../../../../public/assets/Picturecommerce1.svg"
 import { CartProvider, useCart } from "react-use-cart";
 import Head from "next/head";
+import Link from 'next/link';
+import Card from "../../../components/Cards"
+
 
 
 async function fetchData(slug) {
   const query = `*[_type == "product" && slug.current == "${slug}"][0]{
-    _id, image, location, price, name, details,sumary, objective,methodology,pdfFile,
+    _id, image, location, price, name, details,sumary,available, objective,methodology,pdfFile,
       "slug": slug.current,
       "imageUrl": image[0].asset->url , "pdfFileURL": pdfFile.asset-> url,     
   }`;
   const data = await client.fetch(query);
   return data;
 }
+
+
+async function getData() {
+  const query = `*[_type == 'product'] | order(_createdAt desc){
+    _id, image, location, price, name, available, details,sumary, objective,methodology,pdfFile,
+      "slug": slug.current,
+      "imageUrl": image[0].asset->url      
+  }`;
+  const data = await client.fetch(query);
+  return data;
+}
+
+
+
 
 export default function productPage({ params }) {
   const { addItem, inCart } = useCart();
@@ -29,6 +46,27 @@ export default function productPage({ params }) {
 
   const objective = "The Nigerian anti-infectives market plays a pivotal role in addressing a wide spectrum of infections. Notably, in 2022, the anti-infectives segment made a substantial contribution, accounting for 25.90% of the total pharmaceutical market revenue, reaching an impressive $835 million. This market exhibited a robust growth pattern, primarily fueled by the profound impact of the COVID-19 pandemic. In 2022, it recorded significant expansion, with a notable increase in revenue amounting to +$237 million compared to the previous year. Projections indicate a continuous growth trend, with market revenue expected to reach $722 million by 2028(CAGR: 6.60%). However, it is essential to acknowledge that the anticipated decline in market revenue from 2022 to 2028 is primarily attributed to currency devaluation. As the local currency undergoes devaluation, it triggers a chain reaction of effects. This includes increased production costs for pharmaceutical companies, resulting in higher drug prices for consumers. Consequently, consumers' purchasing power may diminish, potentially posing challenges for local pharmaceutical enterprises as they compete on the global stage. These combined factors are expected to constrain the revenue growth within the anti-infectives market (CAGR: 6.60%).Major industry players, including GSK, Sanofi, Fidson Healthcare, Pfizer, Roche, and Taylek have made substantial contributions. GSK, driven by Augmentin and Ampiclox, accounted for 31.94% of the 2022 revenue."
   const methodology = ""
+
+
+  const [data1, setData1] = useState(null);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const data = await fetchData();
+        setData1(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    getData();
+  }, []);
+
+  const data = data1;
+  const cardData = data;
+
+  console.log("new card is", card)
+
 
   
 
@@ -45,7 +83,7 @@ export default function productPage({ params }) {
     getData();
   }, [params.slug]);
 
-  const [activeTitle, setActiveTitle] = useState("Report Overview");
+  const [activeTitle, setActiveTitle] = useState("Methodology");
 
   const handleTitleClick = (title) => {
     setActiveTitle(title);
@@ -87,8 +125,10 @@ export default function productPage({ params }) {
       </Head>
 
         <Nav/>
-        <div className="flex gap-2 lg:gap-10 my-5 p-2 xl:px-20 2xl:px-36">
+        <div className="flex gap-2 lg:gap-10 my-5 p-2 xl:px-20 2xl:px-36 cursor-pointer">
+          <Link href="/">
           <p className="text-sm ">Product Listing</p> 
+          </Link>
           <Image src={arrow} alt=""/>
           <p className="text-sm font-bold">Product Page</p> 
 
@@ -257,8 +297,8 @@ Market in Nigeria</p>
       <div className='w-full lg:p-20 bg-[#F8F8F8] p-2 2xl:px-36 mt-9'>
             <div className="flex gap-5 w-full text-[#696969] font-light">
               <div
-                className={`title ${activeTitle === 'Report Overview' ? 'active' : ''} border-r-2 border-[#696969]`}
-                onClick={() => handleTitleClick('Report Overview')}
+                className={`title ${activeTitle === 'Methodology' ? 'active' : ''} border-r-2 border-[#696969]`}
+                onClick={() => handleTitleClick('Methodology')}
               >
 Description
               </div>
@@ -295,6 +335,13 @@ Description
                 margin-top: 20px;
               }
             `}</style>
+          </div>
+
+          <div>
+          <div className="mx-1 p-3 my-5 w-full lg:px-10  2xl:px-20">
+        <Card data={card} />
+      </div>
+
           </div>
     </div>
   );
