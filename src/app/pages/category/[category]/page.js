@@ -5,6 +5,8 @@ import Nav from "../../../components/Navbar";
 import catti from "../../../../../public/assets/catti1.png";
 import Card from "../../../components/Cards";
 import { useState, useEffect } from "react";
+import Link from 'next/link';
+
 
 import { client } from "@/app/lib/sanity";
 
