@@ -23,7 +23,7 @@ const category = () => {
 
       <div className="flex flex-row  gap-5 p-3 xl:px-20 2xl:px-36 items-center">
         <div className="w-1/3 cursor-pointer transition-transform duration-300 transform hover:scale-105">
-        <Link href={`/pages/category/Healthcare-Ecosystem-Insights`}>
+        <Link href={`/pages/category/Hcp`}>
 
           <Image alt="alt" src={cat1} className="w-full" />
           </Link>
@@ -32,16 +32,24 @@ const category = () => {
 
         <div className="w-1/3 flex flex-col gap-5 ">
         <div className=" cursor-pointer transition-transform duration-300 transform hover:scale-105">
-            {" "}
+        <Link href={`/pages/category/Healthcare-Ecosystem-Insights`}>
+
             <Image alt="alt" src={cat2} className="w-full" />
+            </Link>
           </div>
           <div className=" cursor-pointer transition-transform duration-300 transform hover:scale-105">
+          <Link href={`/pages/category/Market-Insight`}>
+
             <Image alt="alt" src={cat3} className="w-full" />
+            </Link>
           </div>
         </div>
         <div className="w-1/3 cursor-pointer transition-transform duration-300 transform hover:scale-105">
           {" "}
+          <Link href={`/pages/category/Market-Insight`}>
+
           <Image alt="alt" src={cat4} className="w-full" />
+          </Link>
         </div>
       </div>
     </div>

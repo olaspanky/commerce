@@ -13,7 +13,8 @@ async function fetchData(category) {
       _id, image, location, price, name, details, sumary, objective, methodology, pdfFile,
         "slug": slug.current,
         "imageUrl": image[0].asset->url,
-        "categoryName": category->name      
+        "categoryName": category->name,      
+        "categoryDescription": category->description      
     }`;
   const data = await client.fetch(query);
   return data;
@@ -51,10 +52,7 @@ export default function categoryPage({ params }) {
             Lorem Ipsum Is a Dummy Text Used As The Heading Of Insight
           </h1>
           <p className="text-[#666666] text-md">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-            nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam.
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-            nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam.
+            {cardData?.categoryDescription}
           </p>
         </div>
       </div>
