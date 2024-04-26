@@ -42,6 +42,15 @@ export default function categoryPage({ params }) {
   return (
     <div className="bg-white h-full">
       <Nav />
+      <div className="flex gap-2 lg:gap-10 my-5 p-2 xl:px-20 2xl:px-36 cursor-pointer">
+          <Link href="/">
+          <p className="text-sm ">          {cardData && cardData.length > 0 && cardData[0].categoryName}
+</p> 
+          </Link>
+          <Image src={arrow} alt=""/>
+          <p className="text-sm font-bold">Product Page</p> 
+
+        </div>
       <div className="lg:px-20 2xl:px-36 my-20 flex flex-col gap-5 lg:gap-20">
       <div className="flex flex-col gap-5 lg:gap-9 lg:flex-row ">
         <div className="lg:w-1/2 ">
