@@ -46,7 +46,7 @@ const category = () => {
         </div>
         <div className="w-1/3 cursor-pointer transition-transform duration-300 transform hover:scale-105">
           {" "}
-          <Link href={`/pages/category/Market-Insight`}>
+          <Link href={`/pages/category/Patient-Insight`}>
 
           <Image alt="alt" src={cat4} className="w-full" />
           </Link>
