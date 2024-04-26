@@ -6,6 +6,8 @@ import catti from "../../../../../public/assets/catti1.png";
 import Card from "../../../components/Cards";
 import { useState, useEffect } from "react";
 import Link from 'next/link';
+import arrow from "../../../../../public/assets/vec.svg";
+
 
 
 import { client } from "@/app/lib/sanity";
