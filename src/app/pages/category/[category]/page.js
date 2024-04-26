@@ -18,7 +18,8 @@ async function fetchData(category) {
         "slug": slug.current,
         "imageUrl": image[0].asset->url,
         "categoryName": category->name,      
-        "categoryDescription": category->description      
+        "categoryDescription": category->description,
+        "categoryImage": category->image[0].asset->url    
     }`;
   const data = await client.fetch(query);
   return data;
@@ -58,7 +59,10 @@ export default function categoryPage({ params }) {
       <div className="lg:px-20 2xl:px-36 my-20 flex flex-col gap-5 lg:gap-20">
       <div className="flex flex-col gap-5 lg:gap-9 lg:flex-row ">
         <div className="lg:w-1/2 ">
-          <Image src={catti} alt="" />
+        {cardData && cardData.length > 0 &&
+                   <img src={cardData[0].categoryImage} alt="" />
+                  }
+
         </div>
         <div className="lg:w-1/2 flex flex-col gap-3 text-black">
           
