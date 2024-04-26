@@ -60,7 +60,9 @@ export default function categoryPage({ params }) {
       <div className="flex flex-col gap-5 lg:gap-9 lg:flex-row ">
         <div className="lg:w-1/2 ">
         {cardData && cardData.length > 0 &&
-                   <img src={cardData[0].categoryImage} alt="" />
+        <div className="">
+                   <img src={cardData[0].categoryImage} alt="" className="w-full" />
+                   </div>
                   }
 
         </div>
