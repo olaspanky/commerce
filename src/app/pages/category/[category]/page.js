@@ -52,7 +52,7 @@ export default function categoryPage({ params }) {
             Lorem Ipsum Is a Dummy Text Used As The Heading Of Insight
           </h1>
           <p className="text-[#666666] text-md">
-            {cardData?.categoryDescription}
+          {cardData && cardData.length > 0 && cardData[0].categoryDescription}
           </p>
         </div>
       </div>
