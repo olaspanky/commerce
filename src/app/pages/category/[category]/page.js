@@ -48,9 +48,7 @@ export default function categoryPage({ params }) {
           <Image src={catti} alt="" />
         </div>
         <div className="lg:w-1/2 flex flex-col gap-3 text-black">
-          <h1 className="text-[#404040] text-lg text-left">
-            Lorem Ipsum Is a Dummy Text Used As The Heading Of Insight
-          </h1>
+          
           <p className="text-[#666666] text-md">
           {cardData && cardData.length > 0 && cardData[0].categoryDescription}
           </p>
