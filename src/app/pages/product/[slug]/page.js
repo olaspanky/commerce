@@ -312,7 +312,7 @@ Description
             </div>
             <div className="content text-sm text-[#575757] ">
             {card ? (
-        <p>{displayText}</p>
+        <p>{card?.methodology}</p>
       ) : (
         <p>Loading...</p> // Or any loading indicator
       )}            </div>
@@ -338,9 +338,7 @@ Description
           </div>
 
           <div>
-          <div className="mx-1 p-3 my-5 w-full lg:px-10  2xl:px-20">
-        <Card data={card} />
-      </div>
+         
 
           </div>
     </div>
