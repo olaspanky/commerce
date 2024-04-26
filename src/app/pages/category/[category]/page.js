@@ -61,6 +61,8 @@ export default function categoryPage({ params }) {
           <p className="text-[#666666] text-md">
           {cardData && cardData.length > 0 && cardData[0].categoryDescription}
           </p>
+
+          <p className="my-3 text-xs text-gray-300 ">15 Apr 2024</p>
         </div>
       </div>
       <div>
