@@ -71,38 +71,73 @@ export default function PaymentForm() {
     }
   }
 
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const cardElement = elements.getElement("card");
+
+  //   if (!stripe || !cardElement || isProcessing) return;
+
+  //   setIsProcessing(true);
+
+  //   try {
+  //     const { data } = await axios.post("/api/stripe", {
+  //       data: { amount: cartTotal },
+  //     });
+  //     const clientSecret = data;
+
+  //     const result = await stripe.confirmCardPayment(clientSecret, {
+  //       payment_method: { card: cardElement },
+  //     });
+
+  //     if (result.error) {
+  //       console.log(result.error.message);
+  //       setShowErrorModal(true); // Show message modal on message success
+  //     } else {
+  //       console.log("Payment successful");
+  //       setShowMessageModal(true); // Show message modal on message success
+  //     }
+  //   } catch (error) {
+  //     console.log("payment error is", error);
+  //     setShowErrorModal(true); // Show message modal on message success
+
+  //   } finally {
+  //     setIsProcessing(false);
+  //   }
+  // };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const cardElement = elements.getElement("card");
-
+  
     if (!stripe || !cardElement || isProcessing) return;
-
+  
     setIsProcessing(true);
-
+  
     try {
       const { data } = await axios.post("/api/stripe", {
         data: { amount: cartTotal },
       });
       const clientSecret = data;
-
+  
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: { card: cardElement },
       });
-
+  
       if (result.error) {
         console.log(result.error.message);
+        setShowErrorModal(true); // Show error modal on payment error
       } else {
         console.log("Payment successful");
-        setShowMessageModal(true); // Show message modal on message success
+        setShowMessageModal(true); // Show message modal on successful payment
       }
     } catch (error) {
       console.log("payment error is", error);
-      setShowErrorModal(true); // Show message modal on message success
-
+      setShowErrorModal(true); // Show error modal on payment error
     } finally {
       setIsProcessing(false);
     }
   };
+  
 
   const cardElementOptions = {
     style: {

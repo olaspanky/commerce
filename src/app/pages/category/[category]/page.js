@@ -7,6 +7,7 @@ import Card from "../../../components/Cards";
 import { useState, useEffect } from "react";
 import Link from 'next/link';
 import arrow from "../../../../../public/assets/vec.svg";
+import catbg from "../../../../../public/assets/catbg.jpg";
 
 
 
@@ -60,9 +61,17 @@ export default function categoryPage({ params }) {
       <div className="flex flex-col gap-5 lg:gap-9 lg:flex-row ">
         <div className="lg:w-1/2 ">
         {cardData && cardData.length > 0 &&
-        <div className="">
-                   <img src={cardData[0].categoryImage} alt="" className="w-full" />
-                   </div>
+        //  <div className=" bg-catbg z-20">
+        //  <img src={cardData[0].categoryImage} alt="" className="w-full z-5" />
+        //  </div>
+        <div class="relative mb-2 h-[50vh]">
+    <img class="cursor-pointer absolute  hover:shadow-outline" src={cardData[0].categoryImage} width="600" />
+
+
+  <Image class="absolute  opacity-20" src={catbg} alt="Workplace" width="600" />
+
+
+</div>
                   }
 
         </div>
@@ -75,7 +84,7 @@ export default function categoryPage({ params }) {
           <p className="my-3 text-xs text-gray-300 ">15 Apr 2024</p>
         </div>
       </div>
-      <div>
+      <div className="mt-2">
         <Card data={cardData} />
       </div>
       </div>

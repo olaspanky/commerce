@@ -21,6 +21,7 @@ module.exports = {
         'bgImage': "url('/commercehead.png')",
         'footer': "url('/assets/footer.svg')",
         'footbg': "url('/assets/footbg.svg')",
+        'catbg': "url('/assets/catbg.jpg')",
 
          },
       keyframes: {
