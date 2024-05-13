@@ -235,19 +235,19 @@ const menuItems = [
     children: [
       {
         title: "HCP Insight",
-        route: "/pages/category/Healthcare-Ecosystem-Insights",
+        route: "/pages/category/Hcp",
       },
       {
         title: "Healthcare Ecosystem Insight",
-        route: "/pages/category/Healthcare-Ecosystem-Insights",
+        route: "s/category/Healthcare-Ecosystem-Insights",
       },
       {
         title: "Market Insight",
-        route: "/pages/category/Healthcare-Ecosystem-Insights",
+        route: "/pages/category/Market-Insight",
       },
       {
         title: "Patients Insight",
-        route: "/pages/category/Healthcare-Ecosystem-Insights",
+        route: "/pages/category/Patient-Insight",
       },
      
     ],
@@ -257,13 +257,13 @@ const menuItems = [
 
   {
     title: "Blog",
-    route: "/",
+    route: "https://pbr-site.vercel.app/pages/blog",
 
 
   },
   {
     title: "Contact Us",
-    route: "/",
+    route: "",
   },
 
 ];
