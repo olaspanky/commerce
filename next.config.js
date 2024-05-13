@@ -1,5 +1,11 @@
-module.exports = {
-    images: {
-      domains: ['cdn.sanity.io', 'pbs.twimg.com'],
-    },
+/**
+* @type {import('next').NextConfig}
+*/
+const nextConfig = {
+  output: 'export',
+  images: { unoptimized: true }
   };
+  module.exports = nextConfig;
+
+
+
