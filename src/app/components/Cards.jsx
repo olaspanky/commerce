@@ -36,7 +36,7 @@ const BoxGrid = ({ data }) => {
 
           
           <div className="w-full">
-          <div className="flex relative  h-[400px]  xl:h-[500px] 2xl:h-[600px]  justify-between rounded-lg shadow-md  pb-3  flex-col gap-3 w-full">
+          <div className="flex relative  h-[400px]  xl:h-[520px] 2xl:h-[600px]  justify-between rounded-lg shadow-md  pb-3  flex-col gap-3 w-full">
             <div className="h-full ">
             {box.imageUrl && (
               <img alt="alt" src={box.imageUrl}  className="w-full h- bg-blue-300" />
@@ -53,7 +53,7 @@ const BoxGrid = ({ data }) => {
           
 
             <div className='h-[100px]'>
-              <div className='px-5 text-xs lg:text-xs my-2 font-light text-[#404040] h-12'>{box.name}</div>
+              <div className='px-5 text-xs lg:text-xs xl:text-lg  my-2 font-light text-[#404040] h-12'>{box.name}</div>
 
             <div className='px-5 text-xs'>
               {/* <p>{box.location}</p> */}

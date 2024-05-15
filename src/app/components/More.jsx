@@ -73,7 +73,6 @@ const ProductDetail = ({ params }) => {
         ></script>
       </Head>
 
-      <Nav />
       <div className="flex gap-2 lg:gap-10 my-5 p-2 xl:px-20 2xl:px-36 cursor-pointer">
         <Link href="/">
           <p className="text-sm ">Product Listing</p>
