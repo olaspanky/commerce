@@ -239,7 +239,7 @@ const menuItems = [
         },
         {
           title: "Healthcare Ecosystem Insight",
-          route: "s/category/Healthcare-Ecosystem-Insights",
+          route: "/pages/category/Healthcare-Ecosystem-Insights",
         },
         {
           title: "Market Insight",
@@ -263,7 +263,7 @@ const menuItems = [
     },
     {
       title: "Contact Us",
-      route: "",
+      route: "/pages/contact",
     },
   
   ];

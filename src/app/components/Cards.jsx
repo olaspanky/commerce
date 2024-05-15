@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 const BoxGrid = ({ data }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  console.log("lol is", data?.price)
+  console.log("lol is", data)
 
   if (!Array.isArray(data)) {
     return <div>Loading...</div>;
@@ -22,7 +22,7 @@ const BoxGrid = ({ data }) => {
     setHoveredIndex(index);
   };
 
-  const isAvailable = (box) => box.price === 1;
+  const isAvailable = (box) => box.available === "yes";
 
   return (
     <div className="grid md:grid-cols-2 grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-10">
@@ -36,10 +36,10 @@ const BoxGrid = ({ data }) => {
 
           
           <div className="w-full">
-          <div className="flex relative  justify-between rounded-lg shadow-md xl:h-[100%] pb-3  flex-col gap-3 w-full">
-            <div className="h-full">
+          <div className="flex relative  h-[400px]  xl:h-[500px] 2xl:h-[600px]  justify-between rounded-lg shadow-md  pb-3  flex-col gap-3 w-full">
+            <div className="h-full ">
             {box.imageUrl && (
-              <img alt="alt" src={box.imageUrl}  className="w-full h-full" />
+              <img alt="alt" src={box.imageUrl}  className="w-full h- bg-blue-300" />
                   )}             
             </div>
 
@@ -52,8 +52,8 @@ const BoxGrid = ({ data }) => {
 
           
 
-            <div className=''>
-              <div className='px-5 text-lg my-2 font-light text-[#404040] h-20 lg:h-20  2xl:h-12'>{box.name}</div>
+            <div className='h-[100px]'>
+              <div className='px-5 text-xs lg:text-xs my-2 font-light text-[#404040] h-12'>{box.name}</div>
 
             <div className='px-5 text-xs'>
               {/* <p>{box.location}</p> */}

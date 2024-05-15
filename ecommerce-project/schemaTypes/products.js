@@ -67,8 +67,8 @@ export default {
           type: 'string'
       },
       {
-          name: "availability",
-          title: 'available',
+          name: "available",
+          title: 'Available',
           type: 'string'
       },
       {
