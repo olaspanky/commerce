@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 const BoxGrid = ({ data }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  console.log("lol is", data)
+  console.log("lol is", data?.price)
 
   if (!Array.isArray(data)) {
     return <div>Loading...</div>;
@@ -36,10 +36,10 @@ const BoxGrid = ({ data }) => {
 
           
           <div className="w-full">
-          <div className="flex relative  h-[400px]  xl:h-[520px] 2xl:h-[600px]  justify-between rounded-lg shadow-md  pb-3  flex-col gap-3 w-full">
-            <div className="h-full ">
+          <div className="flex relative  justify-between rounded-lg shadow-md xl:h-[100%] pb-3  flex-col gap-3 w-full">
+            <div className="h-full">
             {box.imageUrl && (
-              <img alt="alt" src={box.imageUrl}  className="w-full h- bg-blue-300" />
+              <img alt="alt" src={box.imageUrl}  className="w-full h-full" />
                   )}             
             </div>
 
@@ -52,13 +52,13 @@ const BoxGrid = ({ data }) => {
 
           
 
-            <div className='h-[100px]'>
-              <div className='px-5 text-xs lg:text-xs xl:text-lg  my-2 font-light text-[#404040] h-12'>{box.name}</div>
+            <div className=''>
+              <div className='px-5 text-lg my-2 font-light text-[#404040] h-20 lg:h-20  2xl:h-12'>{box.name}</div>
 
             <div className='px-5 text-xs'>
               {/* <p>{box.location}</p> */}
             </div>
-            <div className='flex justify-between px-5 text-xs text-[black] pb-5'>
+            <div className='flex justify-between px-5 text-xs text-[black] pb-5 mt-5'>
               <div className='flex gap-2'>
               <p className="">
               ${box.price}
