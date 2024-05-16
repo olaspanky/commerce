@@ -53,7 +53,7 @@ const BeautifulForm = () => {
       onSubmit={handleSubmit}
     >
       <Form>
-        <div className='w-full flex flex-col 2xl:gap-20 gap-9 bg-white border border-gray-200 rounded-md p-9 lg:p-9 2xl:p-20 shadow-md justify-center'>
+        <div className='w-full flex flex-col 2xl:gap-12 gap-9 bg-white border border-gray-200 rounded-md p-9 lg:p-9 2xl:p-20 shadow-md justify-center'>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         <div className='flex flex-col'>
           <Field type="text" id="firstName" placeholder="First Name" name="firstName" className="input border border-gray-200 p-2 rounded-md" />
