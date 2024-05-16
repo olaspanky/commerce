@@ -53,17 +53,15 @@ const BeautifulForm = () => {
       onSubmit={handleSubmit}
     >
       <Form>
-        <div className='w-full flex flex-col 2xl:gap-5 gap-2 bg-white border border-gray-200 rounded-md p-2 lg:p-3 2xl:p-9 shadow-md justify-center'>
+        <div className='w-full flex flex-col 2xl:gap-20 gap-9 bg-white border border-gray-200 rounded-md p-9 lg:p-9 2xl:p-20 shadow-md justify-center'>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         <div className='flex flex-col'>
-          <label htmlFor="firstName">First Name</label>
-          <Field type="text" id="firstName" name="firstName" className="input border border-gray-200 p-2 rounded-md" />
+          <Field type="text" id="firstName" placeholder="First Name" name="firstName" className="input border border-gray-200 p-2 rounded-md" />
           <ErrorMessage name="firstName" component="div" className="error" />
         </div>
 
         <div className='flex flex-col'>
-          <label htmlFor="lastName">Last Name</label>
-          <Field type="text" id="lastName" name="lastName" className="input border border-gray-200 p-2 rounded-md" />
+          <Field type="text" id="lastName" placeholder="Last Name" name="lastName" className="input border border-gray-200 p-2 rounded-md" />
           <ErrorMessage name="lastName" component="div" className="error" />
         </div>
         </div>
@@ -71,38 +69,24 @@ const BeautifulForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
 
         <div className='flex flex-col'>
-          <label htmlFor="email">Email</label>
-          <Field type="email" id="email" name="email" className="input border border-gray-200 p-2 rounded-md" />
+          <Field type="email" id="email" name="email" placeholder="Email" className="input border  border-gray-200 p-2 rounded-md" />
           <ErrorMessage name="email" component="div" className="error" />
         </div>
 
         <div className='flex flex-col'>
-          <label htmlFor="phone">Phone</label>
-          <Field type="text" id="phone" name="phone" className="input border border-gray-200 p-2 rounded-md" />
+          <Field type="text" id="phone" name="phone"placeholder="Phone" className="input border border-gray-200 p-2 rounded-md" />
           <ErrorMessage name="phone" component="div" className="error" />
         </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-
-        <div className='flex flex-col'>
-          <label htmlFor="organization">Organization</label>
-          <Field type="text" id="organization" name="organization" className="input border border-gray-200 p-2 rounded-md" />
-          <ErrorMessage name="organization" component="div" className="error" />
-        </div>
-
-        <div className='flex flex-col'>
-          <label htmlFor="position">Position</label>
-          <Field type="text" id="position" name="position" className="input border border-gray-200 p-2 rounded-md" />
-          <ErrorMessage name="position" component="div" className="error" />
-        </div>
-        </div>
+    
 
         <div className="col-span-2">
-          <label htmlFor="country">Choose Country</label>
+          <label htmlFor="country"></label>
           <Select
             id="country"
             name="country"
+            placeholder="Choose Country"
             options={countries}
             className="react-select border border-gray-200 p-2 rounded-md"
             classNamePrefix="react-select"
@@ -116,11 +100,12 @@ const BeautifulForm = () => {
         </div>
 
         <div className="col-span-2">
-          <label htmlFor="product">Product and Solution</label>
+          <label htmlFor="product"></label>
           <Select
             id="product"
             name="product"
             options={products}
+            placeholder="Product and Solution"
             className="react-select border border-gray-200 p-2 rounded-md"
             classNamePrefix="react-select"
             isSearchable
@@ -133,8 +118,7 @@ const BeautifulForm = () => {
         </div>
 
         <div className="col-span-3 flex flex-col">
-          <label htmlFor="message">Message</label>
-          <Field as="textarea" id="message" name="message" rows="4" className="input border border-gray-200 p-2 rounded-md" />
+          <Field as="textarea" id="message" placeholder="Message" name="message" rows="4" className="input border border-gray-200 p-2 rounded-md" />
           <ErrorMessage name="message" component="div" className="error" />
         </div>
 
