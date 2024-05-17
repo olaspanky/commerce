@@ -257,7 +257,7 @@ const menuItems = [
 
   {
     title: "Blog",
-    route: "https://pbr-site.vercel.app/pages/blog",
+    route: "/pages/blog",
 
 
   },
