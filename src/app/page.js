@@ -10,6 +10,8 @@ import Category from "./components/Category";
 import Head from "next/head";
 import { FloatingWhatsApp } from 'react-floating-whatsapp'
 import logo from "../../public/assets/logo.svg"
+import WhatsAppWidget from "react-whatsapp-chat-widget";
+import ChatwootWidget from './components/Woochat'
 
 
 export default function Home() {
@@ -27,8 +29,7 @@ export default function Home() {
       <Head2 scrollToHero={scrollToHero} />
       <Hero ref={heroRef} />
       <div className="h-0 bg-black">
-              <FloatingWhatsApp className="h-2" accountName="PBR Life Sciences" placeholder="hello there" avatar="logo" phoneNumber="+2347019312514" message="Hello World!!!" />
-
+ <ChatwootWidget/>
       </div>
       <Category />
       <Footer />
