@@ -14,9 +14,7 @@ const BoxGrid = ({ data }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   console.log("lol is", data?.price)
 
-  if (!Array.isArray(data)) {
-    return <div>Loading...</div>;
-  }
+
 
   const handleHover = (index) => {
     setHoveredIndex(index);

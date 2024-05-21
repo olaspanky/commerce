@@ -95,7 +95,7 @@ const Hero = ({ scrollToHero }) => {
   }, [currentIndex]);
 
   return (
-    <div className=' z-0 relative  top-0'> {/* Added relative position */}
+    <div className='max-w-[100vw] z-0 relative  top-0'> {/* Added relative position */}
       <div className="slide-container">
         <Fade ref={slideRef} {...properties} controls={false}>
           {slideImages.map((slideImage, index) => (

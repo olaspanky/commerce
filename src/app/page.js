@@ -22,9 +22,10 @@ export default function Home() {
   };
 
   return (
-    <main className="h-[500px]">
+    <main className="h-auto max-w-[100vw]">
       <Head>
-        <script id='pixel-script-poptin' src='https://cdn.popt.in/pixel.js?id=b6981d0c90768' async='true'></script>
+      
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <Head2 scrollToHero={scrollToHero} />
       <Hero ref={heroRef} />
