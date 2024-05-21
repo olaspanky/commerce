@@ -330,7 +330,7 @@ const InfiniteLoopSlider = () => {
   };
 
   return (
-    <Slider className="flex  gap-10" {...settings}>
+    <Slider className="flex w-[100vw]  gap-10" {...settings}>
       {countries.map((country, index) => (
         <div key={index} className='flex gap-10 lg:py-5 lg:px-9 p-2 border- border-l-[1px] border-[#FFFFFF] sm:border-opacity-50' >
  <div className='flex flex-col gap-2'>
