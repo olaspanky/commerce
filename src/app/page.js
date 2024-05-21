@@ -8,6 +8,9 @@ import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import Category from "./components/Category";
 import Head from "next/head";
+import { FloatingWhatsApp } from 'react-floating-whatsapp'
+import logo from "../../public/assets/logo.svg"
+
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -23,6 +26,10 @@ export default function Home() {
       </Head>
       <Head2 scrollToHero={scrollToHero} />
       <Hero ref={heroRef} />
+      <div className="h-0 bg-black">
+              <FloatingWhatsApp className="h-2" accountName="PBR Life Sciences" placeholder="hello there" avatar="logo" phoneNumber="+2347019312514" message="Hello World!!!" />
+
+      </div>
       <Category />
       <Footer />
     </main>
