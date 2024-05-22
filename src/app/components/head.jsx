@@ -128,7 +128,7 @@ const Hero = ({ scrollToHero }) => {
             </button>
           </div>
         </div>
-        <div className="w-[100vw] top-auto hidden md:flex"><Carousel/></div>
+        <div className="w-[100vw] max-h-[20]  top-auto hidden md:flex"><Carousel/></div>
 
 
 
