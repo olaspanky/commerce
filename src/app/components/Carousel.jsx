@@ -327,6 +327,7 @@ const InfiniteLoopSlider = () => {
     arrows: false,
     variableWidth: true,
     pauseOnHover: false,
+    display: "flex"
   };
 
   return (

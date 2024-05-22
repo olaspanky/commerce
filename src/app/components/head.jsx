@@ -101,7 +101,7 @@ const Hero = ({ scrollToHero }) => {
           {slideImages.map((slideImage, index) => (
             <div key={index}>
               <div style={{ ...divStyle }}>
-                <Image src={slideImage.url} alt={slideImage.caption} className='h-[100vh] w-[100vw]'  layout="responsive" />
+                <Image src={slideImage.url} alt={slideImage.caption} className='h-[100vh] w-[100vw]'  />
               </div>
             </div>
           ))}
