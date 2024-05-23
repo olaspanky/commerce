@@ -108,7 +108,7 @@ const Hero = ({ scrollToHero }) => {
         </Fade>
       </div>
       
-      <div className=' bg-black bg-opacity-50  absolute top-0 z-10 left-0 w-full h-full   '>
+      <div className=' bg-black bg-opacity-50  absolute top-0 z-10 left-0 w-full h-full'>
         <div className='z-15'>
         <Navbar/>
 
