@@ -58,7 +58,7 @@ const footer = () => {
       </div>
 
       <div className="text-xs flex gap-3 text-white m-7">
-        <p>@2022 PBr</p>
+        <p>@2022 PBR</p>
         <p>Privacy</p>
         <p>Terms</p>
       </div>
