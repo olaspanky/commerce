@@ -8,6 +8,11 @@ import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import Category from "./components/Category";
 import Head from "next/head";
+import { FloatingWhatsApp } from 'react-floating-whatsapp'
+import logo from "../../public/assets/logo.svg"
+import WhatsAppWidget from "react-whatsapp-chat-widget";
+import ChatwootWidget from './components/Woochat'
+
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -17,12 +22,16 @@ export default function Home() {
   };
 
   return (
-    <main className="h-[500px]">
+    <main className="h-auto max-w-[100vw]">
       <Head>
-        <script id='pixel-script-poptin' src='https://cdn.popt.in/pixel.js?id=b6981d0c90768' async='true'></script>
+      <link rel='icon' href='/favicon.ico' />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <Head2 scrollToHero={scrollToHero} />
       <Hero ref={heroRef} />
+      <div className="h-0 bg-black">
+ <ChatwootWidget/>
+      </div>
       <Category />
       <Footer />
     </main>

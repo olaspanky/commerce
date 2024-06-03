@@ -1,7 +1,6 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import LocationCarousel from './location'; // Import the LocationCarousel component
 import locationIcon from '../../../public/assets/location-icon.svg';
 import Image from 'next/image';
 
@@ -327,10 +326,11 @@ const InfiniteLoopSlider = () => {
     arrows: false,
     variableWidth: true,
     pauseOnHover: false,
+    display: "flex"
   };
 
   return (
-    <Slider className="flex  gap-10" {...settings}>
+    <Slider className="flex w-[100vw]  gap-10" {...settings}>
       {countries.map((country, index) => (
         <div key={index} className='flex gap-10 lg:py-5 lg:px-9 p-2 border- border-l-[1px] border-[#FFFFFF] sm:border-opacity-50' >
  <div className='flex flex-col gap-2'>

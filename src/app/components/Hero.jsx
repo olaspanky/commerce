@@ -1,52 +1,32 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState, useEffect } from 'react';
 import Card from "./Cards";
-import alldata from "./data";
+import Carousel from "./Carousel";
 import { client } from "../lib/sanity";
-import { useState, useEffect } from "react";
-import Confetti from './Confetti';
-import Carousel from "./Carousel"
 
-async function getData() {
+async function fetchData() {
   const query = `*[_type == 'product'] | order(_createdAt desc){
-    _id, image, location, price, name, available, details,sumary, objective,methodology,pdfFile,
-      "slug": slug.current,
-      "imageUrl": image[0].asset->url      
+    _id, image, location, price, name, available, details, sumary, objective, methodology, pdfFile,
+    "slug": slug.current,
+    "imageUrl": image[0].asset->url      
   }`;
   const data = await client.fetch(query);
   return data;
 }
 
-async function fetchData(slug) {
-  const query = `*[_type == 'product'] | order(_createdAt desc){
-    _id, image, location, price, name, details,sumary,available, objective,methodology,pdfFile,
-      "slug": slug.current,
-      "imageUrl": image[0].asset->url      
-  }`;
-    const data = await client.fetch(query);
-  return data;
-}
-
-
-
-
-
 const Hero = forwardRef((props, ref) => {
-  const [data1, setData1] = useState(null);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    async function getData() {
+    async function fetchDataAndUpdateState() {
       try {
-        const data = await fetchData();
-        setData1(data);
+        const fetchedData = await fetchData();
+        setData(fetchedData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
-    getData();
+    fetchDataAndUpdateState();
   }, []);
-
-  const data = data1;
-  const cardData = data;
 
   return (
     <div ref={ref} className="flex flex-col justify-center items-center">
@@ -61,7 +41,7 @@ const Hero = forwardRef((props, ref) => {
       </h1>
 
       <div className="mx-1 p-3 my-5 w-full lg:px-10  2xl:px-20">
-        <Card data={cardData} />
+        <Card data={data} />
       </div>
     </div>
   );

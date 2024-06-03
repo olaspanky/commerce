@@ -95,20 +95,20 @@ const Hero = ({ scrollToHero }) => {
   }, [currentIndex]);
 
   return (
-    <div className=' z-0 relative  top-0'> {/* Added relative position */}
+    <div className='max-w-[100vw]  z-0 relative  top-0'> {/* Added relative position */}
       <div className="slide-container">
         <Fade ref={slideRef} {...properties} controls={false}>
           {slideImages.map((slideImage, index) => (
             <div key={index}>
               <div style={{ ...divStyle }}>
-                <Image src={slideImage.url} alt={slideImage.caption} className='h-full'  layout="responsive" />
+                <Image src={slideImage.url} alt={slideImage.caption} className='h-auto lg:h-[100vh] w-[100vw]'  />
               </div>
             </div>
           ))}
         </Fade>
       </div>
       
-      <div className=' bg-black bg-opacity-50  absolute top-0 z-10 left-0 w-full h-full   '>
+      <div className=' bg-black bg-opacity-50  absolute top-0 z-10 left-0 w-full h-full'>
         <div className='z-15'>
         <Navbar/>
 
@@ -128,7 +128,7 @@ const Hero = ({ scrollToHero }) => {
             </button>
           </div>
         </div>
-        <div className="w-full top-auto hidden md:flex"><Carousel/></div>
+        <div className="w-[100vw] max-h-[20]  top-auto hidden md:flex"><Carousel/></div>
 
 
 

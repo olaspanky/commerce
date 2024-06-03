@@ -22,6 +22,7 @@ module.exports = {
         'footer': "url('/assets/footer.svg')",
         'footbg': "url('/assets/footbg.svg')",
         'catbg': "url('/assets/catbg.jpg')",
+        'bbg': "url('/assets/bbg.png')",
 
          },
       keyframes: {
