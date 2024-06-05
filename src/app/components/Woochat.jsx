@@ -11,20 +11,20 @@ class ChatwootWidget extends React.Component {
     };
 
     // Paste the script from inbox settings except the <script> tag
-    (function (d, t) {
-      var BASE_URL = "https://app.chatwoot.com";
-      var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      g.src = BASE_URL + "/packs/js/sdk.js";
+    (function(d,t) {
+      var BASE_URL="https://app.chatwoot.com";
+      var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=BASE_URL+"/packs/js/sdk.js";
       g.defer = true;
       g.async = true;
-      s.parentNode.insertBefore(g, s);
-      g.onload = function () {
+      s.parentNode.insertBefore(g,s);
+      g.onload=function(){
         window.chatwootSDK.run({
-          websiteToken: '7J3Uu8PonLcULL7AoN7No9zz',
+          websiteToken: 'JwcWsgv2CkksZkBP3PJR77Np',
           baseUrl: BASE_URL
         })
       }
-    })(document, "script");
+    })(document,"script");
   }
 
   render () {
