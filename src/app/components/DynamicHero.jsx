@@ -94,7 +94,11 @@ export default async function BoxGrid({carddata}) {
 
 
         <div className='col-span-6 flex flex-col gap-3'>
-            <p className='text-2xl text-[#1567E0] font-bold'>Anti-infective Report Analysis 2023</p>
+          <div className='flex justify-between items-center'>
+          <p className='text-2xl text-[#1567E0] font-bold'>Anti-infective Report Analysis 2023</p>
+<p>30% Discount Added</p>
+
+          </div>
             <div className='flex justify-between text-xs lg:w-[55%] '>
                 <p>Published: October 18, 2023</p>
                 <p>Report Code: PBR -LS1200</p>

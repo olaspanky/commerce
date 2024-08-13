@@ -100,9 +100,11 @@ const ProductDetail = ({ params }) => {
 
         <div className="lg:col-span-6 flex flex-col gap-3">
           <div className="flex flex-col gap-2">
-            <p className="text-2xl text-black w-96 font-bold">
-              The Anti-infectives Drugs Market in Nigeria
-            </p>
+          <div className='flex justify-between items-center'>
+          <p className='text-2xl text-[#1567E0] font-bold'>Anti-infective Report Analysis 2023</p>
+<p className="text-red-500">30% Discount Added</p>
+
+          </div>
             <div className="flex my-2 items-center">
               <p className="text-xl mr-5 ">${card?.price}</p>
               <div class="flex items-center border-l-2 px-2">

@@ -53,24 +53,28 @@ const BoxGrid = ({ data }) => {
           
 
             <div className=''>
-              <div className='px-5 text-sm lg:text-lg my-2 font-light text-[#404040] h-20 lg:h-20  2xl:h-12'>{box.name}</div>
+              <div className='px-5 flex justify-between text-sm gap-3 items-center lg:text-lg my-2 font-light text-[#404040] h-20 lg:h-20  2xl:h-12'>
+                <p>{box.name}</p>
+
+                </div>
 
             <div className='px-5 text-xs'>
               {/* <p>{box.location}</p> */}
             </div>
             <div className='flex justify-between px-5 text-xs text-[black] pb-5 mt-5'>
-              <div className='flex gap-2'>
+              <div className='flex flex-col gap-2'>
+               
               <p className="">
+              <p className='  line-through'>1500</p>
               ${box.price}
             </p>
             <Link href={`/pages/product/${box.slug}`}>
             </Link>
               </div>
               <div className='flex gap-2'>
-              <p className="">
-              {box.view}
-            </p>
-                <Image src={eye}/>
+              <div className="w-20 text-red-600   text-xs font-bold  rounded-md  ">
+                  30% OFF
+                </div>
               </div>
            
            
