@@ -28,13 +28,26 @@ const Hero = forwardRef((props, ref) => {
     fetchDataAndUpdateState();
   }, []);
 
+  const [showCarousel, setShowCarousel] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowCarousel(true);
+    }, 4000); // 4 seconds delay
+
+    return () => clearTimeout(timer); // Clean up the timer if the component unmounts
+  }, []);
+
   return (
     <div ref={ref} className="flex flex-col justify-center items-center">
       <div className="flex md:hidden bg-gray-100">
         <h1 className='text-xs lg:text-md xl:text-xl font-light font-work text-black p-2 '>The reports are focused on insights from patients, healthcare practitioners,<br className="hidden lg:flex"/> healthcare ecosystems and channels within emerging markets</h1>
       </div>
-      <div className="flex md:hidden w-full py-2 top-auto h-full bg-black "><Carousel/></div>
-      
+      {showCarousel && (
+        <div className="">
+          <Carousel />
+        </div>
+      )}      
       <h1 className="text-3xl text-center my-5 font-bold ">
         Chart Your Course to Success -{" "}
         <span className="text-[#1567E0]">Order Your Report Today</span>
