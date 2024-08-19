@@ -10,8 +10,7 @@ import Category from "./components/Category";
 import Head from "next/head";
 import { FloatingWhatsApp } from 'react-floating-whatsapp'
 import logo from "../../public/assets/logo.svg"
-import WhatsAppWidget from "react-whatsapp-chat-widget";
-import ChatwootWidget from './components/Woochat'
+
 
 
 export default function Home() {
@@ -26,11 +25,13 @@ export default function Home() {
       <Head>
       <link rel='icon' href='/favicon.ico' />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
       </Head>
       <Head2 scrollToHero={scrollToHero} />
       <Hero ref={heroRef} />
       <div className="h-0 bg-black">
- <ChatwootWidget/>
       </div>
       <Category />
       <Footer />
