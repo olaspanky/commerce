@@ -102,7 +102,6 @@ const ProductDetail = ({ params }) => {
           <div className="flex flex-col gap-2">
           <div className='flex justify-between items-center'>
           <p className='text-2xl text-[#1567E0] font-bold'>Anti-infective Report Analysis 2023</p>
-<p className="text-red-500">30% Discount Added</p>
 
           </div>
             <div className="flex my-2 items-center">

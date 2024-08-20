@@ -50,6 +50,7 @@
     "raw-body": "^2.5.2",
     "react": "^18",
     "react-canvas-confetti": "^2.0.7",
+    "react-confetti": "^6.1.0",
     "react-dom": "^18",
     "react-floating-whatsapp": "^5.0.8",
     "react-select": "^5.8.0",

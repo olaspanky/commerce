@@ -65,16 +65,13 @@ const BoxGrid = ({ data }) => {
               <div className='flex flex-col gap-2'>
                
               <p className="">
-              <p className='  line-through'>1500</p>
               ${box.price}
             </p>
             <Link href={`/pages/product/${box.slug}`}>
             </Link>
               </div>
               <div className='flex gap-2'>
-              <div className="w-20 text-red-600   text-xs font-bold  rounded-md  ">
-                  30% OFF
-                </div>
+             
               </div>
            
            
