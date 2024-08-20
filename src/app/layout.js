@@ -33,8 +33,8 @@ export default function RootLayout({ children }) {
             
             {children}
             <TawkMessengerReact
-                propertyId="66c2d0b9146b7af4a43be001"
-                widgetId="1i5kfulu3"/>
+                propertyId="66c47c33ea492f34bc08163c"
+                widgetId="1i5noaafu"/>
             
           </CartProviders>
           </ChakraProvider>
