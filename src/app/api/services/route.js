@@ -1,27 +1,27 @@
-import { NextResponse } from 'next/server';
-const nodemailer = require('nodemailer');
-const path = require('path');
+import { NextResponse } from "next/server";
+const nodemailer = require("nodemailer");
+const path = require("path");
 
 // Handles POST requests to /api/services
 export async function POST(request) {
-    try {
-        const formData = await request.json();
-        const { name, email, message } = formData;
+  try {
+    const formData = await request.json();
+    const { name, email, message } = formData;
 
-        // Gmail SMTP configuration
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'pbrmarketintellligencereport@gmail.com', // Your Gmail address
-                pass: 'aasl uuwn lmrw dsvl', // Your app-specific password
-            },
-        });
+    // Gmail SMTP configuration
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "pbrmarketintellligencereport@gmail.com", // Your Gmail address
+        pass: "aasl uuwn lmrw dsvl", // Your app-specific password
+      },
+    });
 
-        // Path to the PDF and logo in the public folder
-        const pdfPath = path.join(process.cwd(), 'public', 'whitepaper.pdf');
-        const logoPath = path.join(process.cwd(), 'public', 'logo.png'); // Assuming your logo is named logo.png
+    // Path to the PDF and logo in the public folder
+    const pdfPath = path.join(process.cwd(), "public", "whitepaper.pdf");
+    const logoPath = path.join(process.cwd(), "public", "logo.png"); // Assuming your logo is named logo.png
 
-        const emailBody = `
+    const emailBody = `
     <p>Dear Adeoye,</p>
     <p>We are excited to share that your free report, <strong>Antihypertensive White paper</strong>, is now available for you to download! We hope you find it valuable and insightful as you explore [the topic of the report].</p>
     <p><a href="[Download Link]" style="color: #007bff;">Download Your Free Report Here</a></p>
@@ -29,13 +29,12 @@ export async function POST(request) {
     <img src="cid:companyLogo" alt="Company Logo" style="width:200px;"/>
 `;
 
-
-        const mail = await transporter.sendMail({
-            from: 'olakareemomobolarinwa@gmail.com',
-            to: email,
-            replyTo: email,
-            subject: `Website activity from ${name}`,
-            html: `
+    const mail = await transporter.sendMail({
+      from: "olakareemomobolarinwa@gmail.com",
+      to: email,
+      replyTo: email,
+      subject: `Website activity from ${name}`,
+      html: `
                 <p>Dear ${name},</p>
                 <p>We are excited to share that your free report, <strong>Antihypertensive White paper</strong>, is now available for you to download! We hope you find it valuable and insightful as you explore [the topic of the report].</p>
                 <p><strong>Message:</strong> ${message}</p>
@@ -55,23 +54,26 @@ export async function POST(request) {
                 <p>Akinwunmi</p>
                 <img src="cid:companyLogo" alt="Company Logo" style="width:200px;"/>
             `,
-            attachments: [
-                {
-                    filename: 'whitepaper.pdf', // Match the filename
-                    path: pdfPath, // Attach the PDF file
-                    contentType: 'application/pdf',
-                },
-                {
-                    filename: 'logo.png',
-                    path: logoPath, // Attach the logo file
-                    cid: 'companyLogo', // Content ID for embedding the logo
-                },
-            ],
-        });
+      attachments: [
+        {
+          filename: "whitepaper.pdf", // Match the filename
+          path: pdfPath, // Attach the PDF file
+          contentType: "application/pdf",
+        },
+        {
+          filename: "logo.png",
+          path: logoPath, // Attach the logo file
+          cid: "companyLogo", // Content ID for embedding the logo
+        },
+      ],
+    });
 
-        return NextResponse.json({ message: `Email Succesfully sent to ${email}` });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json({ message: "COULD NOT SEND MESSAGE" }, { status: 500 });
-    }
+    return NextResponse.json({ message: `Email Succesfully sent to ${email}` });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: "COULD NOT SEND MESSAGE" },
+      { status: 500 }
+    );
+  }
 }
