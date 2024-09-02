@@ -465,7 +465,7 @@ export default function PaymentForm() {
   };
 
   const applyPromoCode = () => {
-    if (promoCode === "PBR MIR 2024") {
+    if (promoCode === "PBR Life Sciences") {
       const discount = cartTotal * 0.3;
       setDiscountedTotal(cartTotal - discount);
       setDiscountApplied(true);
