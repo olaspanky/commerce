@@ -21,16 +21,9 @@ export async function POST(request) {
     const pdfPath = path.join(process.cwd(), "public", "whitepaper.pdf");
     const logoPath = path.join(process.cwd(), "public", "logo.png"); // Assuming your logo is named logo.png
 
-    const emailBody = `
-    <p>Dear Adeoye,</p>
-    <p>We are excited to share that your free report, <strong>Antihypertensive White paper</strong>, is now available for you to download! We hope you find it valuable and insightful as you explore [the topic of the report].</p>
-    <p><a href="[Download Link]" style="color: #007bff;">Download Your Free Report Here</a></p>
    
-    <img src="cid:companyLogo" alt="Company Logo" style="width:200px;"/>
-`;
-
     const mail = await transporter.sendMail({
-      from: "olakareemomobolarinwa@gmail.com",
+      from: "pbrmarketintellligencereport@gmail.com",
       to: email,
       replyTo: email,
       subject: `Website activity from ${name}`,
@@ -38,11 +31,11 @@ export async function POST(request) {
                 <p>Dear ${name},</p>
                 <p>We are excited to share that your free report, <strong>Antihypertensive White paper</strong>, is now available for you to download! We hope you find it valuable and insightful as you explore [the topic of the report].</p>
                 <p>But that’s not all! As a token of our appreciation for your continued interest, we are pleased to offer you an exclusive 30% discount on your next purchase of any paid report from our collection.</p>
-                <p><strong>Your Discount Code:</strong> PBR Life Sciences</p>
+                <p style="background-color: yellow; padding: 2px;"><strong>Your Discount Code:</strong> PBR Life Sciences</p>
                 <p>You can use this code at checkout to save 30% on any of our premium reports. This is a limited-time offer, so be sure to take advantage of this opportunity to access even more in-depth insights and data.</p>
                 <p><strong>How to Redeem Your Discount:</strong></p>
                 <ol>
-                <li style="background-color: yellow; padding: 2px;">
+                <li >
                 Visit our <a href="https://www.pbrmir.com.ng/" style="color: #007bff;">Reports Page</a>.
             </li>                   
              <li>Select the report(s) you wish to purchase.</li>
