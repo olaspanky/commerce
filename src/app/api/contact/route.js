@@ -85,6 +85,9 @@ export async function POST(request) {
         }
     });
 
+    const logoPath = path.join(process.cwd(), "public", "logo.png"); // Assuming your logo is named logo.png
+
+
     try {
         // Send mail
         const mail = await transporter.sendMail({
@@ -93,10 +96,18 @@ export async function POST(request) {
             replyTo: email,
             subject: `Website activity from ${email}`,
             html: `
-            <p>Name: ${name} </p>
+            <p>Dear ${name},</p>
             <p>Email: ${email} </p>
             <p>Message: ${message} </p>
             `,
+            attachments: [
+               
+                {
+                  filename: "logo.png",
+                  path: logoPath, // Attach the logo file
+                  cid: "companyLogo", // Content ID for embedding the logo
+                },
+              ],
         });
 
         return NextResponse.json({ message: `Email Succesfully sent to ${email}` });
