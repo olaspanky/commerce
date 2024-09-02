@@ -12,8 +12,8 @@ export async function POST(request) {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'olakareemomobolarinwa@gmail.com', // Your Gmail address
-                pass: 'tcdr czmr torm hduk', // Your app-specific password
+                user: 'pbrmarketintellligencereport@gmail.com', // Your Gmail address
+                pass: 'aasl uuwn lmrw dsvl', // Your app-specific password
             },
         });
 
@@ -69,7 +69,7 @@ export async function POST(request) {
             ],
         });
 
-        return NextResponse.json({ message: "Success: email was sent" });
+        return NextResponse.json({ message: `Email Succesfully sent to ${email}` });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: "COULD NOT SEND MESSAGE" }, { status: 500 });
