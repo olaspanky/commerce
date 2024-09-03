@@ -225,8 +225,8 @@ export default function DownloadReportForm() {
         <form onSubmit={handleSubmit}>
             <div>
                 {/* Form fields remain unchanged */}
-                <div className='flex justify-between gap-5'>
-                    <div className='flex flex-col w-1/2'>
+                <div className='flex flex-wrap justify-between lg:gap-5'>
+                    <div className='flex flex-col w-full lg:w-1/2'>
                         <label>Name</label>
                         <input
                             type="text"
@@ -234,11 +234,11 @@ export default function DownloadReportForm() {
                             placeholder="Name*"
                             value={formData.name}
                             onChange={handleChange}
-                            className="text-black border border-gray-200 p-2 rounded-md my-2"
+                            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
                             required
                         />
                     </div>
-                    <div className='flex flex-col w-1/2'>
+                    <div className='flex flex-col w-full lg:w-1/2'>
                         <label>Organization</label>
                         <input
                             type="text"
@@ -246,14 +246,14 @@ export default function DownloadReportForm() {
                             placeholder="Name Of Organization*"
                             value={formData.organization}
                             onChange={handleChange}
-                            className="text-black border border-gray-200 p-2 rounded-md my-2"
+                            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
                             required
                         />
                     </div>
                 </div>
 
-                <div className='flex justify-between gap-5'>
-                    <div className='flex flex-col w-1/2'>
+                <div className='flex flex-wrap justify-between lg:gap-5'>
+                    <div className='flex flex-col w-full lg:w-1/2'>
                         <label>Designation</label>
                         <input
                             type="text"
@@ -261,11 +261,11 @@ export default function DownloadReportForm() {
                             placeholder="Designation*"
                             value={formData.designation}
                             onChange={handleChange}
-                            className="text-black border border-gray-200 p-2 rounded-md my-2"
+                            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
                             required
                         />
                     </div>
-                    <div className='flex flex-col w-1/2'>
+                    <div className='flex flex-col w-full lg:w-1/2'>
                         <label>Email</label>
                         <input
                             type="email"
@@ -273,14 +273,14 @@ export default function DownloadReportForm() {
                             placeholder="Email Address*"
                             value={formData.email}
                             onChange={handleChange}
-                            className="text-black border border-gray-200 p-2 rounded-md my-2"
+                            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
                             required
                         />
                     </div>
                 </div>
 
-                <div className='flex justify-between gap-5'>
-                    <div className='flex flex-col w-1/2'>
+                <div className='flex flex-wrap justify-between lg:gap-5'>
+                    <div className='flex flex-col w-full lg:w-1/2'>
                         <label>Phone Number</label>
                         <input
                             type="tel"
@@ -288,32 +288,32 @@ export default function DownloadReportForm() {
                             placeholder="Phone Number*"
                             value={formData.phone1}
                             onChange={handleChange}
-                            className="text-black border border-gray-200 p-2 rounded-md my-2"
+                            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
                             required
                         />
                     </div>
-                    <div className='flex flex-col w-1/2'>
-                        <label>Phone Number</label>
+                    <div className='flex flex-col w-full lg:w-1/2'>
+                        <label>Phone Number 2</label>
                         <input
                             type="tel"
                             name="phone2"
                             placeholder="Phone Number*"
                             value={formData.phone2}
                             onChange={handleChange}
-                            className="text-black border border-gray-200 p-2 rounded-md my-2"
+                            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
                             required
                         />
                     </div>
                 </div>
 
                 <div className='flex w-full'>
-                    <div className='flex flex-col w-full'>
+                    <div className='flex flex-col w-full lg:w-full'>
                         <label>How did you hear About us</label>
                         <select
                             name="hearAboutUs"
                             value={formData.hearAboutUs}
                             onChange={handleChange}
-                            className="text-black border border-gray-200 p-2 rounded-md my-2"
+                            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
                             required
                         >
                             <option value="">Select an option</option>
@@ -326,15 +326,7 @@ export default function DownloadReportForm() {
                     </div>
                 </div>
 
-                <input
-                    type="text"
-                    name="postcode"
-                    placeholder="Postcode / Zip*"
-                    value={formData.postcode}
-                    onChange={handleChange}
-                    required
-                    className="text-black border border-gray-200 p-2 rounded-md my-2"
-                />
+               
             </div>
 
                          <button type="submit" className='bg-[#1567E0] rounded-full' style={{ marginTop: '20px', padding: '10px', color: 'white', border: 'none', }}>

@@ -268,15 +268,15 @@ const BoxGrid = () => {
 
 
   return (
-    <div className="flex flex-col lg:grid md:grid-cols-2 lg:grid-cols-12 place-content-center gap-10 my-20 px-10 xl:px-36">
+    <div className="flex flex-col lg:grid md:grid-cols-2 lg:grid-cols-12 place-content-center gap-10 my-20 p-2 lg:px-10 xl:px-36">
       <div className="col-span-7 border border-gray-100 rounded-lg">
-        <div className="bg-[#1567E0] p-3 flex justify-between  text-white rounded-tr-lg rounded-tl-lg px-9">
+        <div className="bg-[#1567E0] p-3 flex justify-between  text-white rounded-tr-lg rounded-tl-lg lg:px-9">
           <h1>Personal</h1>
           <h1>Billing</h1>
           <h1>Confirmation</h1>
         </div>
         <div>
-          <div className="p-5">
+          <div className="p-2 lg:p-5">
           <PayStack />
 
           </div>
