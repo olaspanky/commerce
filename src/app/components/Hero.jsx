@@ -53,7 +53,7 @@ const Hero = forwardRef((props, ref) => {
         <span className="text-[#1567E0]">Order Your Report Today</span>
       </h1>
 
-      <p className="text-[#1567E0]">Get a 30% first timer discount when you order your report today</p>
+      <p className="text-[#1567E0]">Get a 30% first timer discount when you download our free Whitepaper</p>
 
       <div className="mx-1 p-3 my-5 w-full lg:px-10  2xl:px-20">
         <Card data={data} />
