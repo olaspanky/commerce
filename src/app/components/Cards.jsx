@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import arrow from "../../../public/assets/farrow.svg";
-import free from "../../../public/assets/free.jpeg";
+import free from "../../../public/assets/bast.jpeg";
 import Link from "next/link";
 
 const BoxGrid = ({ data }) => {
