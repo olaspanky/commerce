@@ -225,7 +225,7 @@ export default function DownloadReportForm() {
         <form onSubmit={handleSubmit}>
             <div>
                 {/* Form fields remain unchanged */}
-                <div className='flex flex-wrap justify-between lg:gap-5'>
+                <div className='flex flex-wrap lg:flex-nowrap justify-between lg:gap-5'>
                     <div className='flex flex-col w-full lg:w-1/2'>
                         <label>Name</label>
                         <input
@@ -252,7 +252,7 @@ export default function DownloadReportForm() {
                     </div>
                 </div>
 
-                <div className='flex flex-wrap justify-between lg:gap-5'>
+                <div className='flex flex-wrap lg:flex-nowrap justify-between lg:gap-5'>
                     <div className='flex flex-col w-full lg:w-1/2'>
                         <label>Designation</label>
                         <input
@@ -279,7 +279,7 @@ export default function DownloadReportForm() {
                     </div>
                 </div>
 
-                <div className='flex flex-wrap justify-between lg:gap-5'>
+                <div className='flex flex-wrap lg:flex-nowrap justify-between lg:gap-5'>
                     <div className='flex flex-col w-full lg:w-1/2'>
                         <label>Phone Number</label>
                         <input
@@ -293,16 +293,7 @@ export default function DownloadReportForm() {
                         />
                     </div>
                     <div className='flex flex-col w-full lg:w-1/2'>
-                        <label>Phone Number 2</label>
-                        <input
-                            type="tel"
-                            name="phone2"
-                            placeholder="Phone Number*"
-                            value={formData.phone2}
-                            onChange={handleChange}
-                            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
-                            required
-                        />
+                       
                     </div>
                 </div>
 
