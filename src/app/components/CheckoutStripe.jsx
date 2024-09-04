@@ -1,280 +1,351 @@
-// // import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-// // import axios from "axios";
-// // import React, { useState, useEffect } from "react";
-// // import { useCart } from "react-use-cart";
-// // import { useRouter } from "next/navigation";
-// // import Link from "next/link";
-// // import suc from "../../../public/assets/Vectorsuc.svg";
-// // import Image from "next/image";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useCart } from "react-use-cart";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import suc from "../../../public/assets/Vectorsuc.svg";
+import Image from "next/image";
+import Confetti from "react-confetti";
 
-// // export default function PaymentForm() {
-// //   const router = useRouter();
-// //   const { items, cartTotal, emptyCart } = useCart();
-// //   // const [showSuccessModal, setShowSuccessModal] = useState(false); // Step 1: State variable for success modal
-// //   const [showSuccessModal, setShowSuccessModal] = useState(false);
-// //   const [showMessageModal, setShowMessageModal] = useState(false);
-// //   const [showErrorModal, setShowErrorModal] = useState(false);
 
-// //   console.log("items are", items);
-// //   console.log("items name", items[0]?.details);
-// //   const [isProcessing, setIsProcessing] = useState(false);
-// //   const [formData, setFormData] = useState({
-// //     name: "",
-// //     email: "",
-// //     message: `Here are your PDFs: \n${items
-// //       .map((item) => item.pdfFileURL)
-// //       .join("\n")}`,
-// //   });
-// //   const stripe = useStripe();
-// //   const elements = useElements();
+export default function PaymentForm() {
+  const router = useRouter();
+  const { items, cartTotal, emptyCart } = useCart();
+  // const [showSuccessModal, setShowSuccessModal] = useState(false); // Step 1: State variable for success modal
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showMessageModal, setShowMessageModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [promoCode, setPromoCode] = useState("");
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [discountedTotal, setDiscountedTotal] = useState(cartTotal);
+  const [promoMessage, setPromoMessage] = useState("");
+  const [showConfetti, setShowConfetti] = useState(false);
 
-// //   const handleFormChange = (e) => {
-// //     setFormData({ ...formData, [e.target.name]: e.target.value });
-// //   };
+  console.log("items are", items);
+  console.log("items name", items[0]?.details);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: `Here are your PDFs: \n${items
+      .map((item) => item.pdfFileURL)
+      .join("\n")}`,
+  });
+  const stripe = useStripe();
+  const elements = useElements();
 
-// //   const [alertMessage, setAlertMessage] = useState("");
-// //   const [alertType, setAlertType] = useState("");
+  const handleFormChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-// //   const showAlert = (message, type) => {
-// //     setAlertMessage(message);
-// //     setAlertType(type);
-// //     setTimeout(() => {
-// //       setAlertMessage("");
-// //       setAlertType("");
-// //     }, 3000);
-// //   };
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
 
-// //   async function handleSubmit(event) {
-// //     event.preventDefault();
+  const showAlert = (message, type) => {
+    setAlertMessage(message);
+    setAlertType(type);
+    setTimeout(() => {
+      setAlertMessage("");
+      setAlertType("");
+    }, 3000);
+  };
 
-// //     const formData = new FormData(event.target);
+  const applyPromoCode = () => {
+    if (promoCode === "PBR Life Sciences") {
+      const discount = cartTotal * 0.3;
+      setDiscountedTotal(cartTotal - discount);
+      setDiscountApplied(true);
+      setPromoMessage("Congratulations!!! Promo code added succesfully");
+      setShowConfetti(true);
 
-// //     try {
-// //       const response = await fetch("/api/contact", {
-// //         method: "POST",
-// //         body: formData,
-// //       });
+      // Hide confetti after a short duration
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 5000);
+    } else {
+      setPromoMessage("❌ Invalid promo code");
+    }
+  };
 
-// //       if (!response.ok) {
-// //         console.log("falling over");
-// //         throw new Error(`response status: ${response.status}`);
-// //       }
-// //       const responseData = await response.json();
-// //       console.log(responseData["message"]);
-// //       showAlert("Pdf Succesfully sent to your Mail");
-// //       alert("Message successfully sent");
-// //     } catch (err) {
-// //       console.error(err);
-// //       showAlert("Error, please try resubmitting the form", err);
 
-// //       alert("Error, please try resubmitting the form");
-// //     }
-// //   }
 
-// //   const onSubmit = async (e) => {
-// //     e.preventDefault();
-// //     const cardElement = elements.getElement("card");
+  async function handleSubmit() {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
   
-// //     if (!stripe || !cardElement || isProcessing) return;
+      if (!response.ok) {
+        console.log("Failed to send email");
+        throw new Error(`Response status: ${response.status}`);
+      }
   
-// //     setIsProcessing(true);
-  
-// //     try {
-// //       const { data } = await axios.post("/api/stripe", {
-// //         data: { amount: cartTotal },
-// //       });
-// //       const clientSecret = data;
-  
-// //       const result = await stripe.confirmCardPayment(clientSecret, {
-// //         payment_method: { card: cardElement },
-// //       });
-  
-// //       if (result.error) {
-// //         console.log(result.error.message);
-// //         setShowErrorModal(true); // Show error modal on payment error
-// //       } else {
-// //         console.log("Payment successful");
-// //         setShowMessageModal(true); // Show message modal on successful payment
-// //       }
-// //     } catch (error) {
-// //       console.log("payment error is", error);
-// //       setShowErrorModal(true); // Show error modal on payment error
-// //     } finally {
-// //       setIsProcessing(false);
-// //     }
-// //   };
+      const responseData = await response.json();
+      console.log(responseData["message"]);
+      showAlert("PDF Successfully sent to your email", "success");
+    } catch (err) {
+      console.error(err);
+      showAlert("Error, please try resubmitting the form", "error");
+    }
+  }
   
 
-// //   const cardElementOptions = {
-// //     style: {
-// //       base: {
-// //         fontSize: "14px",
-// //         color: "black",
-// //         "::placeholder": {
-// //           color: "black",
-// //         },
-// //         padding: "10px 15px",
-// //         border: "2px solid black",
-// //         borderRadius: "5px",
-// //         display: "flex",
-// //         flexDirection: "column",
-// //         gap: "10px",
-// //       },
-// //       invalid: {
-// //         color: "#9e2146",
-// //       },
-// //     },
-// //   };
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const cardElement = elements.getElement("card");
+  
+    if (!stripe || !cardElement || isProcessing) return;
+  
+    setIsProcessing(true);
+  
+    try {
+      // Apply the discount if applicable
+      const amountToCharge = discountApplied ? discountedTotal : cartTotal;
+  
+      const { data } = await axios.post("/api/stripe", {
+        data: { amount: amountToCharge }, // Use the discounted amount here
+      });
+      const clientSecret = data;
+  
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: { card: cardElement },
+      });
+  
+      if (result.error) {
+        console.log(result.error.message);
+        setShowErrorModal(true);
+      } else {
+        // Payment successful, now send the email
+        await handleSubmit(); // This sends the email
+        console.log("Payment successful");
+        setShowMessageModal(true);
+      }
+    } catch (error) {
+      console.log("Payment error is", error);
+      setShowErrorModal(true);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+  
 
-// //   return (
-// //     <>
-// //       <form
-// //         onSubmit={onSubmit}
-// //         enctype="multipart/form-data"
-// //         className="flex flex-col gap-5"
-// //       >
-// //         <div className="flex flex-col my-5">
-// //           <label htmlFor="form-name">Name On Card* </label>
-// //           <input
-// //             id="form-name"
-// //             autoComplete="name"
-// //             maxLength={50}
-// //             size="lg"
-// //             name="name"
-// //             className="text-black border border-gray-200 p-2 rounded-md my-2"
-// //           />
+  const cardElementOptions = {
+    style: {
+      base: {
+        fontSize: "14px",
+        color: "black",
+        "::placeholder": {
+          color: "black",
+        },
+        padding: "10px 15px",
+        border: "2px solid black",
+        borderRadius: "5px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+      },
+      invalid: {
+        color: "#9e2146",
+      },
+    },
+  };
 
-// //           <label htmlFor="form-email"> Email:</label>
-// //           <input
-// //             id="form-email"
-// //             required
-// //             autoComplete="email"
-// //             maxLength={80}
-// //             name="email"
-// //             type="email"
-// //             className="text-black border border-gray-200 p-2 rounded-md my-2"
-// //           />
+  return (
+    <>
+      <form
+        onSubmit={onSubmit}
+        enctype="multipart/form-data"
+        className="flex flex-col gap-5"
+      >
+        <div className="flex flex-col my-5">
+          <label htmlFor="form-name">Name On Card* </label>
+          <input
+            id="form-name"
+            autoComplete="name"
+            maxLength={50}
+            size="lg"
+            name="name"
+            value={formData.name} // Bind value to state
+      onChange={handleFormChange} // Update state on change
+            className="text-black border border-gray-200 p-2 rounded-md my-2"
+          />
 
-// //           <label className="hidden" htmlFor="form-message">
-// //             {" "}
-// //             Message:{" "}
-// //           </label>
-// //           <textarea
-// //             id="form-message"
-// //             required
-// //             name="message"
-// //             rows={5}
-// //             className="text-black border border-gray-200 p-2 rounded-md hidden"
-// //             value={formData.message} // Add this line
-// //             onChange={handleFormChange} // Add this line
-// //           />
-// //         </div>
+          <label htmlFor="form-email"> Email:</label>
+          <input
+            id="form-email"
+            required
+            autoComplete="email"
+            maxLength={80}
+            name="email"
+            type="email"
+            value={formData.email} // Bind value to state
+            onChange={handleFormChange} // Update state on change
+            className="text-black border border-gray-200 p-2 rounded-md my-2"
+          />
 
-// //         <div className="form-group">
-// //           <div className="my-2" htmlFor="card-element">
-// //             Credit or debit card
-// //           </div>
 
-// //           <CardElement
-// //             id="card-element"
-// //             className="text-black border border-gray-200 p-2 rounded-md my-2"
-// //             options={{
-// //               style: {
-// //                 base: {
-// //                   fontSize: "16px",
-// //                   color: "#424770",
-// //                   "::placeholder": {
-// //                     color: "#aab7c4",
-// //                   },
-// //                   padding: "10px 15px",
-// //                   border: "2px solid black",
-// //                   borderRadius: "5px",
-// //                 },
-// //                 invalid: {
-// //                   color: "#9e2146",
-// //                 },
-// //               },
-// //             }}
-// //           />
-// //         </div>
-// //         <button
-// //           type="submit"
-// //           className="w-48 rounded-full text-center p-2 bg-blue-700 text-white"
-// //         >
-// //           Pay ${cartTotal}
-// //         </button>
-// //       </form>
+<label htmlFor="promo-code">Promo Code:</label>
+          <div className="flex justify-center items-center gap-2 w-full">
+            <input
+              id="promo-code"
+              name="promoCode"
+              value={promoCode}
+              onChange={(e) => setPromoCode(e.target.value)}
+              className="text-black border border-gray-200 w-full p-2 rounded-md my-2"
+            />
+            <button
+              type="button"
+              onClick={applyPromoCode}
+              className="p-2 h-9 bg-blue-700 text-white rounded-full"
+            >
+              Apply
+            </button>
+          </div>
+          {promoMessage && <p className="text-blue-700">{promoMessage}</p>}
+
+          <label className="hidden" htmlFor="form-message">
+            {" "}
+            Message:{" "}
+          </label>
+          <textarea
+            id="form-message"
+            required
+            name="message"
+            rows={5}
+            className="text-black border border-gray-200 p-2 rounded-md hidden"
+            value={formData.message} // Add this line
+            onChange={handleFormChange} // Add this line
+          />
+        </div>
+
+        <div className="form-group">
+          <div className="my-2" htmlFor="card-element">
+            Credit or debit card
+          </div>
+
+          <CardElement
+            id="card-element"
+            className="text-black border border-gray-200 p-2 rounded-md my-2"
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  color: "#424770",
+                  "::placeholder": {
+                    color: "#aab7c4",
+                  },
+                  padding: "10px 15px",
+                  border: "2px solid black",
+                  borderRadius: "5px",
+                },
+                invalid: {
+                  color: "#9e2146",
+                },
+              },
+            }}
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-48 rounded-full text-center p-2 bg-blue-700 text-white"
+        >
+ Pay ${discountApplied ? discountedTotal.toFixed(2) : cartTotal.toFixed(2)}        </button>
+      </form>
 
     
-// //       {showMessageModal && (
-// //         <div className="fixed inset-0 flex items-center justify-center z-50">
-// //           <div className="bg-white w-[500px] rounded-lg p-8 shadow-lg">
-// //             <div className="w-full flex justify-center my-9">
-// //               <Image src={suc} alt="" />
-// //             </div>
-// //             <h2 className="text-2xl font-bold mb-4 text-center">Thank you!</h2>
-// //             <p className="text-gray-300 font-extralight text-sm text-center">
-// //               Your order has been confirmed & it is on the way. Check your email
-// //               for the details
-// //             </p>
-// //             <div className="flex justify-center mt-4 space-x-4">
-// //               <Link href="/">
-// //                 <button
-// //                   onClick={() => {
-// //                     setShowMessageModal(false);
-// //                     emptyCart(); // Empty cart when the user clicks on "Go to Homepage"
-// //                   }}
-// //                   className="px-4 py-2 bg-[#1567E0] text-white rounded-full"
-// //                 >
-// //                   Go to Homepage
-// //                 </button>
-// //               </Link>
-// //               <Link href="/pages/summary">
+      {showMessageModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white w-[500px] rounded-lg p-8 shadow-lg">
+            <div className="w-full flex justify-center my-9">
+              <Image src={suc} alt="" />
+            </div>
+            <h2 className="text-2xl font-bold mb-4 text-center">Thank you!</h2>
+            <p className="text-gray-300 font-extralight text-sm text-center">
+              Your order has been confirmed & it is on the way. Check your email
+              for the details
+            </p>
+            <div className="flex justify-center mt-4 space-x-4">
+              <Link href="/">
+                <button
+                  onClick={() => {
+                    setShowMessageModal(false);
+                    emptyCart(); // Empty cart when the user clicks on "Go to Homepage"
+                  }}
+                  className="px-4 py-2 bg-[#1567E0] text-white rounded-full"
+                >
+                  Go to Homepage
+                </button>
+              </Link>
+              <Link href="/pages/summary">
 
-// //               <button
-// //                 onClick={() => {
-// //                   setShowMessageModal(false);
-// //                 }}
-// //                 className="px-4 py-2 bg-white text-[#1567E0] border border-[#1567E0] rounded-full"
-// //               >
-// //                 Check Order status
-// //               </button>
-// //               </Link>
-// //             </div>
-// //           </div>
-// //         </div>
-// //       )}
-// //       {showErrorModal && (
-// //         <div className="fixed inset-0 flex items-center justify-center z-50">
-// //           <div className="bg-white w-[500px] rounded-lg p-8 shadow-lg">
+              {/* <button
+                onClick={() => {
+                  setShowMessageModal(false);
+                }}
+                className="px-4 py-2 bg-white text-[#1567E0] border border-[#1567E0] rounded-full"
+              >
+                Check Order status
+              </button> */}
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      {showErrorModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white w-[500px] rounded-lg p-8 shadow-lg">
 
-// //             <h2 className="text-2xl font-bold mb-4 text-center">Error!</h2>
-// //             <p className="text-gray-300 font-extralight text-sm text-center">
-// // Something went Wrong
-// //             </p>
-// //             <div className="flex justify-center mt-4 space-x-4">
-// //               <Link href="/">
-// //                 <button
-// //                   onClick={() => {
-// //                     setShowMessageModal(false);
-// //                     emptyCart(); // Empty cart when the user clicks on "Go to Homepage"
-// //                   }}
-// //                   className="px-4 py-2 bg-[#1567E0] text-white rounded-full"
-// //                 >
-// //                   Go to Homepage
-// //                 </button>
-// //               </Link>
-// //               <Link href="/pages/summary">
+            <h2 className="text-2xl font-bold mb-4 text-center">Error!</h2>
+            <p className="text-gray-300 font-extralight text-sm text-center">
+Something went Wrong
+            </p>
+            <div className="flex justify-center mt-4 space-x-4">
+              <Link href="/">
+                <button
+                  onClick={() => {
+                    setShowMessageModal(false);
+                    emptyCart(); // Empty cart when the user clicks on "Go to Homepage"
+                  }}
+                  className="px-4 py-2 bg-[#1567E0] text-white rounded-full"
+                >
+                  Go to Homepage
+                </button>
+              </Link>
+              <Link href="/pages/summary">
 
             
-// //               </Link>
-// //             </div>
-// //           </div>
-// //         </div>
-// //       )}
-// //     </>
-// //   );
-// // }
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 // import axios from "axios";
 // import React, { useState, useEffect } from "react";
@@ -430,167 +501,170 @@
 //     </>
 //   );
 // }
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import axios from "axios";
-import React, { useState } from "react";
-import { useCart } from "react-use-cart";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import suc from "../../../public/assets/Vectorsuc.svg";
-import Image from "next/image";
-import Confetti from "react-confetti";
 
-export default function PaymentForm() {
-  const router = useRouter();
-  const { items, cartTotal, emptyCart } = useCart();
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: `Here are your PDFs: \n${items
-      .map((item) => item.pdfFileURL)
-      .join("\n")}`,
-  });
-  const [promoCode, setPromoCode] = useState("");
-  const [discountApplied, setDiscountApplied] = useState(false);
-  const [discountedTotal, setDiscountedTotal] = useState(cartTotal);
-  const [promoMessage, setPromoMessage] = useState("");
-  const [showConfetti, setShowConfetti] = useState(false);
+// import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+// import axios from "axios";
+// import React, { useState } from "react";
+// import { useCart } from "react-use-cart";
+// import { useRouter } from "next/navigation";
+// import Link from "next/link";
+// import suc from "../../../public/assets/Vectorsuc.svg";
+// import Image from "next/image";
+// import Confetti from "react-confetti";
 
-  const stripe = useStripe();
-  const elements = useElements();
+// export default function PaymentForm() {
+//   const router = useRouter();
+//   const { items, cartTotal, emptyCart } = useCart();
+//   const [isProcessing, setIsProcessing] = useState(false);
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     message: `Here are your PDFs: \n${items
+//       .map((item) => item.pdfFileURL)
+//       .join("\n")}`,
+//   });
+  // const [promoCode, setPromoCode] = useState("");
+  // const [discountApplied, setDiscountApplied] = useState(false);
+  // const [discountedTotal, setDiscountedTotal] = useState(cartTotal);
+  // const [promoMessage, setPromoMessage] = useState("");
+  // const [showConfetti, setShowConfetti] = useState(false);
 
-  const handleFormChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+//   const stripe = useStripe();
+//   const elements = useElements();
 
-  const applyPromoCode = () => {
-    if (promoCode === "PBR Life Sciences") {
-      const discount = cartTotal * 0.3;
-      setDiscountedTotal(cartTotal - discount);
-      setDiscountApplied(true);
-      setPromoMessage("Congratulations!!! Promo code added succesfully");
-      setShowConfetti(true);
+//   const handleFormChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
 
-      // Hide confetti after a short duration
-      setTimeout(() => {
-        setShowConfetti(false);
-      }, 5000);
-    } else {
-      setPromoMessage("❌ Invalid promo code");
-    }
-  };
+//   const [showMessageModal, setShowMessageModal] = useState(false);
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const cardElement = elements.getElement("card");
+  // const applyPromoCode = () => {
+  //   if (promoCode === "PBR Life Sciences") {
+  //     const discount = cartTotal * 0.3;
+  //     setDiscountedTotal(cartTotal - discount);
+  //     setDiscountApplied(true);
+  //     setPromoMessage("Congratulations!!! Promo code added succesfully");
+  //     setShowConfetti(true);
 
-    if (!stripe || !cardElement || isProcessing) return;
+  //     // Hide confetti after a short duration
+  //     setTimeout(() => {
+  //       setShowConfetti(false);
+  //     }, 5000);
+  //   } else {
+  //     setPromoMessage("❌ Invalid promo code");
+  //   }
+  // };
 
-    setIsProcessing(true);
+//   const onSubmit = async (e) => {
+//     e.preventDefault();
+//     const cardElement = elements.getElement("card");
 
-    try {
-      const { data } = await axios.post("/api/stripe", {
-        data: { amount: discountApplied ? discountedTotal : cartTotal },
-      });
-      const clientSecret = data;
+//     if (!stripe || !cardElement || isProcessing) return;
 
-      const result = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: { card: cardElement },
-      });
+//     setIsProcessing(true);
 
-      if (result.error) {
-        console.log(result.error.message);
-        setShowErrorModal(true); // Show error modal on payment error
-      } else {
-        console.log("Payment successful");
-        setShowMessageModal(true); // Show message modal on successful payment
-      }
-    } catch (error) {
-      console.log("payment error is", error);
-      setShowErrorModal(true); // Show error modal on payment error
-    } finally {
-      setIsProcessing(false);
-    }
-  };
+//     try {
+//       const { data } = await axios.post("/api/stripe", {
+//         data: { amount: discountApplied ? discountedTotal : cartTotal },
+//       });
+//       const clientSecret = data;
 
-  return (
-    <>
-      {showConfetti && <Confetti />}
-      <form onSubmit={onSubmit} className="flex flex-col gap-5">
-        <div className="flex flex-col my-5">
-          <label htmlFor="form-name">Name On Card* </label>
-          <input
-            id="form-name"
-            autoComplete="name"
-            maxLength={50}
-            size="lg"
-            name="name"
-            className="text-black border border-gray-200 p-2 rounded-md my-2"
-          />
+//       const result = await stripe.confirmCardPayment(clientSecret, {
+//         payment_method: { card: cardElement },
+//       });
 
-          <label htmlFor="form-email"> Email:</label>
-          <input
-            id="form-email"
-            required
-            autoComplete="email"
-            maxLength={80}
-            name="email"
-            type="email"
-            className="text-black border border-gray-200 p-2 rounded-md my-2"
-          />
+//       if (result.error) {
+//         console.log(result.error.message);
+//         setShowErrorModal(true); // Show error modal on payment error
+//       } else {
+//         console.log("Payment successful");
+//         setShowMessageModal(true); // Show message modal on successful payment
+//       }
+//     } catch (error) {
+//       console.log("payment error is", error);
+//       setShowErrorModal(true); // Show error modal on payment error
+//     } finally {
+//       setIsProcessing(false);
+//     }
+//   };
 
-          <label htmlFor="promo-code">Promo Code:</label>
-          <div className="flex justify-center items-center gap-2 w-full">
-            <input
-              id="promo-code"
-              name="promoCode"
-              value={promoCode}
-              onChange={(e) => setPromoCode(e.target.value)}
-              className="text-black border border-gray-200 w-full p-2 rounded-md my-2"
-            />
-            <button
-              type="button"
-              onClick={applyPromoCode}
-              className="p-2 h-9 bg-blue-700 text-white rounded-full"
-            >
-              Apply
-            </button>
-          </div>
-          {promoMessage && <p className="text-blue-700">{promoMessage}</p>}
+//   return (
+//     <>
+//       {showConfetti && <Confetti />}
+//       <form onSubmit={onSubmit} className="flex flex-col gap-5">
+//         <div className="flex flex-col my-5">
+//           <label htmlFor="form-name">Name On Card* </label>
+//           <input
+//             id="form-name"
+//             autoComplete="name"
+//             maxLength={50}
+//             size="lg"
+//             name="name"
+//             className="text-black border border-gray-200 p-2 rounded-md my-2"
+//           />
 
-          <label className="hidden" htmlFor="form-message">
-            Message:
-          </label>
-          <textarea
-            id="form-message"
-            required
-            name="message"
-            rows={5}
-            className="text-black border border-gray-200 p-2 rounded-md hidden"
-            value={formData.message}
-            onChange={handleFormChange}
-          />
-        </div>
+//           <label htmlFor="form-email"> Email:</label>
+//           <input
+//             id="form-email"
+//             required
+//             autoComplete="email"
+//             maxLength={80}
+//             name="email"
+//             type="email"
+//             className="text-black border border-gray-200 p-2 rounded-md my-2"
+//           />
 
-        <div className="form-group">
-          <div className="my-2" htmlFor="card-element">
-            Credit or debit card
-          </div>
-          <CardElement
-            id="card-element"
-            className="text-black border border-gray-200 p-2 rounded-md my-2"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-48 rounded-full text-center p-2 bg-blue-700 text-white"
-        >
-          Pay ${discountApplied ? discountedTotal.toFixed(2) : cartTotal.toFixed(2)}
-        </button>
-      </form>
+          // <label htmlFor="promo-code">Promo Code:</label>
+          // <div className="flex justify-center items-center gap-2 w-full">
+          //   <input
+          //     id="promo-code"
+          //     name="promoCode"
+          //     value={promoCode}
+          //     onChange={(e) => setPromoCode(e.target.value)}
+          //     className="text-black border border-gray-200 w-full p-2 rounded-md my-2"
+          //   />
+          //   <button
+          //     type="button"
+          //     onClick={applyPromoCode}
+          //     className="p-2 h-9 bg-blue-700 text-white rounded-full"
+          //   >
+          //     Apply
+          //   </button>
+          // </div>
+          // {promoMessage && <p className="text-blue-700">{promoMessage}</p>}
 
-      {/* Modals for success and error messages (same as before) */}
-    </>
-  );
-}
+//           <label className="hidden" htmlFor="form-message">
+//             Message:
+//           </label>
+//           <textarea
+//             id="form-message"
+//             required
+//             name="message"
+//             rows={5}
+//             className="text-black border border-gray-200 p-2 rounded-md hidden"
+//             value={formData.message}
+//             onChange={handleFormChange}
+//           />
+//         </div>
+
+//         <div className="form-group">
+//           <div className="my-2" htmlFor="card-element">
+//             Credit or debit card
+//           </div>
+//           <CardElement
+//             id="card-element"
+//             className="text-black border border-gray-200 p-2 rounded-md my-2"
+//           />
+//         </div>
+//         <button
+//           type="submit"
+//           className="w-48 rounded-full text-center p-2 bg-blue-700 text-white"
+//         >
+//           Pay ${discountApplied ? discountedTotal.toFixed(2) : cartTotal.toFixed(2)}
+//         </button>
+//       </form>
+
+//       {/* Modals for success and error messages (same as before) */}
+//     </>
+//   );
+// }
