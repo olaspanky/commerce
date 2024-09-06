@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import arrow from "../../../public/assets/farrow.svg";
-import free from "../../../public/assets/bast.jpeg";
+import free from "../../../public/assets/amatem.jpeg";
 import Link from "next/link";
 
 const BoxGrid = ({ data }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  console.log("lol is", data?.price);
 
   if (!Array.isArray(data)) {
     return <div>Loading...</div>;
@@ -42,7 +41,7 @@ const BoxGrid = ({ data }) => {
 
                   {hoveredIndex === index && (
                     <div className="absolute inset-0 flex items-center justify-center text-white text-lg bg-black opacity-60 pointer-events-none rounded-lg">
-                      {isAvailable(box) ? "Explore" : "Not Available"}
+                      {isAvailable(box) ? "Explore" : "Coming Soon"}
                     </div>
                   )}
 

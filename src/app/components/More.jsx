@@ -101,7 +101,7 @@ const ProductDetail = ({ params }) => {
         <div className="lg:col-span-6 flex flex-col gap-3">
           <div className="flex flex-col gap-2">
           <div className='flex justify-between items-center'>
-          <p className='text-2xl text-[#1567E0] font-bold'>Anti-infective Report Analysis 2023</p>
+          <p className='text-2xl text-[#1567E0] font-bold'>{card?.name}</p>
 
           </div>
             <div className="flex my-2 items-center">
@@ -126,7 +126,7 @@ const ProductDetail = ({ params }) => {
             <div className="border border-gray-200 "></div>
 
             <div className="flex flex-col my-2 gap-9">
-              <p className="text-sm "> {objective}</p>
+              <p className="text-sm "> {card?.details}</p>
             </div>
 
             <div className="lg:col-span-3 flex flex-col gap-5 items-center w-full mt-3">
