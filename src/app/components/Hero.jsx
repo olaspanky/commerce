@@ -5,7 +5,7 @@ import { client } from "../lib/sanity";
 
 async function fetchData() {
   const query = `*[_type == 'product'] | order(_createdAt desc){
-    _id, image, location, price, name, available, details, sumary, objective, methodology, pdfFile,
+    _id, image, location, position, price, name, available, details, sumary, objective, methodology, pdfFile,
     "slug": slug.current,
     "imageUrl": image[0].asset->url      
   }`;

@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import Nav from "../../components/Navbar"
+import Nav from "../../components/Nav3"
 import Form from "../../components/Contactform"
 import data from "../../components/data"
 import lady from "../../../../public/assets/maint.png"
@@ -23,9 +23,8 @@ console.log("card is", card)
 
   return (
     <div className='w-[100vw]  '>
-<div className= "lg:py-9 lg:p-20 2xl:px-36">        <Link href="/" >
-        <Image src={logo} className="w-12 lg:w-36" alt="logo" />
-      </Link>
+      <Nav/>
+<div className= "lg:py-9 lg:p-20 2xl:px-36">      
         </div>
       <div className="lg:grid grid-cols-12">
 

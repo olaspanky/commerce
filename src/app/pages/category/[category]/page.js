@@ -54,7 +54,7 @@ export default function categoryPage({ params }) {
 </p> 
           </Link>
           <Image src={arrow} alt=""/>
-          <p className="text-sm font-bold"> {cardData && cardData.length > 0 && cardData[0].categoryName}</p> 
+          <p className="text-sm font-bold capitalize"> {cardData && cardData.length > 0 && cardData[0].categoryName}</p>
 
         </div>
       <div className="lg:px-20 2xl:px-36 my-20 flex flex-col gap-5 lg:gap-20">

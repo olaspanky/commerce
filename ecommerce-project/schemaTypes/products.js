@@ -18,6 +18,11 @@ export default {
           type: 'string'
       },
       {
+          name: "position",
+          title: 'Position',
+          type: 'number'
+      },
+      {
           name: 'slug',
           title: 'Slug',
           type: 'slug',
