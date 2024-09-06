@@ -18,7 +18,7 @@ export async function POST(request) {
     });
 
     // Path to the PDF and logo in the public folder
-    const pdfPath = path.join(process.cwd(), "public", "The-Case-of-Amatem_.pdf");
+    const pdfPath = path.join(process.cwd(), "public", "The Case of Amatem Nn.pdf");
     const logoPath = path.join(process.cwd(), "public", "logo.png"); // Assuming your logo is named logo.png
 
    
@@ -52,7 +52,7 @@ export async function POST(request) {
             `,
       attachments: [
         {
-          filename: "The-Case-of-Amatem_.pdf", // Match the filename
+          filename: "The Case of Amatem Nn.pdf", // Match the filename
           path: pdfPath, // Attach the PDF file
           contentType: "application/pdf",
         },
