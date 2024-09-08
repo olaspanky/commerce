@@ -79,7 +79,7 @@ export default function DownloadReportForm() {
     
             // Handle responses from both APIs
             if (response1.ok && response2.ok) {
-                setModalMessage('Form data submitted successfully to both endpoints.');
+                setModalMessage(data1.message);
             } else if (!response1.ok) {
                 setModalMessage(`Error in /api/services: ${data1.message}`);
             } else if (!response2.ok) {
