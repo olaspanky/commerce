@@ -94,7 +94,6 @@ const BoxGrid = ({ data }) => {
                     <div className="px-5 text-xs"></div>
                     <div className="flex justify-between px-5 text-xs text-[black] pb-5 mt-5">
                       <div className="flex flex-col gap-2">
-                        <p className="">${box.price}</p>
                       </div>
                       <div className="flex gap-2"></div>
                     </div>
