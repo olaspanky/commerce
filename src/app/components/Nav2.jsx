@@ -790,7 +790,7 @@ export default function Header() {
 
       </div>
       
-      <div className="hidden md:flex gap-8 items-center text-white">
+      <div className="hidden md:flex gap-8 cursor-pointer items-center text-white">
         {menuItems.map((item) => {
           return item.hasOwnProperty("children") ? (
             <Dropdown item={item} />
