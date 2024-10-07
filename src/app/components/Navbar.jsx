@@ -79,12 +79,12 @@ export default function Header() {
 
       </div>
       
-      <div className="hidden md:flex cursor-pointer gap-8 items-center text-black">
+      <div className="hidden md:flex h-auto cursor-pointer gap-8 items-center text-black">
         {menuItems.map((item) => {
           return item.hasOwnProperty("children") ? (
             <Dropdown item={item} />
           ) : (
-            <Link className={`${item.route === path ? "text-[#FFFFFF] border-b-2 px-3 border-[#FFFFFF] font-semibold pb-1" : ""}`} href={item?.route || ""}>
+<Link className={`${item.route === path ? "text-[#FFFFFF] border-b-2 px-3 border-[#FFFFFF] font-semibold pb-1" : ""}`} href={item?.route || ""}>
               {item.title}
             </Link>
           );
