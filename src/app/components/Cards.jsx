@@ -14,7 +14,7 @@ const BoxGrid = ({ data }) => {
     setHoveredIndex(index);
   };
 
-  console.log("data is :", data)
+  //console.log("data is :", data)
 
   const isAvailable = (box) => box.available === "yes";
 

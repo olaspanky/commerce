@@ -18,7 +18,7 @@ import { useParams } from "next/navigation";
 const ProductDetail = () => {
 const params = useParams();
 const card = data.find((item) => item.id === parseInt(params.productid));
-console.log("card is", card)
+//console.log("card is", card)
   
 
   return (

@@ -33,7 +33,7 @@ const products = [
 const BeautifulForm = () => {
   const handleSubmit = (values) => {
     // Handle form submission logic
-    console.log(values);
+    //console.log(values);
   };
 
   return (

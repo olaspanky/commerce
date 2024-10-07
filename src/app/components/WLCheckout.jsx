@@ -169,7 +169,7 @@
 
 // const BoxGrid = () => {
 //   const {items, isEmpty, totalUniqueItems, totalItems, cartTotal, updateItemQuantity, removeItem, emptyCart} = useCart()  
-//   console.log("items is", items)
+//   //console.log("items is", items)
 
 
 //   if (isEmpty) return <div className="w-full h-[70vh] flex flex-col justify-between items-center p-36">
@@ -264,7 +264,7 @@ import PayStack from "./DownloadWhitelist";
 
 const BoxGrid = () => {
   const {items, isEmpty, totalUniqueItems, totalItems, cartTotal, updateItemQuantity, removeItem, emptyCart} = useCart()  
-  console.log("items is", items)
+  //console.log("items is", items)
 
 
   return (

@@ -65,7 +65,7 @@ export default function productPage({ params }) {
   const data = data1;
   const cardData = data;
 
-  console.log("new card is", card)
+  //console.log("new card is", card)
 
 
   

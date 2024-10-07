@@ -73,7 +73,7 @@
 //   const handleSubmit = async (values, { setSubmitting }) => {
 //     try {
 //       await payWithPayStack(values);
-//       console.log('Payment successful');
+//       //console.log('Payment successful');
 //     } catch (error) {
 //       console.error('Error submitting form:', error);
 //     } finally {

@@ -795,7 +795,7 @@ export default function Header() {
           return item.hasOwnProperty("children") ? (
             <Dropdown item={item} />
           ) : (
-<Link className={`${item.route === path ? "text-[#FFFFFF] border-b-2 px-3 border-[#FFFFFF] font-semibold pb-1" : ""}`} href={item?.route || ""}>
+<Link className={`${item.route === path ? "text-[#1567E0] border-b-2 px-3 border-[#FFFFFF] font-semibold pb-1" : ""}`} href={item?.route || ""}>
               {item.title}
             </Link>
           );
@@ -830,7 +830,7 @@ export default function Header() {
                 <Dropdown item={item} />
               ) : (
                 <Link href={item?.route || ''} onClick={toggleMenu}>
-                  <div className="hover:text-blue-500">{item.title}</div>
+                  <div className="hover:text-blue-500 cursor-pointer">{item.title}</div>
                 </Link>
               )}
             </div>

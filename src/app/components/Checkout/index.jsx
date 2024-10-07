@@ -19,12 +19,12 @@ const CheckoutButton = ({ amount = 1 }) => {
       const { sessionId } = await res.json();
 
       const { error } = await stripe.redirectToCheckout({ sessionId });
-      console.log(error);
+      //console.log(error);
       if (error) {
         router.push("/error");
       }
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       router.push("/error");
     }
   };

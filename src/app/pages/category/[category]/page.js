@@ -43,7 +43,7 @@ export default function categoryPage({ params }) {
 
   const data = cat;
   const cardData = data;
-  console.log("Carddata category is,:", cardData);
+  //console.log("Carddata category is,:", cardData);
 
   return (
     <div className="bg-white h-full">

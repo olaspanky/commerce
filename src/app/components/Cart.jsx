@@ -10,7 +10,7 @@
 
 // const BoxGrid = () => {
 //   const {items, isEmpty, totalUniqueItems, totalItems, cartTotal, updateItemQuantity, removeItem, emptyCart} = useCart()  
-//   console.log("items is", items)
+//   //console.log("items is", items)
 
 
 //   if (isEmpty) return <div className="w-full h-[70vh] flex flex-col justify-between items-center p-36">
@@ -103,7 +103,7 @@ import CheckoutButton from "../components/CheckoutStripe";
 
 const BoxGrid = () => {
   const {items, isEmpty, totalUniqueItems, totalItems, cartTotal, updateItemQuantity, removeItem, emptyCart} = useCart()  
-  console.log("items is", items)
+  //console.log("items is", items)
 
 
   if (isEmpty) return <div className="w-full h-[70vh] flex flex-col justify-between items-center p-36">
@@ -189,7 +189,7 @@ const BoxGrid = () => {
         </div>
          <Link href="/pages/payment">
 
-        <div className="bg-[#1567E0] cursor-pointer	  p-3 flex justify-center  text-white rounded-br-lg rounded-bl-lg px-9">
+        <div className="bg-[#1567E0] cursor-pointer	  p-3 flex justify-center  text-white rounded-br-lg rounded-bl-lg px-9 hover:bg-[#1567E0] hover:text-white hover:animate-pulse hover:transition-transform hover:scale-99">
           <h1 className="">Proceed To Checkout</h1>
         </div>
         </Link>

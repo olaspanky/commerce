@@ -8,7 +8,7 @@ export async function POST(request) {
     const username = "pbrmarketintellligencereport@gmail.com";
     const password = "aasl uuwn lmrw dsvl"; // Use your Gmail app-specific password
 
-    console.log("Dealing with request");
+    //console.log("Dealing with request");
 
     try {
         const formData = await request.json();
@@ -18,7 +18,7 @@ export async function POST(request) {
             throw new Error("No recipients defined");
         }
 
-        console.log("formdate", formData);
+        //console.log("formdate", formData);
 
 
         // Create transporter object using Gmail SMTP service

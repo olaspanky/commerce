@@ -20,8 +20,8 @@ async function getData() {
 export default async function BoxGrid({carddata}) {
   const data = await getData();
   const card = data.find((item) => item.id === parseInt(carddata));
-  console.log("dynamic card is", card)
-  console.log("dynamic carddata is", carddata)
+  //console.log("dynamic card is", card)
+  //console.log("dynamic carddata is", carddata)
   const [hoveredIndex, setHoveredIndex] = useState(0);
 
 

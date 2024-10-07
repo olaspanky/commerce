@@ -9,7 +9,7 @@ export default function Home() {
         const res = await fetch(url);
       const { data } = await res.json();
       const allProducts = data;
-      console.log("all product:", allProducts)
+      //console.log("all product:", allProducts)
     }
     getPosts();
   }, []);
