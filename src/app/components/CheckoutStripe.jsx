@@ -22,7 +22,7 @@ export default function PaymentForm() {
   const [promoMessage, setPromoMessage] = useState("");
   const [showConfetti, setShowConfetti] = useState(false);
   const [confettiOpacity, setConfettiOpacity] = useState(1); // State to track opacity
-
+  const [showProcessingModal, setShowProcessingModal] = useState(false); // Modal for processing
 
   //console.log("items are", items);
   //console.log("items name", items[0]?.details);
@@ -30,10 +30,12 @@ export default function PaymentForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: `Here are your PDFs: \n${items
-      .map((item) => item.pdfFileURL)
-      .join("\n")}`,
-  });
+    message: `Here are your PDFs: <ul>${items
+      .map((item, index) => `<li>Report ${index + 1}: <a href="${item.pdfFileURL}">Download</a></li>`)
+      .join("")}</ul>`,
+});
+
+
   const stripe = useStripe();
   const elements = useElements();
 
@@ -109,41 +111,76 @@ export default function PaymentForm() {
   }
   
 
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const cardElement = elements.getElement("card");
+  
+  //   if (!stripe || !cardElement || isProcessing) return;
+  
+  //   setIsProcessing(true);
+  
+  //   try {
+  //     // Apply the discount if applicable
+  //     const amountToCharge = discountApplied ? discountedTotal : cartTotal;
+  
+  //     const { data } = await axios.post("/api/stripe", {
+  //       data: { amount: amountToCharge }, // Use the discounted amount here
+  //     });
+  //     const clientSecret = data;
+  
+  //     const result = await stripe.confirmCardPayment(clientSecret, {
+  //       payment_method: { card: cardElement },
+  //     });
+  
+  //     if (result.error) {
+  //       //console.log(result.error.message);
+  //       setShowErrorModal(true);
+  //     } else {
+  //       // Payment successful, now send the email
+  //       await handleSubmit(); // This sends the email
+  //       //console.log("Payment successful");
+  //       setShowMessageModal(true);
+  //     }
+  //   } catch (error) {
+  //     //console.log("Payment error is", error);
+  //     setShowErrorModal(true);
+  //   } finally {
+  //     setIsProcessing(false);
+  //   }
+  // };
   const onSubmit = async (e) => {
     e.preventDefault();
     const cardElement = elements.getElement("card");
-  
+
     if (!stripe || !cardElement || isProcessing) return;
-  
+
     setIsProcessing(true);
-  
+    setShowProcessingModal(true); // Show modal when processing starts
+
     try {
       // Apply the discount if applicable
       const amountToCharge = discountApplied ? discountedTotal : cartTotal;
-  
+
       const { data } = await axios.post("/api/stripe", {
         data: { amount: amountToCharge }, // Use the discounted amount here
       });
       const clientSecret = data;
-  
+
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: { card: cardElement },
       });
-  
+
       if (result.error) {
-        //console.log(result.error.message);
         setShowErrorModal(true);
       } else {
-        // Payment successful, now send the email
-        await handleSubmit(); // This sends the email
-        //console.log("Payment successful");
+        await handleSubmit();
         setShowMessageModal(true);
       }
     } catch (error) {
-      //console.log("Payment error is", error);
       setShowErrorModal(true);
     } finally {
       setIsProcessing(false);
+      setShowProcessingModal(false); // Hide modal after processing
     }
   };
   
@@ -280,6 +317,21 @@ export default function PaymentForm() {
           )}
         </button>
       </form>
+
+      {showProcessingModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white w-[500px] rounded-lg p-8 shadow-lg text-center">
+            <h2 className="text-2xl font-bold mb-4">Processing Payment</h2>
+            <p className="text-gray-800 text-sm mb-4">
+              Please do not close the tab or disconnect from the internet while your reports are being processed.
+            </p>
+            <p className="text-gray-500 text-sm">
+              This process typically takes around 30 seconds.
+            </p>
+            <div className="loader mt-4"></div>
+          </div>
+        </div>
+      )}
 
       {/* Processing spinner */}
       <style jsx>{`
