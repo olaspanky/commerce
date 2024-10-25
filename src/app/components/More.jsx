@@ -124,7 +124,7 @@ const ProductDetail = ({ params }) => {
 
       <div className='lg:col-span-6 flex flex-col gap-3'>
         <div className="lg:w-[55%]">
-        <p className='text-2xl text-[#1567E0] font-bold'>{card.name}</p>
+        <p className='text-2xl text-[#1567E0] font-bold'>{card?.name}</p>
         <div className='flex justify-between text-xs w-full '>
          
         </div>
