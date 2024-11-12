@@ -9,7 +9,7 @@ import CartProviders from "./components/provider";
 import { ChakraProvider } from '@chakra-ui/react'
 import Head from "next/head";
 import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
-
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -29,6 +29,8 @@ export default function RootLayout({ children }) {
         <MantineProvider>
           <ChakraProvider>
           <CartProviders>
+          <GoogleAnalytics />
+
           
             
             {children}
