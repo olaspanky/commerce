@@ -91,7 +91,7 @@ export default function Header() {
             </Link>
           );
         })}
-        <a href="/pages/cart" className="text-white">
+        {/* <a href="/pages/cart" className="text-white">
             <div className="flex gap-3 px-3 py-2 border rounded-lg border-[white] items-center justify-center">
               <div className="relative">
                 <Image src={cart} />
@@ -103,7 +103,7 @@ export default function Header() {
               </div>
               <p className="text-xs text-[white]">Cart</p>
             </div>
-          </a>
+          </a> */}
       </div>
       <div className="md:hidden text-black">
         <button onClick={toggleMenu} className="hover:text-blue-500">

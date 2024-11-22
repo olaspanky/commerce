@@ -15,7 +15,7 @@ import { client } from "@/app/lib/sanity";
 
 async function fetchData(category) {
   const query = `*[_type == "product" && category->name == "${category}"] | order(_createdAt desc){
-      _id, image, location, price, name, details, sumary, objective, methodology, pdfFile,
+      _id, image, location, price, name,available, details, sumary, objective, methodology, pdfFile,
         "slug": slug.current,
         "imageUrl": image[0].asset->url,
         "categoryName": category->name,      
@@ -26,7 +26,7 @@ async function fetchData(category) {
   return data;
 }
 
-export default function categoryPage({ params }) {
+export default function categoryPage({ params }) {x
   const [cat, setCat] = useState(null);
 
   useEffect(() => {
