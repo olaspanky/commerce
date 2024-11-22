@@ -26,7 +26,7 @@ async function fetchData(category) {
   return data;
 }
 
-export default function categoryPage({ params }) {x
+export default function categoryPage({ params }) {
   const [cat, setCat] = useState(null);
 
   useEffect(() => {
