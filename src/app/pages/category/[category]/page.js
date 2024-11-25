@@ -1,92 +1,198 @@
+// "use client";
+// import React from "react";
+// import Image from "next/image";
+// import Nav from "../../../components/Navbar";
+// import catti from "../../../../../public/assets/catti1.png";
+// import Card from "../../../components/Cards";
+// import { useState, useEffect } from "react";
+// import Link from 'next/link';
+// import arrow from "../../../../../public/assets/vec.svg";
+// import catbg from "../../../../../public/assets/catbg.jpg";
+
+
+
+// import { client } from "@/app/lib/sanity";
+
+// async function fetchData(category) {
+//   const query = `*[_type == "product" && category->name == "${category}"] | order(_createdAt desc){
+//       _id, image, location, price, name,available, details, sumary, objective, methodology, pdfFile,
+//         "slug": slug.current,
+//         "imageUrl": image[0].asset->url,
+//         "categoryName": category->name,      
+//         "categoryDescription": category->description,
+//         "categoryImage": category->image[0].asset->url    
+//     }`;
+//   const data = await client.fetch(query);
+//   return data;
+// }
+
+// export default function categoryPage({ params }) {
+//   const [cat, setCat] = useState(null);
+
+//   useEffect(() => {
+//     async function getData() {
+//       try {
+//         const data = await fetchData(params.category);
+//         setCat(data);
+//       } catch (error) {
+//         console.error("Error fetching data:", error);
+//       }
+//     }
+//     getData();
+//   }, [params.slug]);
+
+//   const data = cat;
+//   const cardData = data;
+//   //console.log("Carddata category is,:", cardData);
+
+//   return (
+//     <div className="bg-white h-full">
+//       <Nav />
+//       <div className="flex gap-2 lg:gap-10 my-5 p-2 xl:px-20 2xl:px-36 cursor-pointer">
+//           <Link href="/">
+//           <p className="text-sm ">         Range of Categories
+// </p> 
+//           </Link>
+//           <Image src={arrow} alt=""/>
+//           <p className="text-sm font-bold capitalize"> {cardData && cardData.length > 0 && cardData[0].categoryName}</p>
+
+//         </div>
+//       <div className="lg:px-20 2xl:px-36 my-20 flex flex-col gap-5 lg:gap-20">
+//       <div className="flex flex-col gap-5 lg:gap-9 lg:flex-row ">
+//         <div className="lg:w-1/2 ">
+//         {cardData && cardData.length > 0 &&
+//         //  <div className=" bg-catbg z-20">
+//         //  <img src={cardData[0].categoryImage} alt="" className="w-full z-5" />
+//         //  </div>
+//         <div class="relative mb-2 h-[50vh]">
+//     <img class="cursor-pointer absolute  hover:shadow-outline" src={cardData[0].categoryImage} width="600" />
+
+
+//   <Image class="absolute  opacity-20" src={catbg} alt="Workplace" width="600" />
+
+
+// </div>
+//                   }
+
+//         </div>
+//         <div className="lg:w-1/2 flex flex-col gap-3 text-black">
+          
+//           <p className="text-[#666666] text-md">
+//           {cardData && cardData.length > 0 && cardData[0].categoryDescription}
+//           </p>
+
+//           <p className="my-3 text-xs text-gray-300 ">15 Apr 2024</p>
+//         </div>
+//       </div>
+//       <div className="mt-2">
+//         <Card data={cardData} />
+//       </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
 "use client";
-import React from "react";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Nav from "../../../components/Navbar";
-import catti from "../../../../../public/assets/catti1.png";
 import Card from "../../../components/Cards";
-import { useState, useEffect } from "react";
-import Link from 'next/link';
 import arrow from "../../../../../public/assets/vec.svg";
 import catbg from "../../../../../public/assets/catbg.jpg";
-
-
-
 import { client } from "@/app/lib/sanity";
 
+// Function to fetch data
 async function fetchData(category) {
-  const query = `*[_type == "product" && category->name == "${category}"] | order(_createdAt desc){
-      _id, image, location, price, name,available, details, sumary, objective, methodology, pdfFile,
-        "slug": slug.current,
-        "imageUrl": image[0].asset->url,
-        "categoryName": category->name,      
-        "categoryDescription": category->description,
-        "categoryImage": category->image[0].asset->url    
-    }`;
+  const query = `*[_type == "product" && "${category}" in categories[]->name] | order(_createdAt desc){
+    _id, 
+    image, 
+    location, 
+    price, 
+    name, 
+    available, 
+    details, 
+    summary, 
+    objective, 
+    methodology, 
+    pdfFile,
+    "slug": slug.current,
+    "imageUrl": image[0].asset->url,
+    "categoryInfo": *[_type == "category" && name == "${category}"][0]{
+        name,
+        description,
+        "imageUrl": image[0].asset->url // Access the first image from the array
+    }
+  }`;
+
   const data = await client.fetch(query);
   return data;
 }
 
-export default function categoryPage({ params }) {
-  const [cat, setCat] = useState(null);
+export default function CategoryPage({ params }) {
+  const [products, setProducts] = useState(null);
+  const [categoryDetails, setCategoryDetails] = useState(null);
 
   useEffect(() => {
-    async function getData() {
+    async function loadData() {
       try {
         const data = await fetchData(params.category);
-        setCat(data);
+        setProducts(data);
+
+        // Extract category details from the first product (they all share the same category)
+        if (data.length > 0) {
+          setCategoryDetails(data[0].categoryInfo);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
-    getData();
-  }, [params.slug]);
 
-  const data = cat;
-  const cardData = data;
-  //console.log("Carddata category is,:", cardData);
+    loadData();
+  }, [params.category]);
+
+  const categoryImage = categoryDetails?.imageUrl;
 
   return (
     <div className="bg-white h-full">
       <Nav />
       <div className="flex gap-2 lg:gap-10 my-5 p-2 xl:px-20 2xl:px-36 cursor-pointer">
-          <Link href="/">
-          <p className="text-sm ">         Range of Categories
-</p> 
-          </Link>
-          <Image src={arrow} alt=""/>
-          <p className="text-sm font-bold capitalize"> {cardData && cardData.length > 0 && cardData[0].categoryName}</p>
-
-        </div>
+        <Link href="/">
+          <p className="text-sm">Range of Categories</p>
+        </Link>
+        <Image src={arrow} alt="Arrow" />
+        <p className="text-sm font-bold capitalize">{params.category}</p>
+      </div>
       <div className="lg:px-20 2xl:px-36 my-20 flex flex-col gap-5 lg:gap-20">
-      <div className="flex flex-col gap-5 lg:gap-9 lg:flex-row ">
-        <div className="lg:w-1/2 ">
-        {cardData && cardData.length > 0 &&
-        //  <div className=" bg-catbg z-20">
-        //  <img src={cardData[0].categoryImage} alt="" className="w-full z-5" />
-        //  </div>
-        <div class="relative mb-2 h-[50vh]">
-    <img class="cursor-pointer absolute  hover:shadow-outline" src={cardData[0].categoryImage} width="600" />
-
-
-  <Image class="absolute  opacity-20" src={catbg} alt="Workplace" width="600" />
-
-
-</div>
-                  }
-
+        <div className="flex flex-col gap-5 lg:gap-9 lg:flex-row">
+          <div className="lg:w-1/2">
+            {categoryImage && (
+              <div className="relative mb-2 h-[50vh]">
+                <img
+                  className="cursor-pointer absolute hover:shadow-outline"
+                  src={categoryImage}
+                  alt="Category"
+                  width="600"
+                />
+                <Image
+                  className="absolute opacity-20"
+                  src={catbg}
+                  alt="Background"
+                  width="600"
+                />
+              </div>
+            )}
+          </div>
+          <div className="lg:w-1/2 flex flex-col gap-3 text-black">
+            <p className="text-[#666666] text-md">{categoryDetails?.description}</p>
+            <p className="my-3 text-xs text-gray-300">15 Apr 2024</p>
+          </div>
         </div>
-        <div className="lg:w-1/2 flex flex-col gap-3 text-black">
-          
-          <p className="text-[#666666] text-md">
-          {cardData && cardData.length > 0 && cardData[0].categoryDescription}
-          </p>
-
-          <p className="my-3 text-xs text-gray-300 ">15 Apr 2024</p>
+        <div className="mt-2">
+          <Card data={products} />
         </div>
-      </div>
-      <div className="mt-2">
-        <Card data={cardData} />
-      </div>
       </div>
     </div>
   );

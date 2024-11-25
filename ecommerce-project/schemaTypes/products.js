@@ -83,13 +83,15 @@ export default {
           accept: '.pdf', // Specify the file format
       },
       {
-        name: "category",
-        title: "Product category",
-        type: "reference",
-        to: [{
-          type: "category"
-        }]
-
-      }
+        name: "categories",
+        title: "Product Categories",
+        type: "array", // Change type to array
+        of: [
+            {
+                type: "reference",
+                to: [{ type: "category" }]
+            }
+        ]
+    }
   ]
 }
