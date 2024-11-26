@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import Nav from "../../components/Nav3"
+import Nav from "../../components/Navbar"
 import Form from "../../components/Contactform"
 import data from "../../components/data"
 import lady from "../../../../public/assets/maint.png"
