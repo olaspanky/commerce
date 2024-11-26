@@ -103,6 +103,8 @@ import Card from "../../../components/Cards";
 import arrow from "../../../../../public/assets/vec.svg";
 import catbg from "../../../../../public/assets/catbg.jpg";
 import { client } from "@/app/lib/sanity";
+import MobileNavbar from "@/app/components/MobileNav";
+import Footer from "@/app/components/Footer";
 
 // Function to fetch data
 async function fetchData(category) {
@@ -157,15 +159,18 @@ export default function CategoryPage({ params }) {
 
   return (
     <div className="bg-white h-full">
-      <Nav />
-      <div className="flex gap-2 lg:gap-10 my-5 p-2 xl:px-20 2xl:px-36 cursor-pointer">
+<div className="hidden md:flex jus w-full"> {/* Desktop Menu */}
+<Nav/>        </div>
+          <div className="md:hidden">
+<MobileNavbar/>
+      </div>        <div className="flex gap-2  lg:gap-10 my-5 xl:px-20 2xl:px-36 cursor-pointer">
         <Link href="/">
           <p className="text-sm">Range of Categories</p>
         </Link>
         <Image src={arrow} alt="Arrow" />
         <p className="text-sm font-bold capitalize">{params.category}</p>
       </div>
-      <div className="lg:px-20 2xl:px-36 my-20 flex flex-col gap-5 lg:gap-20">
+      <div className="lg:px-20 2xl:px-36 my-20 p-2 flex flex-col gap-5 lg:gap-20">
         <div className="flex flex-col gap-5 lg:gap-9 lg:flex-row">
           <div className="lg:w-1/2">
             {categoryImage && (
@@ -194,6 +199,8 @@ export default function CategoryPage({ params }) {
           <Card data={products} />
         </div>
       </div>
+
+      <Footer/>
     </div>
   );
 }

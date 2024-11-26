@@ -12,9 +12,9 @@ import { SocialIcon } from "react-social-icons";
 import BoxGrid from '@/app/components/blogCard';
 import { useParams } from "next/navigation";
 import { client } from "@/app/lib/sanity";
+import MobileNavbar from '@/app/components/MobileNav';
 
-
-
+import Footer from '@/app/components/Footer';
 
 
 
@@ -26,7 +26,12 @@ const card = data.find((item) => item.id === parseInt(params.productid));
 
   return (
     <div className='w-[100vw] bg-white'>
-      <Nav/>
+ <div className="hidden md:flex justify-between w-full"> {/* Desktop Menu */}
+<Nav/>        </div>
+          <div className="md:hidden">
+<MobileNavbar/>
+      </div>
+     
       <div className='p-2 lg:p-20 '>
       <h1 className="text-3xl text-center my-5 font-bold ">
         Chart Your Course to Success -{" "}
@@ -38,6 +43,7 @@ const card = data.find((item) => item.id === parseInt(params.productid));
         <BoxGrid />
       </div>
       </div>
+      <Footer/>
     </div>
   );
 };

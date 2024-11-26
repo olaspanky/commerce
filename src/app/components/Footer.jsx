@@ -8,11 +8,11 @@ import Link from "next/link";
 
 const footer = () => {
   return (
-    <div className="bg-footer" style={{ position: "relative" }}>
+    <div className="bg-footer" >
 
    
 
-          <div className="  text-[white]] lg:px-7 px-1 py-8" style={{ position: "relative", zIndex: 1 }}>
+          <div className="  text-[white]] lg:px-7 px-1 py-8" >
      
 
 

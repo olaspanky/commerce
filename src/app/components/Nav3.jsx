@@ -782,7 +782,7 @@ export default function Header() {
   " hover:text-blue-500"
 
   return (
-    <div className=" flex justify-between px-5 xl:px-20 2xl:px-36 gap-10 items-center ">
+    <div className="w-full flex justify-between px-5 xl:px-20 2xl:px-36 gap-10 items-center ">
       <div className="lg:p-5 p-2 rounded-br-[25%] rounded-bl-[25%] bg-[#]">
      <Link href="/" >
         <Image src={Logo} className="w-5 lg:w-20" alt="logo" />

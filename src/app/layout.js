@@ -10,7 +10,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import Head from "next/head";
 import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 import GoogleAnalytics from "./components/GoogleAnalytics";
-
+import Footer from "./components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
   weight: '400',
@@ -32,8 +32,9 @@ export default function RootLayout({ children }) {
           <GoogleAnalytics />
 
           
-            
+            <div className="w-full h-auto">
             {children}
+              </div>           
             <TawkMessengerReact
                 propertyId="66c47c33ea492f34bc08163c"
                 widgetId="1i5noaafu"/>
@@ -41,6 +42,8 @@ export default function RootLayout({ children }) {
           </CartProviders>
           </ChakraProvider>
           </MantineProvider>
+
+
       </body>
     </html>
   );

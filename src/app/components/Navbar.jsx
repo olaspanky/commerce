@@ -36,7 +36,7 @@ export default function Header() {
   const closeMenuAfterInactivity = useCallback(() => {
     inactivityTimeout = setTimeout(() => {
       setIsMenuOpen(false);
-    }, 4000); // 4 seconds
+    }, 1500); // 4 seconds
   }, []);
 
   // Reset inactivity timer whenever there is interaction
@@ -62,7 +62,7 @@ export default function Header() {
   }, [isMenuOpen, closeMenuAfterInactivity]);
 
   return (
-    <div className="bg-white flex justify-between px-5 xl:px-20 2xl:px-36 gap-10 items-center">
+    <div className="bg-white w-full flex justify-between px-5 xl:px-20 2xl:px-36 gap-10 items-center">
       <div className="lg:p-5 p-2 rounded-br-[25%] rounded-bl-[25%] bg-[#1567E0]">
         <Link href="/">
           <Image src={Logo} className="w-5 lg:w-20" alt="logo" />

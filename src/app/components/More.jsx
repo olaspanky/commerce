@@ -96,7 +96,7 @@ const ProductDetail = ({ params }) => {
     <script id='pixel-script-poptin' src='https://cdn.popt.in/pixel.js?id=b6981d0c90768' async='true'></script> 
     </Head>
 
-    <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-12 gap-10 my-20 px-10 h-[70vh]">
+    <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-12 gap-10 p-2 lg:my-20 lg:px-10 h-[70vh]">
       <div className='lg:col-span-3 lg:px-10 2xl:px-20'>
         <div className="w-full">
           <div className="flex rounded-md shadow-md flex-col gap-3 w-full">
