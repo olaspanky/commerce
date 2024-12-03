@@ -78,7 +78,7 @@ export default function DownloadReportForm() {
             const data2 = await response2.json();
     
             // Handle responses from both APIs
-            if (response1.ok && response2.ok) {
+            if (response1.ok || response2.ok) {
                 setModalMessage(data1.message);
             } else if (!response1.ok) {
                 setModalMessage(`Error in /api/services: ${data1.message}`);
