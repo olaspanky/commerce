@@ -100,11 +100,20 @@ const ProductDetail = ({ params }) => {
       <div className='lg:col-span-3 lg:px-10 2xl:px-20'>
         <div className="w-full">
           <div className="flex rounded-md shadow-md flex-col gap-3 w-full">
-            <div className="">
-            {card?.imageUrl && (
-                    <img alt="alt" src={card?.imageUrl}  className="w-full h-full" />
+          <div className="relative w-full h-full flex items-center justify-center">
+  {card?.imageUrl ? (
+    <div className="pulsating-card">
+      <img
+        alt={card?.name || "Product Image"}
+        src={card?.imageUrl}
+        className="w-full h-full rounded-md"
+      />
+    </div>
+  ) : (
+    <div className="placeholder-card w-full h-[300px] bg-gray-200 rounded-md animate-pulse" />
+  )}
+</div>
 
-                  )}                           </div>
             <div className='px-5 text-xs'>
               <p>{card?.location}</p>
             </div>
@@ -270,4 +279,36 @@ const ProductDetail = ({ params }) => {
   );
 };
 
+<style jsx global>{`
+  @keyframes pulseEffect {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 10px rgba(21, 103, 224, 0.5);
+    }
+    50% {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(21, 103, 224, 0.8);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 10px rgba(21, 103, 224, 0.5);
+    }
+  }
+
+  .pulsating-card {
+    animation: pulseEffect 2s ease-in-out infinite;
+    border-radius: 10px;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .placeholder-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`}</style>
+
+
 export default ProductDetail;
+
