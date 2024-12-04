@@ -3,17 +3,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
-export default function Dropdown({ item, active, onOpen, onInteract }) {
+export default function Dropdown({ item, active, onToggle, onMouseEnter, onMouseLeave }) {
   const menuItems = item?.children || [];
   const path = usePathname();
 
   return (
     <div
       className="relative"
-      onMouseEnter={onInteract} // Clear close timeout
-      onMouseLeave={onOpen}    // Start close timeout
+      onMouseEnter={onMouseEnter} // Keep the dropdown open
+      onMouseLeave={onMouseLeave} // Allow closing after mouse leaves
     >
-      <button className="hover:text-blue-400">{item.title}</button>
+      <button
+        className="hover:text-blue-400"
+        onClick={onToggle} // Toggle dropdown on click
+      >
+        {item.title}
+      </button>
       {active && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -26,9 +31,9 @@ export default function Dropdown({ item, active, onOpen, onInteract }) {
               key={child.route}
               className={`${
                 child.route === path ? "text-blue-700" : "text-black"
-              }`}
+              } hover:text-blue-500`}
               href={child?.route || ""}
-              onClick={onOpen} // Close dropdown on selection
+              onClick={onToggle} // Close dropdown when a link is clicked
             >
               <motion.div whileHover={{ scale: 1.1 }}>{child.title}</motion.div>
             </Link>

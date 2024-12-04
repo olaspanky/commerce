@@ -46,9 +46,9 @@ const MobileNavbar = () => {
   }, [lastScrollY]);
 
   return (
-    <div className={`relative z-50 transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}>
+    <div className={`relative z-50 transition-transform duration-300`}>
       {/* Header */}
-      <div className="flex justify-between items-center px-5 py-2 bg-[#1567E0] sticky top-0 z-50">
+      <div className="flex justify-between items-center px-5 py-1 bg-[#1567E0] sticky top-0 z-50">
         <Link href="/">
           <Image src={Logo} className="w-10" alt="Logo" />
         </Link>

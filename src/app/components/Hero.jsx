@@ -1,7 +1,7 @@
 import React, { forwardRef, useState, useEffect } from 'react';
 import Card from "./Cards";
-import Carousel from "./Carousel";
 import { client } from "../lib/sanity";
+import Carousel from "../components/Carousel"
 
 async function fetchData() {
   const query = `*[_type == 'product'] | order(_createdAt desc){
@@ -43,11 +43,9 @@ const Hero = forwardRef((props, ref) => {
       <div className="flex md:hidden bg-gray-100">
         <h1 className='text-xs lg:text-md xl:text-xl font-light font-work text-black p-2 '>The reports are focused on insights from patients, healthcare practitioners,<br className="hidden lg:flex"/> healthcare ecosystems and channels within emerging markets</h1>
       </div>
-      {showCarousel && (
-        <div className="">
-          <Carousel />
+        <div className="flex w-[100vw] h-20">
+          <Carousel /> 
         </div>
-      )}      
       <h1 className="text-3xl text-center my-5 font-bold ">
         Chart Your Course to Success -{" "}
         <span className="text-[#1567E0]">Order Your Report Today</span>
