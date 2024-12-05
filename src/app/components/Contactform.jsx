@@ -1,137 +1,238 @@
 "use client"
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import Select from 'react-select';
+import React, { useState } from 'react';
 
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required('First Name is required'),
-  lastName: Yup.string().required('Last Name is required'),
-  email: Yup.string().email('Invalid email').required('Email is required'),
-  phone: Yup.string().required('Phone is required'),
-  organization: Yup.string().required('Organization is required'),
-  position: Yup.string().required('Position is required'),
-  country: Yup.object().shape({
-    label: Yup.string().required('Country is required'),
-    value: Yup.string().required('Country is required'),
-  }),
-  product: Yup.string().required('Product is required'),
-  message: Yup.string().required('Message is required'),
-});
+export default function ZohoCRMLeadForm() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    company: '',
+    email: '',
+    mobile: '',
+    country: ''
+  });
 
-const countries = [
-  { label: 'United States', value: 'us' },
-  { label: 'United Kingdom', value: 'uk' },
-  // Add more countries as needed
-];
+  const [errors, setErrors] = useState({});
+  const [submissionStatus, setSubmissionStatus] = useState({
+    loading: false,
+    success: false,
+    error: null
+  });
 
-const products = [
-  { label: 'Product 1', value: 'product1' },
-  { label: 'Product 2', value: 'product2' },
-  // Add more products as needed
-];
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
-const BeautifulForm = () => {
-  const handleSubmit = (values) => {
-    // Handle form submission logic
-    //console.log(values);
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last Name is required';
+    }
+
+    if (!formData.company.trim()) {
+      newErrors.company = 'Company is required';
+    }
+
+    if (formData.email && !validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Reset previous submission status
+    setSubmissionStatus({ loading: true, success: false, error: null });
+
+    // Validate form
+    if (!validateForm()) {
+      setSubmissionStatus({ loading: false, success: false, error: null });
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/zoho', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Reset form on successful submission
+        setFormData({
+          firstName: '',
+          lastName: '',
+          company: '',
+          email: '',
+          mobile: '',
+          country: ''
+        });
+        setSubmissionStatus({ loading: false, success: true, error: null });
+      } else {
+        setSubmissionStatus({ 
+          loading: false, 
+          success: false, 
+          error: result.message || 'Submission failed' 
+        });
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmissionStatus({ 
+        loading: false, 
+        success: false, 
+        error: 'Network error. Please try again.' 
+      });
+    }
   };
 
   return (
-    <Formik
-      initialValues={{
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        organization: '',
-        position: '',
-        country: null,
-        product: '',
-        message: '',
-      }}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form>
-        <div className='w-full flex flex-col 2xl:gap-12 gap-9 bg-white border border-gray-200 rounded-md p-9 lg:p-9 2xl:p-10 shadow-md justify-center'>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-        <div className='flex flex-col'>
-          <Field type="text" id="firstName" placeholder="First Name" name="firstName" className="input border border-gray-200 p-2 rounded-md" />
-          <ErrorMessage name="firstName" component="div" className="error" />
-        </div>
+    <div className=" bg-white ">
 
-        <div className='flex flex-col'>
-          <Field type="text" id="lastName" placeholder="Last Name" name="lastName" className="input border border-gray-200 p-2 rounded-md" />
-          <ErrorMessage name="lastName" component="div" className="error" />
-        </div>
-        </div>
+    {submissionStatus.success && (
+      <div
+        className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
+        role="alert"
+      >
+                  Thank you for submitting the form! We shall be in touch with you.
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+      </div>
+    )}
 
-        <div className='flex flex-col'>
-          <Field type="email" id="email" name="email" placeholder="Email" className="input border  border-gray-200 p-2 rounded-md" />
-          <ErrorMessage name="email" component="div" className="error" />
-        </div>
+    {submissionStatus.error && (
+      <div
+        className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+        role="alert"
+      >
+        {submissionStatus.error}
+      </div>
+    )}
 
-        <div className='flex flex-col'>
-          <Field type="text" id="phone" name="phone"placeholder="Phone" className="input border border-gray-200 p-2 rounded-md" />
-          <ErrorMessage name="phone" component="div" className="error" />
-        </div>
-        </div>
+    <form onSubmit={handleSubmit} className="space-y-4">
 
-    
-
-        <div className="col-span-2">
-          <label htmlFor="country"></label>
-          <Select
-            id="country"
-            name="country"
-            placeholder="Choose Country"
-            options={countries}
-            className="react-select border border-gray-200 p-2 rounded-md"
-            classNamePrefix="react-select"
-            isSearchable
-            onChange={(value) => {
-              // Manually set the value for Formik
-              setFieldValue('country', value);
-            }}
+      <div className="flex w-full lg:gap-2 flex-col justify-between lg:flex-row">
+      <div className="w-full">
+        <label htmlFor="firstName" className="block text-sm font-medium">
+          First Name
+        </label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+          className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
           />
-          <ErrorMessage name="country" component="div" className="error" />
-        </div>
+        {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
+      </div>
 
-        <div className="col-span-2">
-          <label htmlFor="product"></label>
-          <Select
-            id="product"
-            name="product"
-            options={products}
-            placeholder="Product and Solution"
-            className="react-select border border-gray-200 p-2 rounded-md"
-            classNamePrefix="react-select"
-            isSearchable
-            onChange={(value) => {
-              // Manually set the value for Formik
-              setFieldValue('product', value);
-            }}
+      <div className="w-full">
+        <label htmlFor="lastName" className="block text-sm font-medium">
+          Last Name
+        </label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+          className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
           />
-          <ErrorMessage name="product" component="div" className="error" />
-        </div>
+        {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
+      </div>
+      </div>
+      <div>
+        <label htmlFor="company" className="block text-sm font-medium">
+          Company
+        </label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          value={formData.company}
+          onChange={handleChange}
+          className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
+          />
+        {errors.company && <p className="text-red-500 text-sm">{errors.company}</p>}
+      </div>
 
-        <div className="col-span-3 flex flex-col">
-          <Field as="textarea" id="message" placeholder="Message" name="message" rows="4" className="input border border-gray-200 p-2 rounded-md" />
-          <ErrorMessage name="message" component="div" className="error" />
-        </div>
+      <div className="flex w-full lg:gap-2 flex-col justify-between lg:flex-row">
+      <div className="w-full">
+        <label htmlFor="email" className="block text-sm font-medium">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
+        />
+        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+      </div>
 
-        <div className="col-span-3">
-          <button type="submit" className="btn w-full bg-[#1920D1] p-3 rounded-md  text-white">
-            Submit
-          </button>
-        </div>
+      <div className="w-full">
+        <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">
+          Mobile
+        </label>
+        <input
+          type="tel"
+          id="mobile"
+          name="mobile"
+          value={formData.mobile}
+          onChange={handleChange}
+          maxLength={30}
+          className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
+        />
+      </div>
+</div>
+      <div>
+        <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+          Country
+        </label>
+        <input
+          type="text"
+          id="country"
+          name="country"
+          value={formData.country}
+          onChange={handleChange}
+          maxLength={100}
+          className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
+        />
+      </div>
 
-        </div>
-      </Form>
-    </Formik>
+
+      <div className="flex space-x-4">
+        <button
+          type="submit"
+          disabled={submissionStatus.loading}
+          className={`w-full py-2 px-4 rounded-md ${
+            submissionStatus.loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
+        >
+          {submissionStatus.loading ? "Submitting..." : "Submit"}
+        </button>
+      
+      </div>
+    </form>
+  </div>
   );
-};
-
-export default BeautifulForm;
+}
