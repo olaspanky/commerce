@@ -14,9 +14,10 @@ export async function POST(request) {
       'Email': formData.email || '',
       'Mobile': formData.mobile || '',
       'Country': formData.country || '',
-      // Hidden fields from the original form
-      'xnQsjsdp': '624567297a13bd735a0f8c0a92a285db4376ae3d8c159077a6888c181a867b2f',
+      'xnQsjsdp': '90470b8c6f786278b937e49e44c6ab678bb8451619e5f0af531d358550e4f037',
+      'xmIwtLD': 'c91bd066d11707ea6dea46e9fb3f50284ec55911e24eed3d0e656ff7e11bfc049ab1ea5e2a8c497a795964a8b4f1dcf3',
       'actionType': 'TGVhZHM=',
+      'returnURL': 'null',
     });
 
     // Submit to Zoho CRM

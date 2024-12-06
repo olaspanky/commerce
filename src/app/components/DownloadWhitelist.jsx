@@ -271,7 +271,6 @@
 //     </div>
 //   );
 // }
-
 import React, { useState } from "react";
 
 export default function ZohoCRMLeadForm() {
@@ -308,40 +307,94 @@ export default function ZohoCRMLeadForm() {
     const newErrors = {};
 
     if (!formData.lastName.trim()) {
-      newErrors.lastName = "Last Name is required";
+      newErrors.lastName = "Last Name is required.";
     }
 
     if (!formData.company.trim()) {
-      newErrors.company = "Company is required";
+      newErrors.company = "Company is required.";
     }
 
     if (formData.email && !validateEmail(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
+      newErrors.email = "Please enter a valid email address.";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setSubmissionStatus({ loading: true, success: false, error: null });
+
+  //   if (!validateForm()) {
+  //     setSubmissionStatus({ loading: false, success: false, error: null });
+  //     return;
+  //   }
+
+  //   try {
+  //     const data = {
+  //       name: `${formData.firstName} ${formData.lastName}`,
+  //       email: formData.email,
+  //       message: `Company: ${formData.company}, Mobile: ${formData.mobile}, Country: ${formData.country}`,
+  //     };
+
+      // const [zohoResponse, servicesResponse] = await Promise.all([
+      //   fetch("/api/zoho", {
+      //     method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify(data),
+      //   }),
+      //   fetch("/api/services", {
+      //     method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify(data),
+      //   }),
+      // ]);
+
+  //     if (zohoResponse.ok && servicesResponse.ok) {
+  //       setFormData({
+  //         firstName: "",
+  //         lastName: "",
+  //         company: "",
+  //         email: "",
+  //         mobile: "",
+  //         country: "",
+  //       });
+  //       setSubmissionStatus({ loading: false, success: true, error: null });
+  //     } else {
+  //       const errorData = await zohoResponse.json();
+  //       setSubmissionStatus({
+  //         loading: false,
+  //         success: false,
+  //         error: errorData.message || "Submission failed for one or more services.",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     setSubmissionStatus({
+  //       loading: false,
+  //       success: false,
+  //       error: "A network error occurred. Please try again.",
+  //     });
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     setSubmissionStatus({ loading: true, success: false, error: null });
-
+  
     if (!validateForm()) {
       setSubmissionStatus({ loading: false, success: false, error: null });
       return;
     }
-
+  
     try {
-      // Prepare the data to be sent
       const data = {
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
         message: `Company: ${formData.company}, Mobile: ${formData.mobile}, Country: ${formData.country}`,
       };
-
-      // Send requests to both APIs
+  
       const [zohoResponse, servicesResponse] = await Promise.all([
         fetch("/api/zoho", {
           method: "POST",
@@ -355,10 +408,9 @@ export default function ZohoCRMLeadForm() {
         }),
       ]);
 
-      // Process the responses
-      const zohoResult = await zohoResponse.json();
-      const servicesResult = await servicesResponse.json();
-
+  
+      const zohoResult = await zohoResponse.json(); // Parse the response
+  
       if (zohoResponse.ok && servicesResponse.ok) {
         setFormData({
           firstName: "",
@@ -368,11 +420,20 @@ export default function ZohoCRMLeadForm() {
           mobile: "",
           country: "",
         });
-        setSubmissionStatus({ loading: false, success: true, error: null });
+  
+        // Use the backend message in the success state
+        setSubmissionStatus({
+          loading: false,
+          success: true,
+          error: null,
+          message: zohoResult.message, // This comes from the backend
+        });
       } else {
-        const errorMessage =
-          zohoResult.message || servicesResult.message || "Failed to submit to one or more endpoints.";
-        setSubmissionStatus({ loading: false, success: false, error: errorMessage });
+        setSubmissionStatus({
+          loading: false,
+          success: false,
+          error: zohoResult.message || "Failed to submit lead.",
+        });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -383,61 +444,58 @@ export default function ZohoCRMLeadForm() {
       });
     }
   };
+  
 
   return (
-    <div className=" bg-white ">
-
-      {submissionStatus.success && (
-        <div
-          className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
-          role="alert"
-        >
-          Thank you for submitting the form! The report has been sent to your email.
-        </div>
-      )}
+    <div className="bg-white">
+     {submissionStatus.success && (
+  <div
+    className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
+    role="alert"
+  >
+    {submissionStatus.message || "Your form was submitted successfully!"}
+  </div>
+)}
 
       {submissionStatus.error && (
-        <div
-          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
-          role="alert"
-        >
-          {submissionStatus.error}
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+          <strong>Error:</strong> {submissionStatus.error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-
-        <div className="flex w-full lg:gap-2 flex-col justify-between lg:flex-row">
-        <div className="w-full">
-          <label htmlFor="firstName" className="block text-sm font-medium">
-            First Name
-          </label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
+        {/* First Name & Last Name */}
+        <div className="flex w-full lg:gap-2 flex-col lg:flex-row">
+          <div className="w-full">
+            <label htmlFor="firstName" className="block text-sm font-medium">
+              First Name
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
             />
-          {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
+          </div>
+          <div className="w-full">
+            <label htmlFor="lastName" className="block text-sm font-medium">
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
+            />
+            {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
+          </div>
         </div>
 
-        <div className="w-full">
-          <label htmlFor="lastName" className="block text-sm font-medium">
-            Last Name
-          </label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
-            />
-          {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
-        </div>
-        </div>
+        {/* Company */}
         <div>
           <label htmlFor="company" className="block text-sm font-medium">
             Company
@@ -449,43 +507,44 @@ export default function ZohoCRMLeadForm() {
             value={formData.company}
             onChange={handleChange}
             className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
-            />
+          />
           {errors.company && <p className="text-red-500 text-sm">{errors.company}</p>}
         </div>
 
-        <div className="flex w-full lg:gap-2 flex-col justify-between lg:flex-row">
-        <div className="w-full">
-          <label htmlFor="email" className="block text-sm font-medium">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
-          />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+        {/* Email & Mobile */}
+        <div className="flex w-full lg:gap-2 flex-col lg:flex-row">
+          <div className="w-full">
+            <label htmlFor="email" className="block text-sm font-medium">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
+            />
+            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+          </div>
+          <div className="w-full">
+            <label htmlFor="mobile" className="block text-sm font-medium">
+              Mobile
+            </label>
+            <input
+              type="tel"
+              id="mobile"
+              name="mobile"
+              value={formData.mobile}
+              onChange={handleChange}
+              className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
+            />
+          </div>
         </div>
 
-        <div className="w-full">
-          <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">
-            Mobile
-          </label>
-          <input
-            type="tel"
-            id="mobile"
-            name="mobile"
-            value={formData.mobile}
-            onChange={handleChange}
-            maxLength={30}
-            className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
-          />
-        </div>
-</div>
+        {/* Country */}
         <div>
-          <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="country" className="block text-sm font-medium">
             Country
           </label>
           <input
@@ -494,25 +553,21 @@ export default function ZohoCRMLeadForm() {
             name="country"
             value={formData.country}
             onChange={handleChange}
-            maxLength={100}
             className="text-black border w-full border-gray-200 p-2 rounded-md my-2"
           />
         </div>
 
-
+        {/* Submit Button */}
         <div className="flex space-x-4">
           <button
             type="submit"
             disabled={submissionStatus.loading}
             className={`w-full py-2 px-4 rounded-md ${
-              submissionStatus.loading
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-500 text-white hover:bg-blue-600"
+              submissionStatus.loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 text-white hover:bg-blue-600"
             }`}
           >
             {submissionStatus.loading ? "Submitting..." : "Submit"}
           </button>
-         
         </div>
       </form>
     </div>
