@@ -1,47 +1,77 @@
-// pages/api/submit-lead.js
-import axios from 'axios';
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    try {
-      // Zoho CRM form submission details
-      const ZOHO_WEBFORM_URL = 'https://crm.zoho.com/crm/WebToLeadForm';
-      
-      // Prepare form data for Zoho
-      const zohoFormData = new URLSearchParams({
-        'xnQsjsdp': '90470b8c6f786278b937e49e44c6ab678bb8451619e5f0af531d358550e4f037',
-        'xmIwtLD': 'c91bd066d11707ea6dea46e9fb3f50284ec55911e24eed3d0e656ff7e11bfc049ab1ea5e2a8c497a795964a8b4f1dcf3',
-        'actionType': 'TGVhZHM=',
-        'returnURL': 'null',
-        'First Name': req.body.firstName || '',
-        'Last Name': req.body.lastName,
-        'Company': req.body.company,
-        'Email': req.body.email || '',
-        'Mobile': req.body.mobile || '',
-        'Country': req.body.country || ''
-      });
+  import { NextResponse } from 'next/server';
 
-      // Submit to Zoho
-      const zohoResponse = await axios.post(ZOHO_WEBFORM_URL, zohoFormData, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      });
+export async function POST(request) {
+  const ZOHO_XNQJSDP = '3ba891c21384f21089d08ebc8b1f0d4ec19c3076a208c12ca07151e7d97b4787';
+  const ZOHO_XMWITLD = '7f1129157f6549ce3c1246cd3f09aed3819315941fe000142af10c6a1f5551dc14c1436af51766c9cbbb51a16ca7e551';
 
-      // Respond to client
-      res.status(200).json({ 
-        message: 'Lead submitted successfully', 
-        zohoResponse: zohoResponse.data 
-      });
-    } catch (error) {
-      console.error('Zoho submission error:', error);
-      res.status(500).json({ 
-        message: 'Error submitting lead', 
-        error: error.message 
-      });
+
+  if (!ZOHO_XNQJSDP || !ZOHO_XMWITLD) {
+    console.error('Zoho credentials are missing');
+    return NextResponse.json({ 
+      success: false, 
+      message: 'Internal server error - Missing credentials' 
+    }, { status: 500 });
+  }
+
+  try {
+    const body = await request.json();
+
+    // Validation
+    const errors = [];
+    if (!body.lastName) {
+      errors.push('Last Name is required');
     }
-  } else {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+
+    if (body.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(body.email)) {
+        errors.push('Invalid email address');
+      }
+    }
+
+    if (errors.length > 0) {
+      return NextResponse.json({ 
+        success: false, 
+        errors 
+      }, { status: 400 });
+    }
+
+    // Send data to Zoho CRM Web-to-Lead endpoint
+    const zohoResponse = await fetch('https://crm.zoho.com/crm/WebToContactForm', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        'First Name': body.firstName || '',
+        'Last Name': body.lastName,
+        'Email': body.email || '',
+        'Mobile': body.mobile || '',
+        'Mailing Country': body.mailingCountry || '',
+        'xnQsjsdp': ZOHO_XNQJSDP,
+        'xmIwtLD': ZOHO_XMWITLD,
+        'actionType': 'Q29udGFjdHM=',
+      }).toString(),
+    });
+
+    if (!zohoResponse.ok) {
+      console.error('Zoho submission failed with status:', zohoResponse.status);
+      return NextResponse.json({ 
+        success: false, 
+        message: 'Zoho submission failed' 
+      }, { status: 500 });
+    }
+
+    return NextResponse.json({ 
+      success: true, 
+      message: 'Lead submitted successfully' 
+    }, { status: 200 });
+  } catch (error) {
+    console.error('Form submission error:', error);
+    return NextResponse.json({ 
+      success: false, 
+      message: 'Internal server error' 
+    }, { status: 500 });
   }
 }
