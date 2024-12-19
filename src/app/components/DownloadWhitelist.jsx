@@ -16,18 +16,18 @@
   //       message: `Company: ${formData.company}, Mobile: ${formData.mobile}, Country: ${formData.country}`,
   //     };
 
-      // const [zohoResponse, servicesResponse] = await Promise.all([
-      //   fetch("/api/zoho", {
-      //     method: "POST",
-      //     headers: { "Content-Type": "application/json" },
-      //     body: JSON.stringify(data),
-      //   }),
-      //   fetch("/api/services", {
-      //     method: "POST",
-      //     headers: { "Content-Type": "application/json" },
-      //     body: JSON.stringify(data),
-      //   }),
-      // ]);
+  //     const [zohoResponse, servicesResponse] = await Promise.all([
+  //       fetch("/api/zoho", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify(data),
+  //       }),
+  //       fetch("/api/services", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify(data),
+  //       }),
+  //     ]);
 
   //     if (zohoResponse.ok && servicesResponse.ok) {
   //       setFormData({
@@ -77,47 +77,61 @@ export default function ContactForm() {
     setLead(prev => ({ ...prev, [name]: value }));
   };
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
-    setSubmitStatus({});
+    setSubmissionStatus({ loading: true, success: false, error: null });
+
+    if (!validateForm()) {
+      setSubmissionStatus({ loading: false, success: false, error: null });
+      return;
+    }
 
     try {
-      const response = await fetch('/api/zoho2', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(lead)
-      });
+      const data = {
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        message: `Company: ${formData.company}, Mobile: ${formData.mobile}, Country: ${formData.country}`,
+      };
 
-      const result = await response.json();
+      const [zohoResponse, servicesResponse] = await Promise.all([
+        fetch("/api/zoho2", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }),
+        fetch("/api/services", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }),
+      ]);
 
-      if (response.ok) {
-        setSubmitStatus({ 
-          success: true, 
-          message: 'Lead submitted successfully!' 
+      if (zohoResponse.ok && servicesResponse.ok) {
+        setFormData({
+          firstName: "",
+          lastName: "",
+          company: "",
+          email: "",
+          mobile: "",
+          country: "",
         });
-        setLead({
-          firstName: '',
-          lastName: '',
-          email: '',
-          mobile: '',
-          mailingCountry: ''
-        });
+        setSubmissionStatus({ loading: false, success: true, error: null });
       } else {
-        setSubmitStatus({ 
-          success: false, 
-          message: result.errors?.join(', ') || 'Submission failed' 
+        const errorData = await zohoResponse.json();
+        setSubmissionStatus({
+          loading: false,
+          success: false,
+          error: errorData.message || "Submission failed for one or more services.",
         });
       }
     } catch (error) {
-      setSubmitStatus({ 
-        success: false, 
-        message: 'Network error. Please try again.' 
+      setSubmissionStatus({
+        loading: false,
+        success: false,
+        error: "A network error occurred. Please try again.",
       });
-    } finally {
-      setSubmitting(false);
     }
   };
 
