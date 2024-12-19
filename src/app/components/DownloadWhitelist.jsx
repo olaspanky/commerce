@@ -136,7 +136,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className=" mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6">PBR MIR Lead Generation</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
