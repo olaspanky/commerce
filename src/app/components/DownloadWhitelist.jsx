@@ -111,7 +111,7 @@
         };
   
         const [zohoResponse, servicesResponse] = await Promise.all([
-          fetch("/api/zoho2", {
+          fetch("/api/zoho", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -271,19 +271,7 @@
           >
             {submitting ? 'Submitting...' : 'Submit'}
           </button>
-          <button 
-            type="reset"
-            onClick={() => setLead({
-              firstName: '',
-              lastName: '',
-              email: '',
-              mobile: '',
-              mailingCountry: ''
-            })}
-            className="bg-gray-200 text-gray-700 py-2 px-4 rounded hover:bg-gray-300"
-          >
-            Reset
-          </button>
+         
         </div>
       </form>
     </div>
