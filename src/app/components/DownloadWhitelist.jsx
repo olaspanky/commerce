@@ -57,84 +57,105 @@
   // };
 
 
+  import React, { useState } from "react";
 
-  import React, { useState } from 'react';
-
-export default function ContactForm() {
-  const [lead, setLead] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    mobile: '',
-    mailingCountry: ''
-  });
-
-  const [submitting, setSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLead(prev => ({ ...prev, [name]: value }));
-  };
-
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmissionStatus({ loading: true, success: false, error: null });
-
-    if (!validateForm()) {
-      setSubmissionStatus({ loading: false, success: false, error: null });
-      return;
-    }
-
-    try {
-      const data = {
-        name: `${formData.firstName} ${formData.lastName}`,
-        email: formData.email,
-        message: `Company: ${formData.company}, Mobile: ${formData.mobile}, Country: ${formData.country}`,
-      };
-
-      const [zohoResponse, servicesResponse] = await Promise.all([
-        fetch("/api/zoho2", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }),
-        fetch("/api/services", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }),
-      ]);
-
-      if (zohoResponse.ok && servicesResponse.ok) {
-        setFormData({
-          firstName: "",
-          lastName: "",
-          company: "",
-          email: "",
-          mobile: "",
-          country: "",
-        });
-        setSubmissionStatus({ loading: false, success: true, error: null });
-      } else {
-        const errorData = await zohoResponse.json();
-        setSubmissionStatus({
+  export default function ContactForm() {
+    const [lead, setLead] = useState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      mobile: "",
+      mailingCountry: "",
+    });
+  
+    const [submitting, setSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState({
+      loading: false,
+      success: false,
+      message: null,
+    });
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setLead((prev) => ({ ...prev, [name]: value }));
+    };
+  
+    const validateForm = () => {
+      // Add validation logic here (e.g., check for required fields, valid email, etc.)
+      if (!lead.firstName || !lead.lastName || !lead.email) {
+        setSubmitStatus({
           loading: false,
           success: false,
-          error: errorData.message || "Submission failed for one or more services.",
+          message: "Please fill in all required fields.",
         });
+        return false;
       }
-    } catch (error) {
-      setSubmissionStatus({
-        loading: false,
-        success: false,
-        error: "A network error occurred. Please try again.",
-      });
-    }
-  };
-
+      return true;
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setSubmitting(true);
+      setSubmitStatus({ loading: true, success: false, message: null });
+  
+      if (!validateForm()) {
+        setSubmitting(false);
+        return;
+      }
+  
+      try {
+        const data = {
+          name: `${lead.firstName} ${lead.lastName}`,
+          email: lead.email,
+          message: `Mobile: ${lead.mobile}, Country: ${lead.mailingCountry}`,
+        };
+  
+        const [zohoResponse, servicesResponse] = await Promise.all([
+          fetch("/api/zoho2", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }),
+          fetch("/api/services", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }),
+        ]);
+  
+        if (zohoResponse.ok && servicesResponse.ok) {
+          setLead({
+            firstName: "",
+            lastName: "",
+            email: "",
+            mobile: "",
+            mailingCountry: "",
+          });
+          setSubmitStatus({
+            loading: false,
+            success: true,
+            message: "Submission successful!",
+          });
+        } else {
+          const errorData = await zohoResponse.json();
+          setSubmitStatus({
+            loading: false,
+            success: false,
+            message:
+              errorData.message ||
+              "Submission failed for one or more services. Please try again.",
+          });
+        }
+      } catch (error) {
+        setSubmitStatus({
+          loading: false,
+          success: false,
+          message: "A network error occurred. Please try again.",
+        });
+      } finally {
+        setSubmitting(false);
+      }
+    };
   return (
     <div className=" mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6">PBR MIR Lead Generation</h2>
