@@ -10,13 +10,13 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
-export default function Home() {
+export default function Home({ onSuccess, onClose, plan }) {
     const {items, isEmpty, totalUniqueItems, totalItems, cartTotal, updateItemQuantity, removeItem, emptyCart} = useCart()  
 
   return (
     <Elements stripe={stripePromise}>
-      <PaymentForm />
-    </Elements>
+    <PaymentForm onSuccess={onSuccess} onClose={onClose} plan={plan} />
+  </Elements>
   );
 }
 

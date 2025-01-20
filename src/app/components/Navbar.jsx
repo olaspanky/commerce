@@ -11,10 +11,9 @@ import cart from "../../../public/assets/cart.svg";
 
 
 const menuItems = [
-  {
-    title: "Home",
-    route: "/",
-  },
+  { title: "Home", route: "/" },
+  { title: "Subscribe Now", route: "/pages/sub" },
+
   {
     title: "Categories",
     route: "",
@@ -107,7 +106,7 @@ export default function Header() {
           )
         )}
 
-<a href="/pages/cart" className="text-white">
+{/* <a href="/pages/cart" className="text-white">
           <div className="flex gap-3 px-3 py-2 border rounded-lg border-[#1567E0] items-center justify-center">
             <div className="relative">
               <Image src={cart} alt="cart" />
@@ -119,7 +118,7 @@ export default function Header() {
             </div>
             <p className="text-xs text-[#1567E0]">Cart</p>
           </div>
-        </a>
+        </a> */}
       </div>
 
       <div className="md:hidden text-black">

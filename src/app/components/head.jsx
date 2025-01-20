@@ -13,7 +13,7 @@ import "react-slideshow-image/dist/styles.css";
 import Navbar from "../components/Nav2";
 import Carousel from "./Carousel";
 import MobileNavbar from "../components/MobileNav";
-
+import Link from "next/link";
 
 const spanStyle = {
   padding: "20px",
@@ -152,7 +152,7 @@ const Hero = ({ scrollToHero }) => {
                 className=" p-2 px-3 2xl:w-48 texy-sm lg:text-lg font-bold lg:w-[15%] bg-[#1567E0] text-[white] rounded-md hover:bg-blue-900 "
                 onClick={scrollToHero} // Add onClick handler to scroll to Hero section
               >
-                ORDER NOW
+                <Link href="/pages/sub">SUBSCRIBE NOW</Link>
               </button>
             </div>
           </div>

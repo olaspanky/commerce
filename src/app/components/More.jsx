@@ -119,8 +119,6 @@ const ProductDetail = ({ params }) => {
             </div>
             <div className='flex justify-between px-5 text-xs text-[#1567E0] pb-5'>
               <div className='flex gap-2'>
-                <p className="">${card?.price}</p>
-                <Image src={arrow} />
               </div>
               <div className='flex gap-2'>
                 <p className="">{card?.view}</p>
@@ -205,12 +203,13 @@ const ProductDetail = ({ params }) => {
 
 <div className="lg:col-span-3 xl:my-96 flex flex-col gap-5 items-center w-full mt-3">
     <div className="flex w-full gap-5">
-        <button className="rounded-full w-[30%] border border-[#1567E0] p-3 bg-[white] text-[#1567E0] hover:bg-[#1567E0] hover:text-white hover:animate-pulse">1</button>
-        <button className="rounded-full w-full p-3 bg-[#1567E0] text-white hover:bg-[#1050CE] hover:text-white hover:animate-pulse hover:transition-transform hover:scale-105" onClick={handleAddToCart}>Add to cart</button>
+        <button className="rounded-full w-full p-3 bg-[#1567E0] text-white hover:bg-[#1050CE] hover:text-white hover:animate-pulse hover:transition-transform hover:scale-105" >
+        <a href="/pages/sub" className=" w-full">
+Subscribe to generate Download Token</a></button>
     </div>
     <div className="w-full">
         <a href="/pages/payment" className="text-black w-full">
-            <button className="rounded-full w-full border border-[#1567E0] p-3 bg-[white] text-[#1567E0] hover:bg-[#1567E0] hover:text-white hover:animate-pulse hover:transition-transform hover:scale-105" onClick={handleAddToCart}>Buy now</button>
+            <button className="rounded-full w-full border border-[#1567E0] p-3 bg-[white] text-[#1567E0] hover:bg-[#1567E0] hover:text-white hover:animate-pulse hover:transition-transform hover:scale-105" onClick={handleAddToCart}>Download now</button>
         </a>
     </div>
 </div>
