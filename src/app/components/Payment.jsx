@@ -69,8 +69,6 @@ const BoxGrid = () => {
 
         {/* Total Section */}
         <div className="p-3 py-5 border-b-2 flex justify-between px-9">
-          <p className="text-lg">TOTAL</p>
-          <p className="text-lg">${cartTotal}</p>
         </div>
       </div>
     </div>
