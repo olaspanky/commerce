@@ -13,6 +13,8 @@ import MobileNavbar from '@/app/components/MobileNav';
 
 
 import { useParams } from "next/navigation";
+import ZohoForm from '@/app/components/Zoho';
+import ZohoTracking from '@/app/components/ZohoTracking';
 
 
 
@@ -43,7 +45,7 @@ const card = data.find((item) => item.id === parseInt(params.productid));
             insight today
           </h1>{" "}
           <div className='w-full'>
-          <Form />
+          <ZohoForm />
 
           </div>
           <div className='flex justify-center gap-2 items-center'>
