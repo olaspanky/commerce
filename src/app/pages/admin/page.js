@@ -97,7 +97,7 @@ const AdminDashboard = () => {
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 to-gray-800">
         <form
           onSubmit={handlePasswordSubmit}
-          className="bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-700"
+          className="bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-700 w-full max-w-md"
         >
           <h2 className="text-2xl font-bold mb-6 text-white text-center">
             Administrator Login
@@ -198,7 +198,7 @@ const AdminDashboard = () => {
         </button>
 
         {/* Content */}
-        <div className="p-8">
+        <div className="p-4 sm:p-8">
           {/* Refresh Data Button */}
           <div className="flex justify-end mb-6">
             <button
@@ -259,13 +259,13 @@ const AdminDashboard = () => {
                 <table id="subscriptions-table" className="min-w-full">
                   <thead>
                     <tr className="bg-gray-700">
-                      <th className="px-6 py-3 text-left">Email</th>
-                      <th className="px-6 py-3 text-left">Token</th>
-                      <th className="px-6 py-3 text-left">Plan</th>
-                      <th className="px-6 py-3 text-left">Price</th>
-                      <th className="px-6 py-3 text-left">Reports Allowed</th>
-                      <th className="px-6 py-3 text-left">Reports Used</th>
-                      <th className="px-6 py-3 text-left">Downloads</th>
+                      <th className="px-4 py-3 text-left">Email</th>
+                      <th className="px-4 py-3 text-left">Token</th>
+                      <th className="px-4 py-3 text-left">Plan</th>
+                      <th className="px-4 py-3 text-left">Price</th>
+                      <th className="px-4 py-3 text-left">Reports Allowed</th>
+                      <th className="px-4 py-3 text-left">Reports Used</th>
+                      <th className="px-4 py-3 text-left">Downloads</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -274,25 +274,28 @@ const AdminDashboard = () => {
                         key={index}
                         className="border-b border-gray-700 hover:bg-gray-750 transition duration-300"
                       >
-                        <td className="px-6 py-4">{item.email}</td>
-                        <td className="px-6 py-4">{item.token}</td>
-                        <td className="px-6 py-4">{item.plan}</td>
-                        <td className="px-6 py-4">${item.price}</td>
-                        <td className="px-6 py-4">{item.reportsAllowed}</td>
-                        <td className="px-6 py-4">{item.reportsUsed}</td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-4">{item.email}</td>
+                        <td className="px-4 py-4">{item.token}</td>
+                        <td className="px-4 py-4">{item.plan}</td>
+                        <td className="px-4 py-4">${item.price}</td>
+                        <td className="px-4 py-4">{item.reportsAllowed}</td>
+                        <td className="px-4 py-4">{item.reportsUsed}</td>
+                        <td className="px-4 py-4">
                           <ul>
                             {item.downloads?.map((download, idx) => (
-                              <li key={idx}>
+                              <li key={idx} className="flex items-center space-x-2">
+                                <span className="text-gray-400">{idx + 1}.</span> {/* Number */}
                                 <a
                                   href={download.reportUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-blue-400 hover:text-blue-300 transition duration-300"
                                 >
-                                  {download.reportName} (Downloaded at:{" "}
-                                  {new Date(download.downloadedAt).toLocaleString()})
+                                  {download.reportName}
                                 </a>
+                                <sub className="text-xs text-gray-500">
+                                  ({new Date(download.downloadedAt).toLocaleString()}) {/* Date as subscript */}
+                                </sub>
                               </li>
                             ))}
                           </ul>
@@ -321,9 +324,9 @@ const AdminDashboard = () => {
                 <table id="whitepaper-table" className="min-w-full">
                   <thead>
                     <tr className="bg-gray-700">
-                      <th className="px-6 py-3 text-left">Name</th>
-                      <th className="px-6 py-3 text-left">Email</th>
-                      <th className="px-6 py-3 text-left">Downloaded At</th>
+                      <th className="px-4 py-3 text-left">Name</th>
+                      <th className="px-4 py-3 text-left">Email</th>
+                      <th className="px-4 py-3 text-left">Downloaded At</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -332,9 +335,9 @@ const AdminDashboard = () => {
                         key={index}
                         className="border-b border-gray-700 hover:bg-gray-750 transition duration-300"
                       >
-                        <td className="px-6 py-4">{download.name}</td>
-                        <td className="px-6 py-4">{download.email}</td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-4">{download.name}</td>
+                        <td className="px-4 py-4">{download.email}</td>
+                        <td className="px-4 py-4">
                           {new Date(download.downloadedAt).toLocaleString()}
                         </td>
                       </tr>
