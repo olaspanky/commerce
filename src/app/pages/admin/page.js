@@ -27,9 +27,12 @@ const AdminDashboard = () => {
     setIsLoading(true); // Start loading
     try {
       const response = await fetch("/api/admin");
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
       const { data, whitepaperDownloads } = await response.json();
-      setSubscriptions(data);
-      setWhitepaperDownloads(whitepaperDownloads);
+      setSubscriptions(data || []); // Ensure data is not undefined
+      setWhitepaperDownloads(whitepaperDownloads || []); // Ensure data is not undefined
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -100,12 +103,18 @@ const AdminDashboard = () => {
             Admin Login
           </h2>
           <input
+            type="text"
+            name="username"
+            autoComplete="username"
+            style={{ display: "none" }}
+          />
+          <input
             type="password"
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-3 bg-gray-700 text-white rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            autoComplete="new-password" // Add autocomplete attribute
+            autoComplete="new-password"
           />
           <button
             type="submit"
@@ -260,7 +269,7 @@ const AdminDashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {subscriptions.map((item, index) => (
+                    {subscriptions?.map((item, index) => (
                       <tr
                         key={index}
                         className="border-b border-gray-700 hover:bg-gray-750 transition duration-300"
@@ -273,7 +282,7 @@ const AdminDashboard = () => {
                         <td className="px-6 py-4">{item.reportsUsed}</td>
                         <td className="px-6 py-4">
                           <ul>
-                            {item.downloads.map((download, idx) => (
+                            {item.downloads?.map((download, idx) => (
                               <li key={idx}>
                                 <a
                                   href={download.reportUrl}
@@ -318,7 +327,7 @@ const AdminDashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {whitepaperDownloads.map((download, index) => (
+                    {whitepaperDownloads?.map((download, index) => (
                       <tr
                         key={index}
                         className="border-b border-gray-700 hover:bg-gray-750 transition duration-300"
