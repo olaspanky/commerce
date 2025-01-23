@@ -105,6 +105,7 @@ const AdminDashboard = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-3 bg-gray-700 text-white rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            autoComplete="new-password" // Add autocomplete attribute
           />
           <button
             type="submit"
