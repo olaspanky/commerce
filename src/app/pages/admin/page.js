@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 
 const AdminDashboard = () => {
   const [password, setPassword] = useState("");
@@ -9,7 +11,7 @@ const AdminDashboard = () => {
   const [subscriptions, setSubscriptions] = useState([]);
   const [whitepaperDownloads, setWhitepaperDownloads] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   // Check authentication state on initial load
   useEffect(() => {
@@ -50,6 +52,40 @@ const AdminDashboard = () => {
   // Toggle sidebar on mobile
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  // Export table as PDF
+  const exportTableToPDF = (tableId, fileName) => {
+    const doc = new jsPDF();
+    const table = document.getElementById(tableId);
+
+    if (table) {
+      const headers = [];
+      const rows = [];
+
+      // Extract headers
+      table.querySelectorAll("thead th").forEach((th) => {
+        headers.push(th.innerText);
+      });
+
+      // Extract rows
+      table.querySelectorAll("tbody tr").forEach((tr) => {
+        const row = [];
+        tr.querySelectorAll("td").forEach((td) => {
+          row.push(td.innerText);
+        });
+        rows.push(row);
+      });
+
+      // Generate PDF
+      doc.autoTable({
+        head: [headers],
+        body: rows,
+      });
+
+      // Save PDF
+      doc.save(`${fileName}.pdf`);
+    }
   };
 
   // Render password prompt if not authenticated
@@ -203,8 +239,14 @@ const AdminDashboard = () => {
               <h2 className="text-2xl font-bold mb-6 text-white">
                 Subscriptions & Report Downloads
               </h2>
+              <button
+                onClick={() => exportTableToPDF("subscriptions-table", "subscriptions")}
+                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300 mb-4"
+              >
+                Download as PDF
+              </button>
               <div className="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">
-                <table className="min-w-full">
+                <table id="subscriptions-table" className="min-w-full">
                   <thead>
                     <tr className="bg-gray-700">
                       <th className="px-6 py-3 text-left">Email</th>
@@ -259,8 +301,14 @@ const AdminDashboard = () => {
               <h2 className="text-2xl font-bold mb-6 text-white">
                 Whitepaper Downloads
               </h2>
+              <button
+                onClick={() => exportTableToPDF("whitepaper-table", "whitepaper-downloads")}
+                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300 mb-4"
+              >
+                Download as PDF
+              </button>
               <div className="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">
-                <table className="min-w-full">
+                <table id="whitepaper-table" className="min-w-full">
                   <thead>
                     <tr className="bg-gray-700">
                       <th className="px-6 py-3 text-left">Name</th>
