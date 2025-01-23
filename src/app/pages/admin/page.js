@@ -100,7 +100,7 @@ const AdminDashboard = () => {
           className="bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-700"
         >
           <h2 className="text-2xl font-bold mb-6 text-white text-center">
-            Admin Login
+            Administrator Login
           </h2>
           <input
             type="text"
