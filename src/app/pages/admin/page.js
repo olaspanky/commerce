@@ -24,19 +24,27 @@ const AdminDashboard = () => {
 
   // Fetch data from the backend
   const fetchData = async () => {
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     try {
-      const response = await fetch("/api/admin");
+      const response = await fetch(`/api/admin?timestamp=${Date.now()}`, {
+        cache: 'no-store',
+        headers: {
+          'Pragma': 'no-cache',
+          'Cache-Control': 'no-cache'
+        }
+      });
+      
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
+      
       const { data, whitepaperDownloads } = await response.json();
-      setSubscriptions(data || []); // Ensure data is not undefined
-      setWhitepaperDownloads(whitepaperDownloads || []); // Ensure data is not undefined
+      setSubscriptions(data || []);
+      setWhitepaperDownloads(whitepaperDownloads || []);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setIsLoading(false); // Stop loading
+      setIsLoading(false);
     }
   };
 
