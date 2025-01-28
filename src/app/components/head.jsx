@@ -149,7 +149,7 @@ const Hero = ({ scrollToHero }) => {
             </h1>
             <div className="flex items-center gap-3">
               <button
-                className=" p-2 px-3 2xl:w-48 texy-sm lg:text-lg font-bold lg:w-[15%] bg-[#1567E0] text-[white] rounded-md hover:bg-blue-900 "
+                className=" p-2 px-3 2xl:w-48 texy-sm lg:text-lg font-bold lg:w-[25%]  bg-[#1567E0] text-[white] rounded-md hover:bg-blue-900 "
                 onClick={scrollToHero} // Add onClick handler to scroll to Hero section
               >
                 <Link href="/pages/sub">SUBSCRIBE NOW</Link>
