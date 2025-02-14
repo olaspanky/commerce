@@ -39,19 +39,19 @@
       e.preventDefault();
       setSubmitting(true);
       setSubmitStatus({ loading: true, success: false, message: null });
-  
+    
       if (!validateForm()) {
         setSubmitting(false);
         return;
       }
-  
+    
       try {
         const data = {
           name: `${lead.firstName} ${lead.lastName}`,
           email: lead.email,
           message: `Mobile: ${lead.mobile}, Country: ${lead.mailingCountry}`,
         };
-  
+    
         const [zohoResponse, servicesResponse] = await Promise.all([
           fetch("/api/zoho", {
             method: "POST",
@@ -64,7 +64,7 @@
             body: JSON.stringify(data),
           }),
         ]);
-  
+    
         if (zohoResponse.ok && servicesResponse.ok) {
           setLead({
             firstName: "",
@@ -98,6 +98,7 @@
         setSubmitting(false);
       }
     };
+    
   return (
     <div className=" mx-auto p-6 bg-white rounded-lg shadow-md">
       <form onSubmit={handleSubmit}>
