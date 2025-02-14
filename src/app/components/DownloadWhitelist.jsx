@@ -76,7 +76,7 @@
           setSubmitStatus({
             loading: false,
             success: true,
-            message: "Submission successful!",
+            message: "Submission successful! report sent to your mail",
           });
         } else {
           const errorData = await zohoResponse.json();
