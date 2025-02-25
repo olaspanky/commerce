@@ -82,7 +82,7 @@ import { MongoClient } from "mongodb";
 export async function POST(request) {
   try {
     const formData = await request.json();
-    const { name, email, message } = formData;
+    const { firstName, email, message } = formData;
 
     // Connect to MongoDB
     const client = await MongoClient.connect(process.env.MONGODB_URI);
@@ -91,7 +91,7 @@ export async function POST(request) {
     try {
       // Save the whitepaper download information
       await db.collection("whitepaperDownloads").insertOne({
-        name,
+        name: firstName,
         email,
         downloadedAt: new Date(),
       });
@@ -113,9 +113,9 @@ export async function POST(request) {
         from: "pbrmarketintellligencereport@gmail.com",
         to: email,
         replyTo: email,
-        subject: `Website activity from ${name}`,
+        subject: `pbrmarketintellligencereport`,
         html: `
-          <p>Dear ${name},</p>
+          <p>Dear ${firstName},</p>
           <p>We are excited to share that your free report: <strong>Winning in Anti-Malaria Segment through Innovation</strong>, is now available for you to download! We hope you find it valuable and insightful as you explore.</p>
           <p>But that’s not all! As a token of our appreciation for your continued interest, we are pleased to offer you an exclusive 30% discount on your next purchase of any paid report from our collection.</p>
           <p style="background-color: yellow; padding: 2px;"><strong>Your Discount Code:</strong> PBR Life Sciences</p>
