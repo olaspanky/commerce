@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../../../public/assets/white_logo.svg";
+import Logo from "../../../public/assets/logo.png";
 import cart from "../../../public/assets/cart.svg";
 import { ChevronDown, ChevronUp } from "lucide-react"; // Import icons
 import { useCart } from "react-use-cart"; // Get cart functionality

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../../../public/assets/white_logo.svg";
+import Logo from "../../../public/assets/logo.png";
 import Dropdown from "./Dropdown"; // Assuming Dropdown is a separate component
 import { useCart } from "react-use-cart";
 import { usePathname } from "next/navigation";
@@ -75,7 +75,7 @@ export default function Header() {
 
   return (
     <div className="flex w-full justify-between px-5 xl:px-20 2xl:px-36 gap-10 items-center">
-      <div className="lg:p-5 p-2 rounded-br-[25%] rounded-bl-[25%] bg-[#1567E0]">
+      <div className="lg:p-5 p-2 rounded-br-[25%] rounded-bl-[25%] bg-white border border-[#1567E0]">
         <Link href="/">
           <Image src={Logo} className="w-5 lg:w-20" alt="logo" />
         </Link>
