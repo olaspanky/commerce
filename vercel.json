@@ -1,6 +1,6 @@
 {
     "functions": {
-      "api/services/route.js": {
+      "src/app/api/services/**": {
         "excludeFiles": "node_modules/@next/swc-darwin-x64/**"
       }
     }
