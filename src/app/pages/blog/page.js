@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { whitepapers } from "@/lib/whitepapers";
 import Modal from "../../components/Modall";
-import ContactForm from "../../components/ContactForm";
+import ContactForm from "../../components/Contactform";
 import Image from "next/image";
 import free from "../../../../public/assets/amatem.jpeg";
 import art from "../../../../public/assets/art.png";
@@ -41,7 +41,7 @@ export default function BlogPage() {
       {/* Hero Section */}
       <div className=" py-12">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl text-center font-bold leading-tight mb-4">
+          <h1 className="text-xl md:text-4xl lg:text-5xl text-center font-bold leading-tight mb-4">
             Chart Your Course to Success{" "}
             <span className="block mt-2 text-blue-600">Order Your Report Today</span>
           </h1>
@@ -53,7 +53,7 @@ export default function BlogPage() {
 
       {/* Content Section */}
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
           {whitepapers.map((whitepaper, index) => (
             <div 
               key={whitepaper.id}
@@ -87,14 +87,14 @@ export default function BlogPage() {
                   </button>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">
+              <div className="lg:p-6 p-1">
+                <h3 className="text-sm lg:text-xl font-semibold text-gray-800 mb-3">
                   {whitepaper.title}
                 </h3>
-                <p className="text-gray-600 mb-4 line-clamp-3">
+                <p className="text-sm lg:text-xl text-gray-600 mb-4 line-clamp-3">
                   {whitepaper.description || "Access this comprehensive whitepaper to gain valuable industry insights and strategic knowledge."}
                 </p>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                   <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
                     Free Access
                   </span>
