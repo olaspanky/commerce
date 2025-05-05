@@ -1,1 +1,6 @@
 ecommerce-project
+node_modules/@next/swc-darwin-x64
+*.zip
+*.tar.gz
+.DS_Store
+.git
