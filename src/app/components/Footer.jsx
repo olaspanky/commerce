@@ -1,10 +1,7 @@
 import React from "react";
 import location from "../../../public/assets/location.svg";
-import logo from "../../../public/assets/logo.png";
-import foot from "../../../public/assets/foot.svg";
 import Image from "next/image";
 import { SocialIcon } from "react-social-icons";
-import Link from "next/link";
 
 const footer = () => {
   return (

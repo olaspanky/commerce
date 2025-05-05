@@ -1,13 +1,13 @@
-// ContactForm.jsx
 import React, { useState } from "react";
 
-export default function ContactForm() {
+export default function ContactForm({ whitepapers }) {
   const [lead, setLead] = useState({
     firstName: "",
     lastName: "",
     email: "",
     mobile: "",
     mailingCountry: "",
+    whitepaperId: whitepapers[0]?.id || "", // Default to first whitepaper
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -42,6 +42,14 @@ export default function ContactForm() {
         return false;
       }
     }
+    if (!lead.whitepaperId) {
+      setSubmitStatus({
+        loading: false,
+        success: false,
+        message: "Please select a whitepaper.",
+      });
+      return false;
+    }
     return true;
   };
 
@@ -57,15 +65,18 @@ export default function ContactForm() {
 
     try {
       const zohoFormData = new URLSearchParams({
-        'First Name': lead.firstName,
-        'Last Name': lead.lastName,
-        'Email': lead.email,
-        'Mobile': lead.mobile,
-        'Mailing Country': lead.mailingCountry,
-        'xnQsjsdp': 'bfcccc38a3fc99522af00f844f5108fc8b1271e0437565f9e9fb14617b659f17',
-        'xmIwtLD': 'dcbf2f72adf8763c70106513bb17bf232b8a1b7d7ad070b0d0894f021f7b4554a45987fb5c618a908718ffb4fe47c286',
-        'actionType': 'Q29udGFjdHM=',
-        'returnURL': 'null',
+        "First Name": lead.firstName,
+        "Last Name": lead.lastName,
+        Email: lead.email,
+        Mobile: lead.mobile,
+        "Mailing Country": lead.mailingCountry,
+        whitepaperId: lead.whitepaperId,
+        xnQsjsdp:
+          "bfcccc38a3fc99522af00f844f5108fc8b1271e0437565f9e9fb14617b659f17",
+        xmIwtLD:
+          "dcbf2f72adf8763c70106513bb17bf232b8a1b7d7ad070b0d0894f021f7b4554a45987fb5c618a908718ffb4fe47c286",
+        actionType: "Q29udGFjdHM=",
+        returnURL: "null",
       });
 
       const servicesData = {
@@ -74,20 +85,21 @@ export default function ContactForm() {
         email: lead.email,
         mobile: lead.mobile,
         mailingCountry: lead.mailingCountry,
+        whitepaperId: lead.whitepaperId,
       };
 
       const [zohoResponse, servicesResponse] = await Promise.all([
-        fetch('/api/zoho', {
-          method: 'POST',
+        fetch("/api/zoho", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            "Content-Type": "application/x-www-form-urlencoded",
           },
           body: zohoFormData,
         }),
-        fetch('/api/services', {
-          method: 'POST',
+        fetch("/api/services", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(servicesData),
         }),
@@ -103,22 +115,23 @@ export default function ContactForm() {
           email: "",
           mobile: "",
           mailingCountry: "",
+          whitepaperId: whitepapers[0]?.id || "",
         });
         setSubmitStatus({
           loading: false,
           success: true,
-          message: "please check your mail for the free pdf",
+          message: "Please check your email for the free PDF.",
         });
       } else {
         setSubmitStatus({
           loading: false,
           success: false,
-          message: 
-            (!zohoResponse.ok && !servicesResponse.ok) 
+          message:
+            !zohoResponse.ok && !servicesResponse.ok
               ? "Failed to submit to both services"
-              : !zohoResponse.ok 
-                ? "Failed to submit to Zoho CRM"
-                : "Failed to submit to services",
+              : !zohoResponse.ok
+              ? "Failed to submit to Zoho CRM"
+              : "Failed to submit to services",
         });
       }
     } catch (error) {
@@ -226,12 +239,35 @@ export default function ContactForm() {
           />
         </div>
 
+        <div className="mb-4">
+          <label
+            htmlFor="whitepaperId"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Select Whitepaper <span className="text-red-500">*</span>
+          </label>
+          <select
+            id="whitepaperId"
+            name="whitepaperId"
+            value={lead.whitepaperId}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+          >
+            {whitepapers.map((wp) => (
+              <option key={wp.id} value={wp.id}>
+                {wp.title}
+              </option>
+            ))}
+          </select>
+        </div>
+
         {submitStatus.message && (
           <div
             className={`mb-4 p-3 rounded ${
               submitStatus.success
-                ? 'bg-green-100 text-green-700'
-                : 'bg-red-100 text-red-700'
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
             }`}
           >
             {submitStatus.message}
@@ -244,7 +280,7 @@ export default function ContactForm() {
             disabled={submitting}
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50"
           >
-            {submitting ? 'Submitting...' : 'Submit'}
+            {submitting ? "Submitting..." : "Submit"}
           </button>
         </div>
       </form>
