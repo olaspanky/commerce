@@ -88,14 +88,14 @@ export default function BlogPage() {
                 </div>
               </div>
               <div className="lg:p-6 p-1">
-                <h3 className="text-sm lg:text-xl font-semibold text-gray-800 mb-3">
+                <h3 className="text-sm lg:text-xl h-12 font-semibold text-gray-800 mb-3">
                   {whitepaper.title}
                 </h3>
                 <p className="text-sm lg:text-xl text-gray-600 mb-4 line-clamp-3">
                   {whitepaper.description || "Access this comprehensive whitepaper to gain valuable industry insights and strategic knowledge."}
                 </p>
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-                  <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs">
+                  <span className="lg:inline-block bg-green-100 text-green-800 px-3 py-1 rounded-[8px] lg:rounded-full  font-medium">
                     Free Access
                   </span>
                   <button 
