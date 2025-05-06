@@ -76,7 +76,7 @@ export async function POST(request) {
           <p>If you have any questions or need assistance with your purchase, please don't hesitate to contact our customer support team. We’re here to help!</p>
           <p>Thank you for choosing us as your trusted source for insightful reports. We look forward to continuing to support your needs.</p>
           <p>Best regards,</p>
-          <p>Akinwunmi</p>
+          <p>Mr Akinwunmi</p>
           <p>Product Manager</p>
           <p>PBR Life Sciences</p>
           <img src="cid:companyLogo" alt="Company Logo" style="width:200px;"/>
