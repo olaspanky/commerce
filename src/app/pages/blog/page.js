@@ -87,8 +87,8 @@ export default function BlogPage() {
                   </button>
                 </div>
               </div>
-              <div className="lg:p-6 p-1">
-                <h3 className="text-sm lg:text-xl h-12 font-semibold text-gray-800 mb-3">
+              <div className="lg:p-6 p-1 flex flex-col justify-between">
+                <h3 className="text-sm lg:text-xl h-12 lg:h-20 font-semibold text-gray-800 mb-3">
                   {whitepaper.title}
                 </h3>
                 <p className="text-sm lg:text-xl text-gray-600 mb-4 line-clamp-3">
