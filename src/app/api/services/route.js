@@ -47,8 +47,8 @@ export async function POST(request) {
       const transporter = createTransport({
         service: "gmail",
         auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASSWORD,
+         user: "pbrmarketintellligencereport@gmail.com",
+          pass: "aasl uuwn lmrw dsvl",
         },
       });
 
