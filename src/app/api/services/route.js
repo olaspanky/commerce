@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server";
 import { createTransport } from "nodemailer";
 import { MongoClient } from "mongodb";
@@ -58,10 +59,24 @@ export async function POST(request) {
         replyTo: email,
         subject: `Your Free Report from PBR Life Sciences`,
         html: `
-          <p>Dear ${firstName},</p>
-          <p>We are excited to share that your free report: <strong>${selectedWhitepaper.title}</strong>, is now available for you to download! <a href="${selectedWhitepaper.pdfUrl}">Click here to download</a>.</p>
-          <!-- rest of your email content -->
-          <img src="${logoUrl}" alt="Company Logo" style="width:200px;"/>
+           <p>Dear ${firstName},</p>
+          <p>We are excited to share that your free report: <strong>${selectedWhitepaper.title}</strong>, is now available for you to download! We hope you find it valuable and insightful as you explore.</p>
+          <p>But that’s not all! As a token of our appreciation for your continued interest, we are pleased to offer you an exclusive 30% discount on your next purchase of any paid report from our collection.</p>
+          <p style="background-color: yellow; padding: 2px;"><strong>Your Discount Code:</strong> PBR Life Sciences</p>
+          <p>You can use this code at checkout to save 30% on any of our premium reports. This is a limited-time offer, so be sure to take advantage of this opportunity to access even more in-depth insights and data.</p>
+          <p><strong>How to Redeem Your Discount:</strong></p>
+          <ol>
+            <li>Visit our <a href="https://www.pbrmir.com.ng/" style="color: #007bff;">Reports Page</a>.</li>
+            <li>Select the report(s) you wish to purchase.</li>
+            <li>Enter the discount code “PBR Life Sciences” at checkout.</li>
+            <li>Enjoy your report at a reduced price!</li>
+          </ol>
+          <p>If you have any questions or need assistance with your purchase, please don't hesitate to contact our customer support team. We’re here to help!</p>
+          <p>Thank you for choosing us as your trusted source for insightful reports. We look forward to continuing to support your needs.</p>
+          <p>Best regards,</p>
+          <p>Mr Akinwunmi</p>
+          <p>Product Manager</p>
+          <p>PBR Life Sciences</p>
         `,
       });
 
