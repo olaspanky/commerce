@@ -77,7 +77,6 @@ export async function POST(request) {
           <ol>
             <li>Visit our <a href="https://www.pbrmir.com.ng/">Reports Page</a></li>
             <li>Select the report(s) you wish to purchase</li>
-            <li>Enter the discount code "PBR Life Sciences" at checkout</li>
           </ol>
           <p>Best regards,</p>
           <p>Mr Akinwunmi<br>Product Manager<br>PBR Life Sciences</p>
