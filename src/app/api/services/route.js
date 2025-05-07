@@ -8,14 +8,16 @@ const whitepapers = [
   {
     id: "1",
     title: "Winning in Anti-Malaria Segment through Innovation",
-    pdf: "The Case of Amatem Nn.pdf",
+    pdfUrl: "https://raw.githubusercontent.com/olaspanky/wasset/main/The%20Case%20of%20Amatem%20Nn.pdf",
   },
   {
     id: "2",
     title: "PBR Artemiter Final",
-    pdf: "PBR-Artemiter-Final.pdf",
+    pdfUrl: "https://raw.githubusercontent.com/olaspanky/wasset/main/PBR-Artemiter-Final.pdf",
   },
 ];
+
+const logoPath = "https://raw.githubusercontent.com/olaspanky/wasset/main/logo.svg";
 
 export async function POST(request) {
   try {
@@ -53,7 +55,6 @@ export async function POST(request) {
       });
 
       const pdfPath = path.join(process.cwd(), "public", selectedWhitepaper.pdf);
-      const logoPath = path.join(process.cwd(), "public", "logo.png");
 
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
